@@ -4,6 +4,8 @@ if (!isset($_SESSION['user_id'])) {
     header('location: index.php');
 }
 
+#commit BY RBK
+
 include_once 'conn.php';
 ?>
 
