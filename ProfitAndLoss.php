@@ -69,7 +69,7 @@ include_once('conn.php');
                     </div>
                     <!--end col-->
                 </div>
-                <br><br>
+                <br>
                 <!-- end page title end breadcrumb -->
                 <div class="row" id="" style="">
                     <div class="col-md-12 text-center">
@@ -86,15 +86,17 @@ include_once('conn.php');
                             </thead>
                             <tbody id="">
                                 <?php
+                                $totalIncome = 0;
                                 $count = 1;
-                                $sql = 'SELECT *, SUM(Amount) FROM overallprofit';
+                                $sql = 'SELECT *, SUM(Amount) FROM overallprofit ';
                                 $result = mysqli_query($conn,$sql);
                                 while($row = mysqli_fetch_assoc($result)){
                                     echo'
                                     <tr>
                                         <td scope="row"><b>'.$count++.'</b></td>
-                                        <td>'.$row['SUM(Amount)'].'</td>
+                                        <td>'.number_format($row['SUM(Amount)'], 2).'</td>
                                     </tr>';
+                                    $totalIncome = floatval($totalIncome) + floatval($row['SUM(Amount)']);
                                 }
                             ?>
                             </tbody>
@@ -118,6 +120,7 @@ include_once('conn.php');
                             </thead>
                             <tbody id="">
                                 <?php
+                                $totalExpense = 0;
                                 $count = 1;
                                 $sql = 'SELECT *, SUM(Amount) FROM overallloss';
                                 $result = mysqli_query($conn,$sql);
@@ -125,9 +128,38 @@ include_once('conn.php');
                                     echo'
                                     <tr>
                                         <td scope="row"><b>'.$count++.'</b></td>
-                                        <td>'.$row['SUM(Amount)'].'</td>
+                                        <td>'.number_format($row['SUM(Amount)'], 2).'</td>
                                     </tr>';
+                                    $totalExpense = floatval($totalExpense) + floatval($row['SUM(Amount)']);
                                 }
+                            ?>
+                            </tbody>
+                        </table>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row" id="" style="">
+                    <div class="col-md-12 text-center">
+                        <h3><b><u>TOTAL PROFIT AND LOSS</u></b></h3>
+                    </div>
+                    
+                    <div class="col-md-12 mt-4">
+                        <table class="table table-bordered" id="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col"><b>S.No</b></th>
+                                    <th scope="col"><b>Amount</b></th>
+                                </tr>
+                            </thead>
+                            <tbody id="">
+                                <?php
+                                $count = 1;
+                                echo'
+                                <tr>
+                                    <td scope="row"><b>'.$count++.'</b></td>
+                                    <td>'.number_format(floatval(floatval($totalIncome) - floatval($totalExpense)), 2).'</td>
+                                </tr>';
                             ?>
                             </tbody>
                         </table>
