@@ -108,6 +108,11 @@
                             Report</span></a></li>
             </ul>
         </li>
+
+        <li><a href="OtherExpense.php"><i class="ti-money"></i><span>Other Expense</span></a></li>
+
+        <li><a href="ProfitAndLoss.php"><i class="ti-wallet"></i><span>Profit And Loss</span></a></li>
+
     </ul>
 </div>
 
