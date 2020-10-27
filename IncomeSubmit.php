@@ -18,6 +18,10 @@ if($result){
         $sql1 = "INSERT INTO income_description (`IncomeId`,`Description`,`Date`,`Amount`)
                             VALUES (".$IncomeId.",'".$_POST['description'][$i]."','".$_POST['date'][$i]."','".$_POST['amount'][$i]."')";
         $result1 = mysqli_query($conn,$sql1);
+
+        // Over All Profit and Loss Calculate krne ke liye ye kaam kiya ha
+            $sql2 = "INSERT INTO overallprofit (`Description`,`Date`,`Amount`) VALUES ('OP Income','".$_POST['date'][$i]."','".$_POST['amount'][$i]."') ";
+            $result2 = mysqli_query($conn,$sql2);
     }
     
     echo '<script>alert("Your Form Has been Submitted!");window.open("Income.php", "_self");</script>'; 
