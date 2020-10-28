@@ -76,11 +76,27 @@ include_once('conn.php');
                 </div>
                 <br>
                 <!-- end page title end breadcrumb -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Year:</label>
+                            <select name="dateyear" class="form-control">
+                            <option value="">Select Year</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Month:</label>
+                            <input type="month" name="datemonth">
+                        </div>
+                    </div>
+                </div>
                 <div class="row" id="" style="">
                     <div class="col-md-12 text-center">
                         <h3><b><u>OVER ALL INCOME</u></b></h3>
                     </div>
-                    
+
                     <div class="col-md-12 mt-4">
                         <table class="table table-bordered" id="table">
                             <thead>
@@ -114,7 +130,7 @@ include_once('conn.php');
                     <div class="col-md-12 text-center">
                         <h3><b><u>OVER ALL EXPENSE</u></b></h3>
                     </div>
-                    
+
                     <div class="col-md-12 mt-4">
                         <table class="table table-bordered" id="table">
                             <thead>
@@ -148,7 +164,7 @@ include_once('conn.php');
                     <div class="col-md-12 text-center">
                         <h3><b><u>TOTAL PROFIT AND LOSS</u></b></h3>
                     </div>
-                    
+
                     <div class="col-md-12 mt-4">
                         <table class="table table-bordered" id="table">
                             <thead>
