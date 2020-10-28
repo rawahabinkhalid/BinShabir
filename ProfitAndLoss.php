@@ -36,6 +36,11 @@ include_once('conn.php');
     table tr th {
         background-color: #33F3FF;
     }
+
+    .table-bordered td,
+    .table-bordered th {
+        border-color: black !important;
+    }
     </style>
 </head>
 
@@ -173,6 +178,8 @@ include_once('conn.php');
                             onclick="printpage()" />
                     </div>
                 </div>
+                <br>
+                <br>
             </div>
             <!-- container -->
             <footer class="footer text-center text-sm-left">&copy; <b>2020 <a href="https://matz.group/"> MATZ SOLUTIONS
