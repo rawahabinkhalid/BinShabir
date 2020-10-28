@@ -6,13 +6,14 @@
         <li><a href="AssetIn.php"><i class="ti-import"></i><span>Asset In</span></a></li>
         <li><a href="AssetAssign.php"><i class="ti-export"></i><span>Asset Assign</span></a></li>
         <li><a href="AssetStock.php"><i class="ti-layers-alt"></i><span>Asset Stock</span></a></li>
+        <li><a href="DepCostReport.php"><i class="ti-layers-alt"></i><span>Depreciation Cost Total</span></a></li>
 
     </ul>
 </div>
 
 <!-- end left-sidenav-->
 
-<script src="assets/js/jquery.min.js"></script>
+<script src="../assets/js/jquery.min.js"></script>
 
 <script>
 $(function() {
