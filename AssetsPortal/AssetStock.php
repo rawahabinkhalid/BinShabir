@@ -1,6 +1,5 @@
 <?php
-include_once 'conn.php';
-?>
+include_once 'conn.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,16 +60,18 @@ include_once 'conn.php';
                 <br><br>
                 <!-- end page title end breadcrumb -->
                 <div class="row" id="" style="">
-                    <div class="col-md-12 text-center">
+                    <div class="col-md-9 text-center">
                         <h3><b><u>Asset Stock Report</u></b></h3>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-9">
+                    <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col"><b>S.No</b></th>
                                     <th scope="col"><b>Asset Name</b></th>
                                     <th scope="col"><b>Description</b></th>
+                                    <th scope="col"><b>Qty</b></th>
                                     <th scope="col"><b>Brand</b></th>
                                     <th scope="col"><b>Asset Type</b></th>
                                     <th scope="col"><b>Actual Price</b></th>
@@ -78,6 +79,7 @@ include_once 'conn.php';
                                     <th scope="col"><b>Depreciated Price</b></th>
                                     <th scope="col"><b>Date</b></th>
                                     <th scope="col"><b>Assigned Date</b></th>
+                                    <th scope="col"><b>Assigned Qty</b></th>
                                     <th scope="col"><b>Department</b></th>
                                     <th scope="col"><b>Assigned To</b></th>
                                     <!-- <th scope="col"><b>N.Weight</b></th> -->
@@ -104,7 +106,8 @@ include_once 'conn.php';
                                 //     }
                                 // }
                                 $count = 1;
-                                $sql = 'SELECT asset.*, asset_in.*, asset_assign.Date AS AssetAssignDate, Department, Assigned_To FROM asset JOIN asset_in ON asset_in.AssetId = asset.AssetId LEFT JOIN asset_assign ON asset_in.Id = asset_assign.AssetInId';
+                                $sql =
+                                    'SELECT asset.*, asset_in.*, asset_assign.Date AS AssetAssignDate, Department, Assigned_To, asset_in.Id AS asset_in_id FROM asset JOIN asset_in ON asset_in.AssetId = asset.AssetId LEFT JOIN asset_assign ON asset_in.Id = asset_assign.AssetInId GROUP BY asset_in.Id';
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo '
@@ -119,44 +122,90 @@ include_once 'conn.php';
                                         $row['Description'] .
                                         '</td>
                                         <td>' .
+                                        $row['AssetQty'] .
+                                        '</td>
+                                        <td>' .
                                         $row['Brand'] .
                                         '</td>
                                         <td>' .
                                         $row['Asset_Type'] .
                                         '</td>
                                         <td>Rs. ' .
-                                        number_format(floatval($row['Price']), 2) .
+                                        number_format(
+                                            floatval($row['Price']),
+                                            2
+                                        ) .
                                         '</td>
                                         <td>';
-                                        if($row['Asset_Type'] == 'Fixed')
-                                            echo $row['Deprication_Rate'] . ' %';
-                                        echo '</td>
+                                    if ($row['Asset_Type'] == 'Fixed') {
+                                        echo $row['Deprication_Rate'] . ' %';
+                                    }
+                                    echo '</td>
                                         <td>';
-                                        if($row['Asset_Type'] == 'Fixed') {
-                                            $depreciation = 0;
-                                            $price = floatval($row['Price']);
-                                            $rate = floatval($row['Deprication_Rate']) / 100;
-                                            $now = time(); // or your date as well
-                                            $your_date = strtotime($row['Date']);
-                                            $datediff = $now - $your_date;
-                                            
-                                            $daysPassed = floor($datediff / (60 * 60 * 24));
-                                            echo 'Rs. ' . number_format($price - ($price * $rate / 365 * $daysPassed), 2);
-                                        }
-                                        echo 
-                                        '</td>
+                                    if ($row['Asset_Type'] == 'Fixed') {
+                                        $depreciation = 0;
+                                        $price = floatval($row['Price']);
+                                        $rate =
+                                            floatval($row['Deprication_Rate']) /
+                                            100;
+                                        $now = time(); // or your date as well
+                                        $your_date = strtotime($row['Date']);
+                                        $datediff = $now - $your_date;
+
+                                        $daysPassed = floor(
+                                            $datediff / (60 * 60 * 24)
+                                        );
+                                        echo 'Rs. ' .
+                                            number_format(
+                                                $price -
+                                                    (($price * $rate) / 365) *
+                                                        $daysPassed,
+                                                2
+                                            );
+                                    }
+                                    $assignedDate = [];
+                                    $assignedDept = [];
+                                    $assignedTo = [];
+                                    $assignedQty = [];
+                                    $sql1 =
+                                        'SELECT asset.*, asset_in.*, asset_assign.Date AS AssetAssignDate, Department, Assigned_To, AssignedQty FROM asset JOIN asset_in ON asset_in.AssetId = asset.AssetId LEFT JOIN asset_assign ON asset_in.Id = asset_assign.AssetInId WHERE asset_in.Id = ' .
+                                        $row['asset_in_id'];
+                                    // echo $sql1;
+                                    $result1 = mysqli_query($conn, $sql1);
+                                    while (
+                                        $row1 = mysqli_fetch_assoc($result1)
+                                    ) {
+                                        $assignedDate[] =
+                                            '* ' .
+                                            date(
+                                                'd-M-Y',
+                                                strtotime(
+                                                    $row['AssetAssignDate']
+                                                )
+                                            );
+                                        $assignedDept[] =
+                                            '* ' . $row1['Department'];
+                                        $assignedTo[] =
+                                            '* ' . $row1['Assigned_To'];
+                                        $assignedQty[] =
+                                            '* ' . $row1['AssignedQty'];
+                                    }
+                                    echo '</td>
                                         <td>' .
                                         date('d-M-Y', strtotime($row['Date'])) .
                                         '</td>
                                         <td>';
-                                        if(!is_null($row['AssetAssignDate']))
-                                            echo date('d-M-Y', strtotime($row['AssetAssignDate']));
-                                        echo '</td>
-                                        <td>' .
-                                        $row['Department'] .
+                                    echo implode('<br>', $assignedDate);
+
+                                    echo '</td>
+                                    <td>' .
+                                        implode('<br>', $assignedQty) .
+                                        '</td>
+                                    <td>' .
+                                        implode('<br>', $assignedDept) .
                                         '</td>
                                         <td>' .
-                                        $row['Assigned_To'] .
+                                        implode('<br>', $assignedTo) .
                                         '</td>
                                     </tr>';
                                 }
@@ -166,6 +215,7 @@ include_once 'conn.php';
 
                             </tfoot>
                         </table>
+                        </div>
                         </div>
                         <br><br>
                     </div>
