@@ -1,6 +1,5 @@
 <?php
-include_once('conn.php');
-?>
+include_once 'conn.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,14 +29,10 @@ include_once('conn.php');
 
 <body>
     <!-- Top Bar Start -->
-    <?php
-    include_once('header.php');
-    ?>
+    <?php include_once 'header.php'; ?>
     <div class="page-wrapper">
         <!-- Left Sidenav -->
-        <?php
-            include_once('sidebar.php');
-        ?>
+        <?php include_once 'sidebar.php'; ?>
 
         <!-- Page Content-->
         <div class="page-content">
@@ -70,9 +65,15 @@ include_once('conn.php');
                                     <?php
                                     $sqlAsset = 'SELECT * FROM asset';
                                     $resultAsset = $conn->query($sqlAsset);
-                                    if($resultAsset->num_rows > 0) {
-                                        while($rowAsset = $resultAsset->fetch_assoc()) {
-                                            echo '<option value="'.$rowAsset['AssetId'].'">'.$rowAsset['AssetName'].'</option>';
+                                    if ($resultAsset->num_rows > 0) {
+                                        while (
+                                            $rowAsset = $resultAsset->fetch_assoc()
+                                        ) {
+                                            echo '<option value="' .
+                                                $rowAsset['AssetId'] .
+                                                '">' .
+                                                $rowAsset['AssetName'] .
+                                                '</option>';
                                         }
                                     }
                                     ?>
@@ -105,6 +106,12 @@ include_once('conn.php');
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
+                                <label>Quantity:</label>
+                                <input type="number" name="qty" min="0" id="qty" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
                                 <label>Price:</label>
                                 <input type="number" name="price" id="" class="form-control" placeholder="" required>
                             </div>
@@ -112,7 +119,9 @@ include_once('conn.php');
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Date:</label>
-                                <input type="date" name="date" id="" value="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="" required>
+                                <input type="date" name="date" id="" value="<?php echo date(
+                                    'Y-m-d'
+                                ); ?>" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="col-md-2" id="deprecationDiv" style="display: none;">
@@ -162,6 +171,10 @@ include_once('conn.php');
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
     <script>
     $(":input").inputmask();
+    $('#qty').on('change', function() {
+        if(parseFloat($(this).attr('min')) > parseFloat($(this).val()))
+            $(this).val($(this).attr('min'));
+    })
     </script>
 
     <script>
