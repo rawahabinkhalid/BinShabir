@@ -80,6 +80,22 @@ include_once('conn.php');
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
+                                <label>Contract #:</label>
+                                <select class="form-control" name="contractno" required>
+                                    <option selected disabled>Select Contract No</option>
+                                    <?php
+                                        $sql = 'SELECT * FROM makecontract';
+                                        $result = mysqli_query($conn, $sql);
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            echo'
+                                            <option value="'.$row['ContractNo'].'">'.$row['ContractNo'].'</option>';
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
                                 <label>GRN # :</label>
                                 <?php
                                 $sql = 'SELECT MAX(Id) as maxid FROM gatepass_g_recieved';
@@ -192,7 +208,7 @@ include_once('conn.php');
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>MOISTURE:</label>
-                                <input type="text" name="moisture" class="form-control">
+                                <input type="number" name="moisture" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-2">

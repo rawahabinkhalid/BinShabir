@@ -80,15 +80,55 @@ include_once('conn.php');
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Year:</label>
-                            <select name="dateyear" class="form-control">
-                            <option value="">Select Year</option>
+                            <select name="dateyear" id="dateyear" class="form-control" required>
+                                <option selected disabled value="">Please select a Year</option>
+                                <?php for ($i = 2030; $i >= 2010; $i--) {
+                                    echo '<option value="' .
+                                        $i .
+                                        '">' .
+                                        $i .
+                                        '</option>';
+                                } 
+                                ?>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Month:</label>
-                            <input type="month" name="datemonth">
+                            <select name="datemonth" id="datemonth" class="form-control">
+                                <option selected disabled value="">Please select a Month</option>
+                                <?php
+                                $month = [
+                                    'January',
+                                    'February',
+                                    'March',
+                                    'April',
+                                    'May',
+                                    'June',
+                                    'July',
+                                    'August',
+                                    'September',
+                                    'October',
+                                    'November',
+                                    'December',
+                                ];
+                                for ($i = 0; $i < count($month); $i++) {
+                                    echo '<option value="';
+                                    echo strlen(strval($i + 1)) == 1 ? '0' . ($i + 1) : $i + 1;
+                                    echo '">' . $month[$i] . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label style="width: 100%; visibility: hidden">Button</label>
+                            <button type="button" name="filterBtn" id="filterBtn" class="btn btn-primary"
+                                style="width: 180px; float: right">
+                                Filter
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -115,7 +155,7 @@ include_once('conn.php');
                                     echo'
                                     <tr>
                                         <td scope="row"><b>'.$count++.'</b></td>
-                                        <td>'.number_format($row['SUM(Amount)'], 2).'</td>
+                                        <td id="all_income">'.number_format($row['SUM(Amount)'], 2).'</td>
                                     </tr>';
                                     $totalIncome = floatval($totalIncome) + floatval($row['SUM(Amount)']);
                                 }
@@ -149,7 +189,7 @@ include_once('conn.php');
                                     echo'
                                     <tr>
                                         <td scope="row"><b>'.$count++.'</b></td>
-                                        <td>'.number_format($row['SUM(Amount)'], 2).'</td>
+                                        <td id="all_expense">'.number_format($row['SUM(Amount)'], 2).'</td>
                                     </tr>';
                                     $totalExpense = floatval($totalExpense) + floatval($row['SUM(Amount)']);
                                 }
@@ -179,7 +219,7 @@ include_once('conn.php');
                                 echo'
                                 <tr>
                                     <td scope="row"><b>'.$count++.'</b></td>
-                                    <td>'.number_format(floatval(floatval($totalIncome) - floatval($totalExpense)), 2).'</td>
+                                    <td id="total_profit_loss">'.number_format(floatval(floatval($totalIncome) - floatval($totalExpense)), 2).'</td>
                                 </tr>';
                             ?>
                             </tbody>
@@ -222,6 +262,49 @@ include_once('conn.php');
 
     <!-- App js -->
     <script src="assets/js/app.js"></script>
+
+    <!-- Year/Month filter  -->
+    <script>
+    $('#filterBtn').on('click', function() {
+        if ($('#dateyear').val() != '' && $('#dateyear').val() != undefined && $('#dateyear').val() != null) {
+            var data = 'yearFilter=' + $('#dateyear').val();
+
+            if ($('#datemonth').val() != '' && $('#datemonth').val() != undefined && $('#datemonth').val() != null) {
+               data += '&monthFilter=' + $('#datemonth').val();
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: 'get_profit_and_loss.php',
+                data: data,
+                success: function(response) {
+                    console.log(response);
+
+                    let obj = JSON.parse(response);
+                    $('#all_income').html(numberWithCommas(obj.totalIncome));
+                    $('#all_expense').html(numberWithCommas(obj.totalExpense));
+
+                    var profit_loss = parseFloat(obj.totalIncome) - parseFloat(obj.totalExpense);
+                    if(profit_loss < 0)
+                        profit_loss = '(' + numberWithCommas(Math.abs(profit_loss)) + ')';
+                    else
+                        profit_loss = numberWithCommas(profit_loss);
+                        
+                    $('#total_profit_loss').html(profit_loss);
+                },
+            });
+        } 
+        else if ($('#datemonth').val() != '' && $('#datemonth').val() != undefined && $('#datemonth').val() != null) {
+            alert('Please select a Year');
+        }
+    })
+    
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '.00';
+    }
+    </script>
+
+
 
     <script>
     $('#headername').html("Profit And Loss Report");

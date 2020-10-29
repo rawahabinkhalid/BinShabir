@@ -1,6 +1,7 @@
 <?php
 include_once('conn.php');
 
+$contractno = $_POST['contractno'];
 $GRNNo = $_POST['GRNNo'];
 $partyname = $_POST['partyname'];
 $date = $_POST['date'];
@@ -27,9 +28,9 @@ $cooking = $_POST['cooking'];
 // $ExWeight = $_POST['ExWeight'];
 // $Weight = $_POST['Weight'];
 
-$sql = 'INSERT INTO gatepass_g_recieved (`GRN_No`,`PartyName`,`Date`,`TimeIn`,`VehicleNo`,
+$sql = 'INSERT INTO gatepass_g_recieved (`ContractNo`,`GRN_No`,`PartyName`,`Date`,`TimeIn`,`VehicleNo`,
                             `Chalky`,`B1`,`B2`,`B3`,`DD`,`Shv`,`RedStripe`,`Choba`,`Ov`,`Moisture`,`Cooking`) 
-        VALUES ("'.$GRNNo.'","'.$partyname.'","'.$date.'","'.$timein.'","'.$vehicleNo.'",
+        VALUES ("'.$contractno.'","'.$GRNNo.'","'.$partyname.'","'.$date.'","'.$timein.'","'.$vehicleNo.'",
                 "'.$chalky.'","'.$b1.'","'.$b2.'","'.$b3.'","'.$dd.'","'.$shv.'",
                 "'.$redstripe.'","'.$choba.'","'.$ov.'","'.$moisture.'","'.$cooking.'")';
 $result = mysqli_query($conn, $sql);

@@ -43,6 +43,9 @@
                 <li class="nav-item"><a class="" href="GatePass_GoodIssue_Report.php"><i class="ti-control-record"></i>
                         Issue Report</a>
                 </li>
+                <li class="nav-item"><a class="" href="GatePass_AvgMoisture_Report.php"><i class="ti-control-record"></i>
+                        Average Moisture</a>
+                </li>
             </ul>
         </li>
 

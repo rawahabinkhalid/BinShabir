@@ -95,8 +95,8 @@ include_once('conn.php');
                                 </select>
                             </div>
                         </div>
-                         <!-- print ke time pr ye visible hoga GRN NO (start) -->
-                         <div class="col-md-4" id="print_grnno" style="display: none">
+                        <!-- print ke time pr ye visible hoga GRN NO (start) -->
+                        <div class="col-md-4" id="print_grnno" style="display: none">
                             <div class="form-group">
                                 <label>GRN No #:</label>
                                 <input type="text" name="grn_no" id="grn_no" value="" class="form-control">
@@ -107,23 +107,29 @@ include_once('conn.php');
                     <div class="row" id="goodrecievednoteReport" style="display:none">
                         <div class="col-md-3">
                             <div class="form-group">
+                                <label>Contract No# :</label>
+                                <input type="text" name="contractno" id="contractno" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
                                 <label>Party Name:</label>
                                 <input type="text" name="partyname" id="partyname" value="" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label>Date:</label>
                                 <input type="date" name="date" id="date" value="" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label>Time In:</label>
                                 <input type="time" name="timein" id="timein" value="" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label>Vehicle No:</label>
                                 <input type="text" name="vehicleNo" id="vehicleNo" value="" class="form-control">
@@ -218,8 +224,8 @@ include_once('conn.php');
                         <div class="col-md-4">
                             <br>
                             <div class="form-group">
-                            <input class="btn btn-success" id="printpagebutton" type="button" value="Print"
-                            onclick="printpage()" />
+                                <input class="btn btn-success" id="printpagebutton" type="button" value="Print"
+                                    onclick="printpage()" />
                             </div>
                         </div>
                     </div>
@@ -278,6 +284,7 @@ include_once('conn.php');
                     $('#goodrecieveddata').html(json_response.tbody);
                     $('#goodrecieveddata_tfoot').html(json_response.tfoot);
 
+                    $('#contractno').val(json_response.contract_no);                    
                     $('#partyname').val(json_response.party_name);
                     $('#date').val(json_response.date);
                     $('#timein').val(json_response.timein);
@@ -301,8 +308,8 @@ include_once('conn.php');
     })
     </script>
 
-     <!-- Print Document -->
-     <script type="text/javascript">
+    <!-- Print Document -->
+    <script type="text/javascript">
     function printpage() {
 
         var printButton = document.getElementById("printpagebutton");
@@ -314,8 +321,8 @@ include_once('conn.php');
         printButton.style.display = 'none';
 
         var printButton = document.getElementById("print_grnno");
-         //Set the print button to 'visible' again 
-         printButton.style.display = '';
+        //Set the print button to 'visible' again 
+        printButton.style.display = '';
 
         //Print the page content
         window.print()

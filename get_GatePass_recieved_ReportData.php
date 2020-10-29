@@ -19,6 +19,7 @@ $result = mysqli_query($conn, $sql);
 if(mysqli_num_rows($result) > 0) {
     while($row = mysqli_fetch_assoc($result)){
         
+        $contract_no = $row['ContractNo'];
         $party_name = $row['PartyName'];
         $date = $row['Date'];
         $timein = $row['TimeIn'];
@@ -75,6 +76,7 @@ if(mysqli_num_rows($result) > 0) {
     $jsonObj->tbody = $data_tbody;
     $jsonObj->tfoot = $data_tfoot;
     
+    $jsonObj->contract_no = $contract_no;
     $jsonObj->party_name = $party_name;
     $jsonObj->date = $date;
     $jsonObj->timein = $timein;
