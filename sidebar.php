@@ -21,6 +21,9 @@
                 <li class="nav-item"><a class="" href="MakeContract.php"><i class="ti-control-record"></i>
                         Make Contract</a>
                 </li>
+                <li class=""><a class="" href="ExtendContracts.php"><i class="ti-control-record"></i>
+                        Extend Contract</a>
+                </li>
                 <li class=""><a class="" href="ViewContracts.php"><i class="ti-control-record"></i>
                         View Contracts</a>
                 </li>
