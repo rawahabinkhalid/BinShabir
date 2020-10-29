@@ -24,6 +24,9 @@
                 <li class=""><a class="" href="ViewContracts.php"><i class="ti-control-record"></i>
                         View Contracts</a>
                 </li>
+                <li class=""><a class="" href="EditContract.php"><i class="ti-control-record"></i>
+                        Edit Contracts</a>
+                </li>
             </ul>
         </li>
 

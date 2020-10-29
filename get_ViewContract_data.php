@@ -1,7 +1,7 @@
 <?php
 include_once('conn.php');
 
-$sql = 'SELECT * FROM makecontract WHERE Id = '.$_POST['contract_no'];
+$sql = 'SELECT * FROM makecontract WHERE ContractNo = '.$_POST['contract_no'];
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
