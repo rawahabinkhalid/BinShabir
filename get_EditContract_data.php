@@ -24,7 +24,7 @@ $row = mysqli_fetch_assoc($result);
     <div class="col-md-4">
         <div class="form-group">
             <label>Customer Name:</label>
-            <input type="text" name="customerPoNum" value="<?php echo $row['CustomerName'] ?>" class="form-control">
+            <input type="text" name="customername" value="<?php echo $row['CustomerName'] ?>" class="form-control">
         </div>
     </div>
     <div class="col-md-4">

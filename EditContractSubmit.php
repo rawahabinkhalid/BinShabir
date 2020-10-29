@@ -40,7 +40,6 @@ if($result){
 
     echo '<script>alert("Your Form Has been Submitted!");window.open("EditContract.php", "_self");</script>'; 
     
-    // header('Location: MakeContract.php');
 }
 else{
     echo $sql;

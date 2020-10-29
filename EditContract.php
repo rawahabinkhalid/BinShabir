@@ -108,15 +108,15 @@ include_once('conn.php');
 
                         </div>
                     </div>
-                </form>
-                <br>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success">Submit</button>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
                 <br><br>
             </div>
             <!-- container -->
