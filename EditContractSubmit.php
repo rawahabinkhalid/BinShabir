@@ -7,9 +7,6 @@ $customerPoNum = $_POST['customerPoNum'];
 $ContractNo = $_POST['ContractNo'];
 $quality = $_POST['quality'];
 $variety = $_POST['variety'];
-// $b1 = $_POST['b1'];
-// $b2 = $_POST['b2'];
-// $damage = $_POST['damage'];
 
 
 $ourreference = $_POST['ourreference'];
@@ -36,7 +33,7 @@ $sql = 'UPDATE makecontract SET `ContractType`= "'.$contracttype.'", `CustomerNa
                             `OurReference` = "'.$ourreference.'", `ProductionOrderNum` = "'.$productionordernum.'", `BagsFilling` = "'.$bagsfilling.'", `Brand` = "'.$brand.'", `MilledQuantity` = "'.$milledquantity.'", `Whiteness` = "'.$whiteness.'",
                             `BrokenPercentage` = "'.$brokenpercentage.'", `Moisture` = "'.$moisture.'", `ChalkyImmatureKernels` = "'.$chalkyimmaturekernels.'", `PackingWeight` = "'.$packingweight.'", `Tags` = "'.$tags.'", `LoadingBags` = "'.$loadingbags.'",
                             `InspectionDate` = "'.$inspectiondate.'", `EmptyBagsLoading` = "'.$emptybagsloading.'", `Fumigation` = "'.$fumigation.'", `Silicagel` = "'.$silicagel.'", `KraftPaper` = "'.$kraftpaper.'", `SpecialInstruction` = "'.$specialinstruction.'",
-                            `ProcessingMill` = "'.$processingmill.'" ) WHERE ContractNo ='.$ContractNo;
+                            `ProcessingMill` = "'.$processingmill.'" WHERE ContractNo ='.$ContractNo;
 $result = mysqli_query($conn, $sql);
 
 if($result){
