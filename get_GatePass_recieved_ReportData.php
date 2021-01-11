@@ -41,7 +41,6 @@ if(mysqli_num_rows($result) > 0) {
                 <td scope="row"><b>'.$count++.'</b></td>
                 <td>'.$row['Items'].'</td>
                 <td>'.$row['Description'].'</td>
-                <td>'.$row['LabNo'].'</td>
                 <td>'.$row['Packsize'].'</td>
                 <td>'.$row['Quantity'].'</td>
                 <td>'.$row['ExWeight'].'</td>
@@ -58,12 +57,10 @@ if(mysqli_num_rows($result) > 0) {
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
             <td><b>Total Weight</b></td>
         </tr>
         <tr>
             <td scope="row" colspan="1"></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>

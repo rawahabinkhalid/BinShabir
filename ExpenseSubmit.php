@@ -17,7 +17,7 @@ if(mysqli_num_rows($resultSelect) > 0 ){
                             VALUES (".$productionno.",'".$_POST['description'][$i]."','".$_POST['date'][$i]."','".$_POST['amount'][$i]."')";
         $result1 = mysqli_query($conn,$sql1);
 
-        $sql2 = "INSERT INTO overallloss (`Description`,`Date`,`Amount`) VALUES ('OP Expense','".$_POST['date'][$i]."','".$_POST['amount'][$i]."') ";
+        $sql2 = "INSERT INTO overallloss (`Description`,`Date`,`Amount`) VALUES ('SM Expense','".$_POST['date'][$i]."','".$_POST['amount'][$i]."') ";
         $result2 = mysqli_query($conn,$sql2);
     }
         echo '<script>alert("Your Form Has been Submitted!");window.open("EditExpense.php", "_self");</script>';   

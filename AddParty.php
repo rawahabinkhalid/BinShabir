@@ -73,25 +73,25 @@ include_once('conn.php');
                                 <select type="text" name="type" id="" class="form-control" placeholder="" required>
                                     <option selected disabled>Select Contract Type</option>
                                     <option value="Debtor/AccountReceivable"> Debtor/AccountReceivable</option>
-                                    <option value="Supplier/Creditor">Supplier/Creditor</option>
-                                    <option value="Capital">Capital</option>
+                                    <option value="Creditor/AccountPayable">Creditor/AccountPayable</option>
+                                    <!-- <option value="Capital">Capital</option>
                                     <option value="Revenue">Revenue</option>
                                     <option value="Expenditure">Expenditure</option>
-                                    <option value="Liability">Liability</option>
+                                    <option value="Liability">Liability</option> -->
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Name:</label>
-                                <input type="text" name="partyname" id="" class="form-control" placeholder="" required>
+                                <input type="text" name="partyname" id="" class="form-control" placeholder="" required
+                                    maxlength="100" onkeypress="return onlyAlphabets(event,this);">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Name Initials:</label>
-                                <input type="text" name="nameinitials" id="" class="form-control" placeholder=""
-                                    required>
+                                <input type="text" name="nameinitials" id="" class="form-control" placeholder="">
                             </div>
                         </div>
                     </div>
@@ -127,14 +127,13 @@ include_once('conn.php');
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Contact Person:</label>
-                                <input type="text" name="contactperson" id="" class="form-control" placeholder=""
-                                    required>
+                                <input type="text" name="contactperson" id="" class="form-control" placeholder="">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Email:</label>
-                                <input type="email" name="email" id="" class="form-control" placeholder="" required>
+                                <input type="email" name="email" id="" class="form-control" placeholder="">
                             </div>
                         </div>
                     </div>
@@ -142,16 +141,14 @@ include_once('conn.php');
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Dispatch Address:</label>
-                                <input type="text" name="dispatchaddress" id="" class="form-control" placeholder=""
-                                    required>
+                                <input type="text" name="dispatchaddress" id="" class="form-control" placeholder="">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>CNIC:</label>
-                                <input type="text" name="cnic" id="cnic" required
-                                    data-inputmask="'mask': '99999-9999999-9'" onchange="checkCNIC();"
-                                    class="form-control" placeholder="e.g. 41111-1111111-1">
+                                <input type="text" name="cnic" id="cnic" data-inputmask="'mask': '99999-9999999-9'"
+                                    onchange="checkCNIC();" class="form-control" placeholder="e.g. 41111-1111111-1">
                             </div>
                         </div>
                     </div>
@@ -228,6 +225,29 @@ include_once('conn.php');
     <script>
     $('#headername').html("Add Party / Customer");
     </script>
+
+    <!-- Only Alphabets Entered in Input Box Start -->
+    <script>
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            } else if (e) {
+                var charCode = e.which;
+            } else {
+                return true;
+            }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        } catch (err) {
+            alert(err.Description);
+        }
+    }
+    </script>
+    <!-- Only Alphabets Entered in Input Box End -->
+
 
 </body>
 

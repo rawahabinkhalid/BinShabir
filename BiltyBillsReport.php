@@ -1,10 +1,11 @@
 <?php
+include_once 'conn.php';
+
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header('location: index.php');
 }
 
-include_once 'conn.php';
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +27,7 @@ include_once 'conn.php';
     <link href="assets/css/icons.css" rel="stylesheet" type="text/css">
     <link href="assets/css/metisMenu.min.css" rel="stylesheet" type="text/css">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="assets/plugins/daterangepicker/daterangepicker.css">
 
@@ -68,7 +70,7 @@ include_once 'conn.php';
                 </div>
                 <br><br>
                 <!-- end page title end breadcrumb -->
-                <div class="row" id="" style="">
+                <div class="row">
                     <div class="col-md-12 text-center">
                         <h3><b><u>Bilty Bills Report</u></b></h3>
                     </div>
@@ -167,6 +169,7 @@ include_once 'conn.php';
     <script>
     $('#headername').html("Bilty Bills Report");
     </script>
+    
     <script>
     $(document).ready(function() {
         $('.table').DataTable();
@@ -214,6 +217,8 @@ include_once 'conn.php';
     $('#daterangeBtn').on('click', function() {
         var dateFrom = $('#daterange').val().split(' - ')[0];
         var dateTo = $('#daterange').val().split(' - ')[1];
+        // console.log(dateFrom);
+        // console.log(dateTo);
         $.ajax({
             type: 'POST',
             url: 'get_Bilty_Bills_Report_By_Date.php',
@@ -239,7 +244,6 @@ include_once 'conn.php';
         printButton.style.visibility = 'hidden';
 
         var printButton = document.getElementById("daterangeBtn");
-        //Set the print button visibility to 'hidden' 
         printButton.style.visibility = 'hidden';
 
         //Print the page content

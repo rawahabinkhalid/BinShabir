@@ -20,7 +20,9 @@ $ov = $_POST['ov'];
 $moisture = $_POST['moisture'];
 $cooking = $_POST['cooking'];
 
+// $Type = $_POST['type'];
 // $Items = $_POST['Items'];
+// $ItemsOther = $_POST['ItemsOther'];
 // $Description = $_POST['Description'];
 // $LabNo = $_POST['LabNo'];
 // $Packsize = $_POST['Packsize'];
@@ -39,11 +41,21 @@ if($result){
 
     $GoodReceivedId = mysqli_insert_id($conn);
 
-     for($i = 0; $i < count($_POST['Items']); $i++) {
-        $sql1 = "INSERT INTO gatepass_g_recieved_items (`GoodReceivedId`,`Items`,`Description`,`LabNo`,`Packsize`,`Quantity`,`ExWeight`,`Weight`)
-                            VALUES (".$GoodReceivedId.",'".$_POST['Items'][$i]."','".$_POST['Description'][$i]."','".$_POST['LabNo'][$i]."','".$_POST['Packsize'][$i]."','".$_POST['Quantity'][$i]."','".$_POST['ExWeight'][$i]."','".$_POST['Weight'][$i]."')";
-        $result1 = mysqli_query($conn,$sql1);
-    }
+        for($i = 0; $i < count($_POST['type']); $i++) {
+
+            if($_POST['type'][$i] == "Rice"){
+                $item = $_POST['Items'][$i];
+            }
+            else{
+                $item = $_POST['ItemsOther'][$i];
+            }
+            $sql1 = "INSERT INTO gatepass_g_recieved_items (`GoodReceivedId`,`Type`,`Items`,`Description`,`Packsize`,`Quantity`,`ExWeight`,`Weight`)
+                                VALUES (".$GoodReceivedId.",'".$_POST['type'][$i]."','".$item."','".$_POST['Description'][$i]."','".$_POST['Packsize'][$i]."','".$_POST['Quantity'][$i]."','".$_POST['ExWeight'][$i]."','".$_POST['Weight'][$i]."')";
+            $result1 = mysqli_query($conn,$sql1);
+
+        }
+    
+    
     if($result1){
 
         echo '<script>alert("Your Form Has been Submitted!");window.open("GatePass_GoodRecieved.php", "_self");</script>'; 

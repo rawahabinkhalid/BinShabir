@@ -88,7 +88,7 @@ include_once('conn.php');
                     <div class="col-md-4" id="name_select">
                         <label>Contract No:</label>
                         <select name="contractno" id="contractno" class="form-control">
-                            <option value="">Select Contract</option>
+                            <option selected disabled>Select Contract</option>
                             <?php
                             $sql = 'SELECT * FROM makecontract';
                             $result = mysqli_query($conn, $sql);

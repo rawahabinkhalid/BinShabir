@@ -87,18 +87,18 @@ include_once 'conn.php';
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Date:</label>
-                                <input type="date" name="extenddate" id="" class="form-control" required>
+                                <input type="date" value="<?php echo date('Y-m-d')?>" name="extenddate" id="" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Packing:</label>
+                                <label>Packing Material/Packing Weight:</label>
                                 <input type="text" name="packing" id="" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Polishing:</label>
+                                <label>Polish/Whiteness:</label>
                                 <input type="text" name="polishing" id="" class="form-control" required>
                             </div>
                         </div>
@@ -106,19 +106,25 @@ include_once 'conn.php';
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Broken:</label>
+                                <label>Broken Percentage:</label>
                                 <input type="text" name="broken" id="" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Qty:</label>
+                                <label>Quantity:</label>
                                 <input type="text" name="extendQty" id="" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Production Order #:</label>
+                                <label>Brand:</label>
+                                <input type="text" name="brand" id="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>PO#:</label>
                                 <input type="text" name="prodOrder" id="" class="form-control">
                             </div>
                         </div>

@@ -13,7 +13,7 @@ include_once('conn.php');
 
 <head>
     <meta charset="utf-8">
-    <title>Make Contract - Dashboard</title>
+    <title>Debtor - Dashboard</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta content="A premium admin dashboard template by Mannatthemes" name="description">
     <meta content="Mannatthemes" name="author">
@@ -54,7 +54,7 @@ include_once('conn.php');
                             <div class="float-right">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="">RiceMill</a></li>
-                                    <li class="breadcrumb-item active">Make Contract</li>
+                                    <li class="breadcrumb-item active">Debtor</li>
                                 </ol>
                             </div>
                             <h4 class="page-title"></h4>
@@ -64,27 +64,20 @@ include_once('conn.php');
                     <!--end col-->
                 </div>
                 <!-- end page title end breadcrumb -->
-                <form action="MakeContractSubmit.php" method="POST">
+                <form action="DebtorSubmit.php" method="POST">
                     <br><br>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Contract Type:</label>
-                                <select class="form-control" name="contracttype" required>
-                                    <option selected disabled>Select Contract Type</option>
-                                    <option value="Debtor/AccountReceivable"> Debtor/AccountReceivable</option>
-                                    <option value="Creditor/AccountPayable">Creditor/AccountPayable</option>
-                                    <!-- <option value="Capital">Capital</option>
-                                    <option value="Revenue">Revenue</option>
-                                    <option value="Expenditure">Expenditure</option>
-                                    <option value="Liability">Liability</option> -->
-                                </select>
+                                <input class="form-control" name="contracttype" value="Debtor/AccountReceivable/Sales"
+                                    readonly>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Customer Name:</label>
-                                <select class="form-control" name="customername" required>
+                                <label>Sales Customer Name:</label>
+                                <select class="form-control" name="salecustomername" required>
                                     <option selected disabled>Select Customer Name</option>
                                     <?php
                                         $sql = 'SELECT * FROM addparty';
@@ -99,8 +92,8 @@ include_once('conn.php');
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Customer PO Number:</label>
-                                <input type="text" name="customerPoNum" id="" class="form-control">
+                                <label>Sales SO Number:</label>
+                                <input type="text" name="salecustomerSoNum" id="" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -109,11 +102,11 @@ include_once('conn.php');
                             <div class="form-group">
                                 <label>Contract #:</label>
                                 <?php
-                                $sql = 'SELECT MAX(Id) as maxid FROM makecontract';
+                                $sql = 'SELECT MAX(ContractNo) as maxno FROM `contract`';
                                 $result = mysqli_query($conn, $sql);
                                 if(mysqli_num_rows($result)>0){
                                     $row = mysqli_fetch_assoc($result);
-                                    $count = $row['maxid'] + 1;
+                                    $count = $row['maxno'] + 1;
                                 }
                                 else{
                                     $count = 1;
@@ -156,26 +149,6 @@ include_once('conn.php');
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>B1 %:</label>
-                                <input type="text" name="b1" id="" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>B2 %:</label>
-                                <input type="text" name="b2" id="" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Damage %:</label>
-                                <input type="text" name="damage" id="" class="form-control" required>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -186,27 +159,19 @@ include_once('conn.php');
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Our Reference:</label>
-                                <input type="text" name="ourreference" id="" class="form-control" required>
+                                <input type="text" name="ourreference" id="" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>PO#:</label>
-                                <input type="text" name="productionordernum" id="" class="form-control" required>
+                                <label>SO#:</label>
+                                <input type="text" name="salesordernum" id="" class="form-control">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Bags Filling:</label>
-                                <input type="text" name="bagsfilling" id="" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Brand:</label>
                                 <input type="text" name="brand" id="" class="form-control" required>
@@ -214,41 +179,39 @@ include_once('conn.php');
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>Milled Quantity M/T:</label>
-                                <input type="text" name="milledquantity" id="" class="form-control">
+                                <label>Quantity:</label>
+                                <input type="text" name="quantity" id="" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>Polish/Whiteness:</label>
-                                <input type="text" name="whiteness" id="" class="form-control">
+                                <label>Moisture:</label>
+                                <input type="text" name="moisture" id="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Payment Terms:</label>
+                                <input type="text" name="paymentterms" id="" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Price:</label>
+                                <input type="text" name="price" id="" class="form-control" required>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Broken Percentage:</label>
-                                <input type="text" name="brokenpercentage" id="" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Moisture:</label>
-                                <input type="text" name="moisture" id="" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label>Chalky & Immature Kernels:</label>
                                 <input type="text" name="chalkyimmaturekernels" id="" class="form-control" required>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label>Packing Material/Packing Weight:</label>
 
@@ -272,8 +235,8 @@ include_once('conn.php');
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Expected Inspection Date:</label>
-                                <input type="date" name="inspectiondate" id="" class="form-control" 
-                                min = "<?php echo date('Y-m-d')?>"required>
+                                <input type="date" name="inspectiondate" id="" class="form-control"
+                                    min="<?php echo date('Y-m-d')?>" required>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -354,7 +317,7 @@ include_once('conn.php');
     <script src="assets/js/app.js"></script>
 
     <script>
-    $('#headername').html("Make Contract");
+    $('#headername').html("Debtor/Accounts - Receivable/Sales");
     </script>
 </body>
 

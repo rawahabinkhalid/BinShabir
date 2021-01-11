@@ -8,16 +8,15 @@ if(isset($_POST['monthFilter']))
 $dateLike = $yearFilter . $monthFilter;
 
 $totalIncome = 0;
-$count = 1;
-$sql = 'SELECT *, SUM(Amount) FROM overallprofit WHERE DefaultDate LIKE "' . $dateLike . '%"';
 
+$sql = 'SELECT *, SUM(Amount) FROM overallprofit WHERE DefaultDate LIKE "' . $dateLike . '%"';
 $result = mysqli_query($conn,$sql);
 while($row = mysqli_fetch_assoc($result)){
     $totalIncome = floatval($totalIncome) + floatval($row['SUM(Amount)']);
 }
 
 $totalExpense = 0;
-$count = 1;
+
 $sql1 = 'SELECT *, SUM(Amount) FROM overallloss WHERE DefaultDate LIKE "' . $dateLike . '%"';
 $result = mysqli_query($conn,$sql1);
 while($row = mysqli_fetch_assoc($result)){

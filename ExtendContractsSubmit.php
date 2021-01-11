@@ -7,27 +7,14 @@ $packing = $_POST['packing'];
 $polishing = $_POST['polishing'];
 $broken = $_POST['broken'];
 $extendQty = $_POST['extendQty'];
-
+$brand = $_POST['brand'];
 $prodOrder = $_POST['prodOrder'];
 
 $sql =
-    'INSERT INTO extendcontract (`ContractId`,`ExtendDate`,`Packing`,`Polishing`,`Broken`,`ExtendQty`,
-                            `ProdOrderNo`) VALUES ("' .
-    $contractno .
-    '","' .
-    $extenddate .
-    '","' .
-    $packing .
-    '","' .
-    $polishing .
-    '","' .
-    $broken .
-    '","' .
-    $extendQty .
-    '",
-    "' .
-    $prodOrder .
-    '")';
+    'INSERT INTO extendcontract (`ContractId`,`ExtendDate`,`Packing`,`Polishing`,`Broken`,`ExtendQty`,`Brand`,
+                            `ProdOrderNo`) VALUES ("'.$contractno.'","'.$extenddate.'","'.$packing.'",
+                                                   "'.$polishing.'","'.$broken.'","'.$extendQty.'",
+                                                   "'.$brand.'","'.$prodOrder.'")';
 $result = mysqli_query($conn, $sql);
 
 if ($result) {

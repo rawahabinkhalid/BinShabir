@@ -208,7 +208,7 @@ include_once('conn.php');
                                         <th scope="col">S.No</th>
                                         <th scope="col">Items</th>
                                         <th scope="col">Description</th>
-                                        <th scope="col">Lot No. / Contract No.</th>
+                                        <!-- <th scope="col">Lot No. / Contract No.</th> -->
                                         <th scope="col">Pack Size & Type</th>
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Ex Weight</th>

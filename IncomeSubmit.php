@@ -20,8 +20,8 @@ if($result){
         $result1 = mysqli_query($conn,$sql1);
 
         // Over All Profit Calculate krne ke liye ye kaam kiya ha
-            $sql2 = "INSERT INTO overallprofit (`Description`,`Date`,`Amount`) VALUES ('OP Income','".$_POST['date'][$i]."','".$_POST['amount'][$i]."') ";
-            $result2 = mysqli_query($conn,$sql2);
+        $sql2 = "INSERT INTO overallprofit (`Description`,`Date`,`Amount`) VALUES ('SM Income','".$_POST['date'][$i]."','".$_POST['amount'][$i]."') ";
+        $result2 = mysqli_query($conn,$sql2);
     }
     
     echo '<script>alert("Your Form Has been Submitted!");window.open("Income.php", "_self");</script>'; 

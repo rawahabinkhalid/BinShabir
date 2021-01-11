@@ -84,7 +84,7 @@ include_once('conn.php');
                                 <select class="form-control" name="contractno" required>
                                     <option selected disabled>Select Contract No</option>
                                     <?php
-                                        $sql = 'SELECT * FROM makecontract';
+                                        $sql = 'SELECT * FROM toolmillcontract';
                                         $result = mysqli_query($conn, $sql);
                                         while($row = mysqli_fetch_assoc($result)){
                                             echo'
@@ -154,55 +154,55 @@ include_once('conn.php');
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>CHALKY:</label>
-                                <input type="text" name="chalky" class="form-control">
+                                <input type="number" name="chalky" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>B-1:</label>
-                                <input type="text" name="b1" class="form-control">
+                                <input type="number" name="b1" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>B-2:</label>
-                                <input type="text" name="b2" class="form-control">
+                                <input type="number" name="b2" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>B-3:</label>
-                                <input type="text" name="b3" class="form-control">
+                                <input type="number" name="b3" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>D/D:</label>
-                                <input type="text" name="dd" class="form-control">
+                                <input type="number" name="dd" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>SHV:</label>
-                                <input type="text" name="shv" class="form-control">
+                                <input type="number" name="shv" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>RED STRIPE/UM:</label>
-                                <input type="text" name="redstripe" class="form-control">
+                                <input type="number" name="redstripe" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>CHOBA:</label>
-                                <input type="text" name="choba" class="form-control">
+                                <input type="number" name="choba" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>OV:</label>
-                                <input type="text" name="ov" class="form-control">
+                                <input type="number" name="ov" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -220,6 +220,11 @@ include_once('conn.php');
                     </div>
                     <hr><br>
                     <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Type:</label>
+                            </div>
+                        </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Items:</label>
@@ -230,11 +235,11 @@ include_once('conn.php');
                                 <label>Description:</label>
                             </div>
                         </div>
-                        <div class="col-md-1">
+                        <!-- <div class="col-md-1">
                             <div class="form-group">
-                                <label>Lot No / Contract No:</label>
+                                <label>Lot No:</label>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-1">
                             <div class="form-group">
                                 <label>Pack Size & Type:</label>
@@ -245,7 +250,7 @@ include_once('conn.php');
                                 <label>Quantity:</label>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <div class="form-group">
                                 <label>Ex Weight:</label>
                             </div>
@@ -366,13 +371,21 @@ include_once('conn.php');
 
         var content = '';
         content += '<div class="row" id="GoodReceiveNote_row_' + counter + '" name="GoodReceive_rows">';
-        content += '    <div class="col-md-3">';
+        content += '    <div class="col-md-2">';
+        content += '        <div class="form-group">';
+        content += '            <select class="form-control itemtype" name="type[]" id="typeSelect-' + counter + '" required>';
+        content += '                <option selected disabled>Select Type</option>';
+        content += '                <option value="Rice">Rice</option>';
+        content += '                <option value="Other">Other</option>';
+        content += '            </select>';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-3" style="display:none" id="ItemVariety' + counter + '">';
         content += '        <div class="form-group">';
         content += '            <select class="form-control" name="Items[]">';
         content += '                <option selected disabled>Select Variety</option>';
         content += '                <option value="1121 Kainaat">1121 Kainaat</option>';
-        content +=
-            '                <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab </option>';
+        content += '                <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab </option>';
         content += '                <option value="Rice 386 Basmati">Rice 386 Basmati</option>';
         content += '                <option value="Rice 386 Supri">Rice 386 Supri</option>';
         content += '                <option value="Super Fine">Super Fine</option>';
@@ -383,34 +396,39 @@ include_once('conn.php');
         content += '            </select>';
         content += '        </div>';
         content += '    </div>';
-        content += '    <div class="col-md-2">';
+        content += '    <div class="col-md-3" style="display:none" id="ItemOther' + counter + '">';
         content += '        <div class="form-group">';
-        content += '            <input type="text" name="Description[]" class="form-control">';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-1">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="LabNo[]" class="form-control">';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-1">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="Packsize[]" class="form-control">';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-1">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="Quantity[]" class="form-control">';
+        content += '            <input type="text" name="ItemsOther[]" class="form-control">';
         content += '        </div>';
         content += '    </div>';
         content += '    <div class="col-md-2">';
         content += '        <div class="form-group">';
-        content += '            <input type="text" name="ExWeight[]" class="form-control">';
+        content += '            <input type="text" name="Description[]" class="form-control" required>';
+        content += '        </div>';
+        content += '    </div>';
+        // content += '    <div class="col-md-1">';
+        // content += '        <div class="form-group">';
+        // content += '            <input type="text" name="LabNo[]" class="form-control" required>';
+        // content += '        </div>';
+        // content += '    </div>';
+        content += '    <div class="col-md-1">';
+        content += '        <div class="form-group">';
+        content += '            <input type="text" name="Packsize[]" class="form-control" required>';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-1">';
+        content += '        <div class="form-group">';
+        content += '            <input type="text" name="Quantity[]" class="form-control" required>';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-1">';
+        content += '        <div class="form-group">';
+        content += '            <input type="text" name="ExWeight[]" class="form-control" required>';
         content += '        </div>';
         content += '    </div>';
         content += '    <div class="col-md-2">';
         content += '        <div class="form-group">';
-        content += '            <input type="text" name="Weight[]" class="form-control">';
+        content += '            <input type="text" name="Weight[]" class="form-control" required>';
         content += '        </div>';
         content += '    </div>';
         content += '</div>';
@@ -422,6 +440,30 @@ include_once('conn.php');
         counter--;
     }
     </script>
+
+
+    <!-- change type and show items start (DELIGATE FUNCTION) -->
+    <script>
+
+    $(document).delegate(".itemtype","change", function() {
+        var value = $(this).val();
+        // alert(value);
+        var elemId = $(this).attr('id');
+        var counterId = elemId.split("-")[1];
+        // alert(counterId);
+        if(value == "Rice"){
+            $("#ItemVariety"+counterId).show();
+            $("#ItemOther"+counterId).hide();
+
+        }else{
+            $("#ItemOther"+counterId).show();
+            $("#ItemVariety"+counterId).hide();
+
+        }
+    });
+    
+    </script>
+    <!-- change type and show items end -->
 </body>
 
 </html>

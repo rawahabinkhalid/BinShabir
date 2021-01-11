@@ -13,7 +13,7 @@ include_once('conn.php');
 
 <head>
     <meta charset="utf-8">
-    <title>Own Production Expense - Dashboard</title>
+    <title>Self Manufacturing Expense - Dashboard</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta content="A premium admin dashboard template by Mannatthemes" name="description">
     <meta content="Mannatthemes" name="author">
@@ -66,7 +66,7 @@ include_once('conn.php');
                             <div class="float-right">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="">RiceMill</a></li>
-                                    <li class="breadcrumb-item active">Own Production Expense</li>
+                                    <li class="breadcrumb-item active">Self Manufacturing Expense</li>
                                 </ol>
                             </div>
                             <h4 class="page-title"></h4>
@@ -178,7 +178,7 @@ include_once('conn.php');
     <script src="assets/js/app.js"></script>
 
     <script>
-    $('#headername').html("Own Production Expense");
+    $('#headername').html("Self Manufacturing Expense");
     </script>
 
     <!-- script of add_button/del_button work -->

@@ -79,7 +79,7 @@ include_once('conn.php');
                         <div class="col-md-12 text-center" id="view_logo" style="display:none; padding-bottom: 30px;">
                             <h3><img src="logo/ricemilllogo1.png" style="width: 300px;" alt=""></h3>
                         </div>
-                        <div class="col-md-4" id="name_select">
+                        <div class="col-md-4" id="contract">
                             <div class="form-group">
                                 <label>Contract #:</label>
                                 <select class="form-control" name="contractno" id="contractno" required>
@@ -298,22 +298,26 @@ include_once('conn.php');
 
         var printButton = document.getElementById("printpagebutton");
         //Set the print button visibility to 'hidden' 
-        printButton.style.display = 'none';
+        printButton.style.visibility = 'hidden';
 
-        var printButton = document.getElementById("name_select");
-        //Set the print button visibility to 'hidden' 
-        printButton.style.display = 'none';
+        var contract = document.getElementById("contract");
+        //Set the contract button visibility to 'hidden' 
+        contract.style.display = 'none';
 
-        var printButton = document.getElementById("print_contractno");
-        //Set the print button to 'visible' again 
-        printButton.style.display = '';
+        var printcontractno = document.getElementById("print_contractno");
+        //Set the printcontractno button to 'visible' again 
+        printcontractno.style.display = '';
 
-        var printButton = document.getElementById("view_logo");
-        //Set the print button to 'visible' again 
-        printButton.style.display = '';
+        var viewlogo = document.getElementById("view_logo");
+        //Set the viewlogo to 'visible' 
+        viewlogo.style.display = '';
 
         //Print the page content
         window.print()
+        printButton.style.visibility = 'visible';
+        viewlogo.style.display = 'none';
+
+
 
     }
     </script>

@@ -130,7 +130,7 @@ include_once('conn.php');
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label>Weight:</label>
+                                <label>Weight/Quantity:</label>
                             </div>
                         </div>
                         <div class="col-md-2">

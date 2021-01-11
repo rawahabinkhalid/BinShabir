@@ -10,25 +10,19 @@ echo '
     <div class="col-md-12">
         <div class="form-group">
             <label>Contract Type: </label>
-            ' .
-    $row['ContractType'] .
-    '
+            '.$row['ContractType'].'
         </div>
     </div>
     <div class="col-md-12">
         <div class="form-group">
-            <label>Customer Name: </label>
-            ' .
-    $row['CustomerName'] .
-    '
+            <label>Name: </label>
+            '.$row['CustomerName'].'
     </div>
     </div>
     <div class="col-md-12">
         <div class="form-group">
-            <label>Customer PO Number: </label>
-            ' .
-    $row['CustomerPoNum'] .
-    '
+            <label>PO #: </label>
+            '.$row['CustomerPoNum'].'
         </div>
     </div>
 </div>
@@ -36,25 +30,25 @@ echo '
     <div class="col-md-12">
         <div class="form-group">
             <label>Contract # :</label>
-            ' .
-    $row['ContractNo'] .
-    '
+            '.$row['ContractNo'].'
         </div>
     </div>
     <div class="col-md-12">
         <div class="form-group">
             <label>Quality: </label>
-            ' .
-    $row['Quality'] .
-    '
+            '.$row['Quality'].'
         </div>
     </div>
     <div class="col-md-12">
         <div class="form-group">
             <label>Variety: </label>
-            ' .
-    $row['Variety'] .
-    '
+            '.$row['Variety'].'
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="form-group">
+            <label>Date Of Contract: </label>
+            '.date('d-M-Y', strtotime(explode(" ", $row['DefaultDate'])[0])).'
         </div>
     </div>
 </div>
@@ -73,117 +67,79 @@ echo '
             <tbody>
                 <tr>
                     <td style="width:50%"><label>Our Reference: </label></td>
-                    <td>' .
-    $row['OurReference'] .
-    '</td>
+                    <td>'.$row['OurReference'].'</td>
                 </tr>
                 <tr>
                     <td><label>Production Order No: </label></td>
-                    <td>' .
-    $row['ProductionOrderNum'] .
-    '</td>
+                    <td>'.$row['ProductionOrderNum'].'</td>
                 </tr>
                 <tr>
                     <td><label>Bags Filling: </label></td>
-                    <td>' .
-    $row['BagsFilling'] .
-    '</td>
+                    <td>'.$row['BagsFilling'].'</td>
                 </tr>
                 <tr>
                     <td><label>Brand: </label></td>
-                    <td>' .
-    $row['Brand'] .
-    '</td>
+                    <td>'.$row['Brand'].'</td>
                 </tr>
                 <tr>
                     <td><label>Milled Qunatity M/T: </label></td>
-                    <td>' .
-    $row['MilledQuantity'] .
-    '</td>
+                    <td>'.$row['MilledQuantity'].'</td>
                 </tr>
                 <tr>
                     <td><label>Whiteness: </label></td>
-                    <td>' .
-    $row['Whiteness'] .
-    '</td>
+                    <td>'.$row['Whiteness'].'</td>
                 </tr>
                 <tr>
                     <td><label>Broken Percentage: </label></td>
-                    <td>' .
-    $row['BrokenPercentage'] .
-    '</td>
+                    <td>'.$row['BrokenPercentage'].'</td>
                 </tr>
                 <tr>
                     <td><label>Moisture: </label></td>
-                    <td>' .
-    $row['Moisture'] .
-    '</td>
+                    <td>'.$row['Moisture'].'</td>
                 </tr>
                 <tr>
                     <td><label>Chalky & Immature Kernels: </label></td>
-                    <td>' .
-    $row['ChalkyImmatureKernels'] .
-    '</td>
+                    <td>'.$row['ChalkyImmatureKernels'].'</td>
                 </tr>
                 <tr>
                     <td><label>Packing / Packing Weight: </label></td>
-                    <td>' .
-    $row['PackingWeight'] .
-    '</td>
+                    <td>'.$row['PackingWeight'].'</td>
                 </tr>
                 <tr>
                     <td><label>Tags: </label></td>
-                    <td>' .
-    $row['Tags'] .
-    '</td>
+                    <td>'.$row['Tags'].'</td>
                 </tr>
                 <tr>
                     <td><label>Loading Bags Per Container: </label></td>
-                    <td>' .
-    $row['LoadingBags'] .
-    '</td>
+                    <td>'.$row['LoadingBags'].'</td>
                 </tr>
                 <tr>
                     <td><label>Expected Inspection Date: </label></td>
-                    <td>' .
-    $row['InspectionDate'] .
-    '</td>
+                    <td>'.$row['InspectionDate'].'</td>
                 </tr>
                 <tr>
                     <td><label>Empty Bags Loading: </label></td>
-                    <td>' .
-    $row['EmptyBagsLoading'] .
-    '</td>
+                    <td>'.$row['EmptyBagsLoading'].'</td>
                 </tr>
                 <tr>
                     <td><label>Fumigation: </label></td>
-                    <td>' .
-    $row['Fumigation'] .
-    '</td>
+                    <td>'.$row['Fumigation'].'</td>
                 </tr>
                 <tr>
                     <td><label>Silica Gel: </label></td>
-                    <td>' .
-    $row['Silicagel'] .
-    '</td>
+                    <td>'.$row['Silicagel'].'</td>
                 </tr>
                 <tr>
                     <td><label>Kraft Paper/Plastic: </label></td>
-                    <td>' .
-    $row['KraftPaper'] .
-    '</td>
+                    <td>'.$row['KraftPaper'].'</td>
                 </tr>
                 <tr>
                     <td><label>Special Instructions: </label></td>
-                    <td>' .
-    $row['SpecialInstruction'] .
-    '</td>
+                    <td>'.$row['SpecialInstruction'].'</td>
                 </tr>
                 <tr>
                     <td><label>Processing Mill: </label></td>
-                    <td>' .
-    $row['ProcessingMill'] .
-    '</td>
+                    <td>'.$row['ProcessingMill'].'</td>
                 </tr>
             </tbody>
         </table>
@@ -212,24 +168,12 @@ if ($resultExtension->num_rows > 0) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>' .
-            $rowExtension['ExtendDate'] .
-            '</td>
-            <td>' .
-            $rowExtension['Packing'] .
-            '</td>
-            <td>' .
-            $rowExtension['Polishing'] .
-            '</td>
-            <td>' .
-            $rowExtension['Broken'] .
-            '</td>
-            <td>' .
-            $rowExtension['ExtendQty'] .
-            '</td>
-            <td>' .
-            $rowExtension['ProdOrderNo'] .
-            '</td>
+                        <td>'.$rowExtension['ExtendDate'].'</td>
+                        <td>'.$rowExtension['Packing'].'</td>
+                        <td>'.$rowExtension['Polishing'].'</td>
+                        <td>'.$rowExtension['Broken'].'</td>
+                        <td>'.$rowExtension['ExtendQty'].'</td>
+                        <td>'.$rowExtension['ProdOrderNo'].'</td>
                     </tr>
                 </tbody>
             </table>

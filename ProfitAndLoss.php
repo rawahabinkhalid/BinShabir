@@ -83,11 +83,7 @@ include_once('conn.php');
                             <select name="dateyear" id="dateyear" class="form-control" required>
                                 <option selected disabled value="">Please select a Year</option>
                                 <?php for ($i = 2030; $i >= 2010; $i--) {
-                                    echo '<option value="' .
-                                        $i .
-                                        '">' .
-                                        $i .
-                                        '</option>';
+                                    echo '<option value="'.$i.'">'.$i.'</option>';
                                 } 
                                 ?>
                             </select>
@@ -138,30 +134,82 @@ include_once('conn.php');
                     </div>
 
                     <div class="col-md-12 mt-4">
+                        <!-- category wise income total table start -->
                         <table class="table table-bordered" id="table">
                             <thead>
                                 <tr>
-                                    <th scope="col"><b>S.No</b></th>
+                                    <th scope="col"><b>Weighbridge </b></th>
+                                    <th scope="col"><b>Biltybills </b></th>
+                                    <th scope="col"><b>Toolmilling (Processing)</b></th>
+                                    <th scope="col"><b>SelfManufacturing (Income)</b></th>
+                                    <th scope="col"><b>Total</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                echo'<tr>';
+                                    $income_Total = 0;
+
+                                    $sql1 = 'SELECT *, SUM(Amount) AS Total_weighbridge FROM overallprofit WHERE `Description` = "WeighBridge" ';
+                                    $result1 = mysqli_query($conn,$sql1);
+                                    $row1 = mysqli_fetch_assoc($result1);
+                                    echo'
+                                        <td id="all_weighbridge">'.number_format($row1['Total_weighbridge']).'</td>
+                                    ';
+
+                                    $sql2 = 'SELECT *, SUM(Amount) AS Total_biltybills FROM overallprofit WHERE `Description` = "BiltyBills" ';
+                                    $result2 = mysqli_query($conn,$sql2);
+                                    $row2 = mysqli_fetch_assoc($result2);
+                                    echo'
+                                        <td id="all_biltybills">'.number_format($row2['Total_biltybills']).'</td>
+                                    ';
+
+                                    $sql3 = 'SELECT *, SUM(Amount) AS Total_toolmilling FROM overallprofit WHERE `Description` = "Tool Milling" ';
+                                    $result3 = mysqli_query($conn,$sql3);
+                                    $row3 = mysqli_fetch_assoc($result3);
+                                    echo'
+                                        <td id="all_toolmillingProcessing">'.number_format($row3['Total_toolmilling']).'</td>
+                                    ';
+
+                                    $sql4 = 'SELECT *, SUM(Amount) AS Total_selfManufacturing FROM overallprofit WHERE `Description` = "SM Income" ';
+                                    $result4 = mysqli_query($conn,$sql4);
+                                    $row4 = mysqli_fetch_assoc($result4);
+                                    echo'
+                                        <td id="all_selfManufacturingIncome">'.number_format($row4['Total_selfManufacturing']).'</td>
+                                    '; 
+                                    
+                                    $income_Total = floatval($income_Total) + floatval($row1['Total_weighbridge']) + floatval($row2['Total_biltybills']) + floatval($row3['Total_toolmilling']) + floatval($row4['Total_selfManufacturing']);
+
+                                echo'
+                                        <td id="income_Total">'.number_format($income_Total).'</td>
+                                </tr>';
+                                ?>
+                            </tbody>
+                        </table>
+                        <!-- category wise income total table end -->
+
+                        <!-- overall income total table start -->
+                        <table class="table table-bordered" id="table">
+                            <thead>
+                                <tr>
                                     <th scope="col"><b>Amount</b></th>
                                 </tr>
                             </thead>
-                            <tbody id="">
+                            <tbody>
                                 <?php
                                 $totalIncome = 0;
-                                $count = 1;
                                 $sql = 'SELECT *, SUM(Amount) FROM overallprofit ';
                                 $result = mysqli_query($conn,$sql);
-                                while($row = mysqli_fetch_assoc($result)){
+                                    $row = mysqli_fetch_assoc($result);
                                     echo'
                                     <tr>
-                                        <td scope="row"><b>'.$count++.'</b></td>
                                         <td id="all_income">'.number_format($row['SUM(Amount)'], 2).'</td>
                                     </tr>';
                                     $totalIncome = floatval($totalIncome) + floatval($row['SUM(Amount)']);
-                                }
                             ?>
                             </tbody>
                         </table>
+                        <!-- overall income total table end -->
                         <br>
                     </div>
                 </div>
@@ -172,30 +220,75 @@ include_once('conn.php');
                     </div>
 
                     <div class="col-md-12 mt-4">
+                        <!-- category wise expense total table start -->
                         <table class="table table-bordered" id="table">
                             <thead>
                                 <tr>
-                                    <th scope="col"><b>S.No</b></th>
+                                    <th scope="col"><b>Other Expense </b></th>
+                                    <th scope="col"><b>Toolmilling (Labour)</b></th>
+                                    <th scope="col"><b>SelfManufacturing (Expense)</b></th>
+                                    <th scope="col"><b>Total</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                echo'<tr>';
+                                    $expense_Total = 0;
+
+                                    $sql1 = 'SELECT *, SUM(Amount) AS Total_otherexpense FROM overallloss WHERE `Description` = "OtherExpnse" ';
+                                    $result1 = mysqli_query($conn,$sql1);
+                                    $row1 = mysqli_fetch_assoc($result1);
+                                    echo'
+                                        <td id="all_otherexpense">'.number_format($row1['Total_otherexpense']).'</td>
+                                    ';
+
+                                    $sql2 = 'SELECT *, SUM(Amount) AS Total_toolmilling FROM overallloss WHERE `Description` = "Tool Milling" ';
+                                    $result2 = mysqli_query($conn,$sql2);
+                                    $row2 = mysqli_fetch_assoc($result2);
+                                    echo'
+                                        <td id="all_toolmillingLabour">'.number_format($row2['Total_toolmilling']).'</td>
+                                    ';
+
+                                    $sql3 = 'SELECT *, SUM(Amount) AS Total_selfManufacturing FROM overallloss WHERE `Description` = "SM Expense" ';
+                                    $result3 = mysqli_query($conn,$sql3);
+                                    $row3 = mysqli_fetch_assoc($result3);
+                                    echo'
+                                        <td id="all_selfManufacturingExpense">'.number_format($row3['Total_selfManufacturing']).'</td>
+                                    '; 
+                                    
+                                    $expense_Total = floatval($expense_Total) +  floatval($row1['Total_otherexpense']) + floatval($row2['Total_toolmilling']) + floatval($row3['Total_selfManufacturing']);
+
+                                echo'
+                                        <td id="expense_Total">'.number_format($expense_Total).'</td>
+                                </tr>';
+                                ?>
+                            </tbody>
+                        </table>
+                        <!-- category wise expense total table end -->
+
+                        <!-- overall expense total table start -->
+                        <table class="table table-bordered" id="table">
+                            <thead>
+                                <tr>
                                     <th scope="col"><b>Amount</b></th>
                                 </tr>
                             </thead>
                             <tbody id="">
                                 <?php
                                 $totalExpense = 0;
-                                $count = 1;
                                 $sql = 'SELECT *, SUM(Amount) FROM overallloss';
                                 $result = mysqli_query($conn,$sql);
-                                while($row = mysqli_fetch_assoc($result)){
+                                    $row = mysqli_fetch_assoc($result);
                                     echo'
                                     <tr>
-                                        <td scope="row"><b>'.$count++.'</b></td>
                                         <td id="all_expense">'.number_format($row['SUM(Amount)'], 2).'</td>
                                     </tr>';
                                     $totalExpense = floatval($totalExpense) + floatval($row['SUM(Amount)']);
-                                }
                             ?>
                             </tbody>
                         </table>
+                        <!-- overall expense total table end -->
+
                         <br>
                     </div>
                 </div>
@@ -209,16 +302,13 @@ include_once('conn.php');
                         <table class="table table-bordered" id="table">
                             <thead>
                                 <tr>
-                                    <th scope="col"><b>S.No</b></th>
                                     <th scope="col"><b>Amount</b></th>
                                 </tr>
                             </thead>
                             <tbody id="">
                                 <?php
-                                $count = 1;
                                 echo'
                                 <tr>
-                                    <td scope="row"><b>'.$count++.'</b></td>
                                     <td id="total_profit_loss">'.number_format(floatval(floatval($totalIncome) - floatval($totalExpense)), 2).'</td>
                                 </tr>';
                             ?>
@@ -263,7 +353,7 @@ include_once('conn.php');
     <!-- App js -->
     <script src="assets/js/app.js"></script>
 
-    <!-- Year/Month filter  -->
+    <!-- Year/Month filter start -->
     <script>
     $('#filterBtn').on('click', function() {
         if ($('#dateyear').val() != '' && $('#dateyear').val() != undefined && $('#dateyear').val() != null) {
@@ -293,6 +383,30 @@ include_once('conn.php');
                     $('#total_profit_loss').html(profit_loss);
                 },
             });
+            
+            $.ajax({
+                type: 'POST',
+                url: 'get_Categorywise_profit_and_loss.php',
+                data: data,
+                success: function(response) {
+                    console.log(response);
+
+                    let obj = JSON.parse(response);
+                    $('#all_weighbridge').html(numberWithCommas(obj.totalWeighbridge));
+                    $('#all_biltybills').html(numberWithCommas(obj.totalBiltybills));
+                    $('#all_toolmillingProcessing').html(numberWithCommas(obj.totalToolmillingProcessing));
+                    $('#all_selfManufacturingIncome').html(numberWithCommas(obj.totalSelfManufacturingIncome));
+                    $('#income_Total').html(numberWithCommas(obj.masterTotalIncome));
+
+
+                    $('#all_otherexpense').html(numberWithCommas(obj.totalOtherexpense));
+                    $('#all_toolmillingLabour').html(numberWithCommas(obj.totalToolmillingLabour));
+                    $('#all_selfManufacturingExpense').html(numberWithCommas(obj.totalSelfManufacturingExpense));
+                    $('#expense_Total').html(numberWithCommas(obj.masterTotalExpense));
+                    
+                },
+            });
+            
         } 
         else if ($('#datemonth').val() != '' && $('#datemonth').val() != undefined && $('#datemonth').val() != null) {
             alert('Please select a Year');
@@ -303,7 +417,7 @@ include_once('conn.php');
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '.00';
     }
     </script>
-
+    <!-- Year/Month filter start -->
 
 
     <script>

@@ -3,7 +3,7 @@
     <ul class="metismenu left-sidenav-menu nav">
         <li><a href="dashboard.php" class="active"><i class="ti-dashboard"></i><span>Dashboard</span></a></li>
 
-        <li><a href="javascript: void(0);"><i class="ti-user"></i><span>Party / Customer</span><span
+        <li><a href="javascript: void(0);"><i class="ti-user"></i><span>Vendor / Customer</span><span
                     class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li class="nav-item"><a class="" href="AddParty.php"><i class="ti-control-record"></i>
@@ -20,6 +20,15 @@
             <ul class="nav-second-level" aria-expanded="false">
                 <li class="nav-item"><a class="" href="MakeContract.php"><i class="ti-control-record"></i>
                         Make Contract</a>
+                </li>
+                <li class="nav-item"><a class="" href="Debtor.php"><i class="ti-arrow-right"></i>
+                        Debtor</a>
+                </li>
+                <li class="nav-item"><a class="" href="Creditor.php"><i class="ti-arrow-right"></i>
+                        Creditor</a>
+                </li>
+                <li class="nav-item"><a class="" href="ToolMillContract.php"><i class="ti-arrow-right"></i>
+                        Tool Mill Contract</a>
                 </li>
                 <li class=""><a class="" href="ExtendContracts.php"><i class="ti-control-record"></i>
                         Extend Contract</a>
@@ -105,7 +114,7 @@
             </ul>
         </li>
 
-        <li><a href="javascript: void(0);"><i class="ti-anchor"></i><span>Own Production</span><span
+        <li><a href="javascript: void(0);"><i class="ti-anchor"></i><span>Self Manufacturing</span><span
                     class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
             <ul class="nav-second-level" aria-expanded="false">
                 <li class="nav-item"><a href="Expense.php"><i class="ti-control-record"></i><span>Expense </span></a>
