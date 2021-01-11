@@ -1,6 +1,7 @@
 <?php
 include_once('conn.php');
 
+
 $type = $_POST['type'];
 $partyname = $_POST['partyname'];
 $nameinitials = $_POST['nameinitials'];
