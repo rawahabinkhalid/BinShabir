@@ -141,16 +141,7 @@ include_once('conn.php');
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Party Name:</label>
-                                <select type="text" name="partyname" id="partyname" class="form-control" required>
-                                    <option value="" selected disabled>Select Party Name</option>
-                                    <?php
-                                    $sql1 = 'SELECT * FROM addparty;';
-                                    $result = mysqli_query($conn, $sql1);
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo '<option value="' . $row['PartyName'] . '">' . $row['PartyName'] . '</option>';
-                                    }
-                                    ?>
-                                </select>
+                                <input type="text" name="partyname" id="partyname" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="col-md-3">

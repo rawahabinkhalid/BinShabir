@@ -13,7 +13,7 @@ if ($row['ContractType'] == 'Debtor/AccountReceivable/Sales') {
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
 } else if ($row['ContractType'] == 'Sales') {
-    $sql = 'SELECT * FROM `toolmilling` WHERE ContractNo =' . $_POST['contractno'];
+    $sql = 'SELECT *, SaleCustomerName AS PartyName FROM `toolmillcontract` WHERE ContractNo =' . $_POST['contractno'];
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
 }

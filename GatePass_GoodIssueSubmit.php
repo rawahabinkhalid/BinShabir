@@ -7,6 +7,7 @@ $VehicleNo = $_POST['VehicleNo'];
 $VehicleType = $_POST['VehicleType'];
 $ContainerNo = $_POST['ContainerNo'];
 $SealNo = $_POST['SealNo'];
+$contractno = $_POST['contractno'];
 
 // $Items = $_POST['Items'];
 // $Description = $_POST['Description'];
@@ -15,7 +16,7 @@ $SealNo = $_POST['SealNo'];
 // $Quantity = $_POST['Quantity'];
 // $Weight = $_POST['Weight'];
 
-$sql = 'INSERT INTO gatepass_g_issue (`GIN_No`,`NameOfConsignee`,`VehicleNo`,`VehicleType`,`ContainerNo`,`SealNo`) VALUES ("'.$GINNo.'","'.$NameOfConsignee.'","'.$VehicleNo.'","'.$VehicleType.'","'.$ContainerNo.'","'.$SealNo.'")';
+$sql = 'INSERT INTO gatepass_g_issue (`ContractNo`,`GIN_No`,`NameOfConsignee`,`VehicleNo`,`VehicleType`,`ContainerNo`,`SealNo`) VALUES ("'.$contractno.'","'.$GINNo.'","'.$NameOfConsignee.'","'.$VehicleNo.'","'.$VehicleType.'","'.$ContainerNo.'","'.$SealNo.'")';
 $result = mysqli_query($conn, $sql);
 
 if($result){
@@ -40,4 +41,3 @@ if($result){
 else{
     echo $sql;
 }
-?>

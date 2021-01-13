@@ -28,19 +28,19 @@ include_once('conn.php');
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
 
     <style>
-    label {
-        font-weight: bold;
-    }
+        label {
+            font-weight: bold;
+        }
 
-    .itembutton {
+        .itembutton {
 
-        font-size: 18px;
-        color: #9C4BEB;
-        background: transparent;
-        border: 2px solid #9C4BEB;
-        border-radius: 15px 15px 15px 15px;
-        padding: 4px;
-    }
+            font-size: 18px;
+            color: #9C4BEB;
+            background: transparent;
+            border: 2px solid #9C4BEB;
+            border-radius: 15px 15px 15px 15px;
+            padding: 4px;
+        }
     </style>
 </head>
 
@@ -52,7 +52,7 @@ include_once('conn.php');
     <div class="page-wrapper">
         <!-- Left Sidenav -->
         <?php
-            include_once('sidebar.php');
+        include_once('sidebar.php');
         ?>
 
         <!-- Page Content-->
@@ -78,22 +78,61 @@ include_once('conn.php');
                 <form action="GatePass_GoodIssueSubmit.php" method="POST">
                     <br>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Contract #:</label>
+                                <select name="contractno" id="contractno" class="form-control">
+                                    <option selected disabled>Select Contract</option>
+                                    <optgroup class="bg-success" label="Debtor/AccountReceivable/Sales"></optgroup>
+                                    <?php
+                                    $sql = 'SELECT * FROM debtor';
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo '<option value="' . $row['ContractNo'] . '">' . $row['ContractNo'] . '</option>';
+                                        }
+                                    }
+                                    ?>
+
+                                    <optgroup class="bg-success" label="Creditor/AccountPayable/Purchase"></optgroup>
+                                    <?php
+                                    $sql = 'SELECT * FROM creditor';
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo '<option value="' . $row['ContractNo'] . '">' . $row['ContractNo'] . '</option>';
+                                        }
+                                    }
+                                    ?>
+
+                                    <optgroup class="bg-success" label="Sales"></optgroup>
+                                    <?php
+                                    $sql = 'SELECT * FROM toolmillcontract';
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo '<option value="' . $row['ContractNo'] . '">' . $row['ContractNo'] . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>GIN NO # :</label>
                                 <?php
                                 $sql = 'SELECT MAX(Id) as maxid FROM gatepass_g_issue';
                                 $result = mysqli_query($conn, $sql);
-                                if(mysqli_num_rows($result)>0){
+                                if (mysqli_num_rows($result) > 0) {
                                     $row = mysqli_fetch_assoc($result);
                                     $count = $row['maxid'] + 1;
-                                }
-                                else{
+                                } else {
                                     $count = 1;
                                 }
-                                
-                                echo'
-                                <input type="text" name="GINNo" value="'.$count++.'" class="form-control" readonly>'
+
+                                echo '
+                                <input type="text" name="GINNo" value="' . $count++ . '" class="form-control" readonly>'
                                 ?>
                             </div>
                         </div>
@@ -213,12 +252,10 @@ include_once('conn.php');
                     <div class="row">
                         <div class="col-3"></div>
                         <div class="col-2">
-                            <input name="addFieldButton" type="button" value="+Add Item" onclick="addField();"
-                                class="form-control itembutton">
+                            <input name="addFieldButton" type="button" value="+Add Item" onclick="addField();" class="form-control itembutton">
                         </div>
                         <div class="col-3">
-                            <input name="delFieldButton" type="button" value="+Remove Item" onclick="delField();"
-                                class="form-control itembutton">
+                            <input name="delFieldButton" type="button" value="+Remove Item" onclick="delField();" class="form-control itembutton">
                         </div>
                     </div><br>
                     <div class="row">
@@ -257,68 +294,68 @@ include_once('conn.php');
     <script src="assets/js/app.js"></script>
 
     <script>
-    $('#headername').html("Gate Passes");
+        $('#headername').html("Gate Passes");
     </script>
 
     <!-- script of add_Item_button/del_Item_button work -->
     <script>
-    counter = -1;
+        counter = -1;
 
-    function addField() {
-        counter++;
+        function addField() {
+            counter++;
 
-        var content = '';
-        content += '<div class="row" id="GoodIssueNote_row_' + counter + '" name="GoodIssue_rows">';
-        content += '    <div class="col-md-3">';
-        content += '        <div class="form-group">';
-        content += '            <select class="form-control" name="Items[]">';
-        content += '                <option selected disabled>Select Variety</option>';
-        content += '                <option value="1121 Kainaat">1121 Kainaat</option>';
-        content +=
-            '                <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab </option>';
-        content += '                <option value="Rice 386 Basmati">Rice 386 Basmati</option>';
-        content += '                <option value="Rice 386 Supri">Rice 386 Supri</option>';
-        content += '                <option value="Super Fine">Super Fine</option>';
-        content += '                <option value="Irri 9-C9">Irri 9-C9</option>';
-        content += '                <option value="Irri 6">Irri 6</option>';
-        content += '                <option value="D-98">D-98</option>';
-        content += '                <option value="KS-282">KS-282</option>';
-        content += '            </select>';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-2">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="Description[]" class="form-control">';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-2">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="LabNo[]" class="form-control">';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-2">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="Packsize[]" class="form-control">';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-1">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="Quantity[]" class="form-control">';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-2">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="Weight[]" class="form-control">';
-        content += '        </div>';
-        content += '    </div>';
-        content += '</div>';
-        $('#items').append(content);
-    }
+            var content = '';
+            content += '<div class="row" id="GoodIssueNote_row_' + counter + '" name="GoodIssue_rows">';
+            content += '    <div class="col-md-3">';
+            content += '        <div class="form-group">';
+            content += '            <select class="form-control" name="Items[]">';
+            content += '                <option selected disabled>Select Variety</option>';
+            content += '                <option value="1121 Kainaat">1121 Kainaat</option>';
+            content +=
+                '                <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab </option>';
+            content += '                <option value="Rice 386 Basmati">Rice 386 Basmati</option>';
+            content += '                <option value="Rice 386 Supri">Rice 386 Supri</option>';
+            content += '                <option value="Super Fine">Super Fine</option>';
+            content += '                <option value="Irri 9-C9">Irri 9-C9</option>';
+            content += '                <option value="Irri 6">Irri 6</option>';
+            content += '                <option value="D-98">D-98</option>';
+            content += '                <option value="KS-282">KS-282</option>';
+            content += '            </select>';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-2">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="Description[]" class="form-control">';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-2">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="LabNo[]" class="form-control">';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-2">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="Packsize[]" class="form-control">';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-1">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="Quantity[]" class="form-control">';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-2">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="Weight[]" class="form-control">';
+            content += '        </div>';
+            content += '    </div>';
+            content += '</div>';
+            $('#items').append(content);
+        }
 
-    function delField() {
-        $("#GoodIssueNote_row_" + counter).remove();
-        counter--;
-    }
+        function delField() {
+            $("#GoodIssueNote_row_" + counter).remove();
+            counter--;
+        }
     </script>
 </body>
 
