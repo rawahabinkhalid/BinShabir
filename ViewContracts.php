@@ -89,15 +89,38 @@ include_once('conn.php');
                         <label>Contract No:</label>
                         <select name="contractno" id="contractno" class="form-control">
                             <option selected disabled>Select Contract</option>
-                            <?php
-                            $sql = 'SELECT * FROM makecontract';
-                            $result = mysqli_query($conn, $sql);
-                            while($row = mysqli_fetch_assoc($result)){
-                                echo '
-                                    <option value="'.$row['ContractNo'].'">'.$row['ContractNo'].'</option>
-                                ';
-                            }
-                            ?>
+                            <optgroup class="bg-success" label="Debtor/AccountReceivable/Sales"></optgroup>
+                                <?php
+                                    $sql = 'SELECT * FROM debtor';
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo '<option value="'.$row['ContractNo'].'">'.$row['ContractNo'].'</option>';
+                                        }
+                                    }
+                                ?>
+
+                            <optgroup class="bg-success" label="Creditor/AccountPayable/Purchase"></optgroup>
+                                <?php
+                                    $sql = 'SELECT * FROM creditor';
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo '<option value="'.$row['ContractNo'].'">'.$row['ContractNo'].'</option>';
+                                        }
+                                    }
+                                ?>
+
+                            <optgroup class="bg-success" label="Sales"></optgroup>
+                                <?php
+                                    $sql = 'SELECT * FROM toolmillcontract';
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo '<option value="'.$row['ContractNo'].'">'.$row['ContractNo'].'</option>';
+                                        }
+                                    }
+                                ?>
                         </select>
                     </div>
                 </div>

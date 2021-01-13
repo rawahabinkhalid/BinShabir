@@ -67,27 +67,48 @@ include_once 'conn.php';
                             <div class="form-group">
                                 <label>Contract #:</label>
                                 <select class="form-control" name="contractno" id="" required>
-                                <option selected disabled value="">Please select a Contract</option>
-                                <?php
-                                $sql = 'SELECT * FROM makecontract';
-                                $result = mysqli_query($conn, $sql);
-                                if (mysqli_num_rows($result) > 0) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo '<option value="' .
-                                            $row['Id'] .
-                                            '">' .
-                                            $row['ContractNo'] .
-                                            '</option>';
-                                    }
-                                }
-                                ?>
+                                    <option selected disabled value="">Please select a Contract</option>
+
+                                    <optgroup class="bg-success" label="Debtor/AccountReceivable/Sales"></optgroup>
+                                    <?php
+                                        $sql = 'SELECT * FROM debtor';
+                                        $result = mysqli_query($conn, $sql);
+                                        if (mysqli_num_rows($result) > 0) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                echo '<option value="'.$row['ContractNo'].'">'.$row['ContractNo'].'</option>';
+                                            }
+                                        }
+                                    ?>
+
+                                    <optgroup class="bg-success" label="Creditor/AccountPayable/Purchase"></optgroup>
+                                    <?php
+                                        $sql = 'SELECT * FROM creditor';
+                                        $result = mysqli_query($conn, $sql);
+                                        if (mysqli_num_rows($result) > 0) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                echo '<option value="'.$row['ContractNo'].'">'.$row['ContractNo'].'</option>';
+                                            }
+                                        }
+                                    ?>
+
+                                    <optgroup class="bg-success" label="Sales"></optgroup>
+                                    <?php
+                                        $sql = 'SELECT * FROM toolmillcontract';
+                                        $result = mysqli_query($conn, $sql);
+                                        if (mysqli_num_rows($result) > 0) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                echo '<option value="'.$row['ContractNo'].'">'.$row['ContractNo'].'</option>';
+                                            }
+                                        }
+                                    ?>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Date:</label>
-                                <input type="date" value="<?php echo date('Y-m-d')?>" name="extenddate" id="" class="form-control" readonly>
+                                <input type="date" value="<?php echo date('Y-m-d')?>" name="extenddate" id=""
+                                    class="form-control" readonly>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -124,7 +145,7 @@ include_once 'conn.php';
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>PO#:</label>
+                                <label>PO# / SO#:</label>
                                 <input type="text" name="prodOrder" id="" class="form-control">
                             </div>
                         </div>

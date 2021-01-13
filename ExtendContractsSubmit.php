@@ -11,7 +11,7 @@ $brand = $_POST['brand'];
 $prodOrder = $_POST['prodOrder'];
 
 $sql =
-    'INSERT INTO extendcontract (`ContractId`,`ExtendDate`,`Packing`,`Polishing`,`Broken`,`ExtendQty`,`Brand`,
+    'INSERT INTO extendcontract (`ContractNo`,`ExtendDate`,`Packing`,`Polishing`,`Broken`,`ExtendQty`,`Brand`,
                             `ProdOrderNo`) VALUES ("'.$contractno.'","'.$extenddate.'","'.$packing.'",
                                                    "'.$polishing.'","'.$broken.'","'.$extendQty.'",
                                                    "'.$brand.'","'.$prodOrder.'")';

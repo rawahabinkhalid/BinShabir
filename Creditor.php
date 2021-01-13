@@ -208,7 +208,7 @@ include_once('conn.php');
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label>Chalky & Immature Kernels:</label>
-                                <input type="text" name="chalkyimmaturekernels" id="" class="form-control" required>
+                                <input type="text" name="chalkyimmaturekernels" id="" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-5">

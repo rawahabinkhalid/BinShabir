@@ -1,22 +1,27 @@
 <?php
 include_once('conn.php');
 
+// Creditor Contract Form Field
+// $purchasesuppliername = $_POST['purchasesuppliername'];
+// $purchasesupplierPoNum = $_POST['purchasesupplierPoNum'];
+// $purchaseordernum = $_POST['purchaseordernum'];
+
+// // Toolmill Contract Form Field
+// $salecustomername_toolmill = $_POST['salecustomername_toolmill'];
+// $salecustomerSoNum_toolmill = $_POST['salecustomerSoNum_toolmill'];
+// $salesordernum_toolmill = $_POST['salesordernum_toolmill'];
+
 $contracttype = $_POST['contracttype'];
-$customername = $_POST['customername'];
-$customerPoNum = $_POST['customerPoNum'];
 $ContractNo = $_POST['ContractNo'];
 $quality = $_POST['quality'];
 $variety = $_POST['variety'];
 
-
 $ourreference = $_POST['ourreference'];
-$productionordernum = $_POST['productionordernum'];
-$bagsfilling = $_POST['bagsfilling'];
 $brand = $_POST['brand'];
-$milledquantity = $_POST['milledquantity'];
-$whiteness = $_POST['whiteness'];
-$brokenpercentage = $_POST['brokenpercentage'];
+$quantity = $_POST['quantity'];
 $moisture = $_POST['moisture'];
+$paymentterms = $_POST['paymentterms'];
+$price = $_POST['price'];
 $chalkyimmaturekernels = $_POST['chalkyimmaturekernels'];
 $packingweight = $_POST['packingweight'];
 $tags = $_POST['tags'];
@@ -29,20 +34,28 @@ $kraftpaper = $_POST['kraftpaper'];
 $specialinstruction = $_POST['specialinstruction'];
 $processingmill = $_POST['processingmill'];
 
-$sql = 'UPDATE makecontract SET `ContractType`= "'.$contracttype.'", `CustomerName` = "'.$customername.'", `CustomerPoNum` = "'.$customerPoNum.'", `ContractNo` = "'.$ContractNo.'", `Quality` = "'.$quality.'", `Variety` = "'.$variety.'",
-                            `OurReference` = "'.$ourreference.'", `ProductionOrderNum` = "'.$productionordernum.'", `BagsFilling` = "'.$bagsfilling.'", `Brand` = "'.$brand.'", `MilledQuantity` = "'.$milledquantity.'", `Whiteness` = "'.$whiteness.'",
-                            `BrokenPercentage` = "'.$brokenpercentage.'", `Moisture` = "'.$moisture.'", `ChalkyImmatureKernels` = "'.$chalkyimmaturekernels.'", `PackingWeight` = "'.$packingweight.'", `Tags` = "'.$tags.'", `LoadingBags` = "'.$loadingbags.'",
-                            `InspectionDate` = "'.$inspectiondate.'", `EmptyBagsLoading` = "'.$emptybagsloading.'", `Fumigation` = "'.$fumigation.'", `Silicagel` = "'.$silicagel.'", `KraftPaper` = "'.$kraftpaper.'", `SpecialInstruction` = "'.$specialinstruction.'",
-                            `ProcessingMill` = "'.$processingmill.'" WHERE ContractNo ='.$ContractNo;
-$result = mysqli_query($conn, $sql);
+if(isset($_POST['contracttype']) && $_POST['contracttype'] == "Debtor/AccountReceivable/Sales"){
 
-if($result){
+    // Deptor Contract Form Field
+    $salecustomername = $_POST['salecustomername'];
+    $salecustomerSoNum = $_POST['salecustomerSoNum'];
+    $salesordernum = $_POST['salesordernum'];
 
-    echo '<script>alert("Your Form Has been Submitted!");window.open("EditContract.php", "_self");</script>'; 
-    
-}
-else{
-    echo $sql;
+    $sql = 'UPDATE debtor SET `ContractType`= "'.$contracttype.'", `SaleCustomerName` = "'.$salecustomername.'", `SaleCustomerSoNum` = "'.$salecustomerSoNum.'", `ContractNo` = "'.$ContractNo.'", `Quality` = "'.$quality.'", `Variety` = "'.$variety.'",
+                                `OurReference` = "'.$ourreference.'", `SaleOrderNum` = "'.$salesordernum.'", `Brand` = "'.$brand.'", `Quantity` = "'.$quantity.'",
+                                `Moisture` = "'.$moisture.'", `PaymentTerms` = "'.$paymentterms.'", `Price` = "'.$price.'", `ChalkyImmatureKernels` = "'.$chalkyimmaturekernels.'", `PackingWeight` = "'.$packingweight.'", `Tags` = "'.$tags.'", `LoadingBags` = "'.$loadingbags.'",
+                                `InspectionDate` = "'.$inspectiondate.'", `EmptyBagsLoading` = "'.$emptybagsloading.'", `Fumigation` = "'.$fumigation.'", `Silicagel` = "'.$silicagel.'", `KraftPaper` = "'.$kraftpaper.'", `SpecialInstruction` = "'.$specialinstruction.'",
+                                `ProcessingMill` = "'.$processingmill.'" WHERE ContractNo = '.$ContractNo;
+    $result = mysqli_query($conn, $sql);
+
+    if($result){
+
+        echo '<script>alert("Your Form Has been Submitted!");window.open("EditContract.php", "_self");</script>'; 
+        
+    }
+    else{
+        echo $sql;
+    }
 }
 
 ?>
