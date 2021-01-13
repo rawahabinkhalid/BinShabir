@@ -28,19 +28,19 @@ include_once('conn.php');
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
 
     <style>
-    label {
-        font-weight: bold;
-    }
+        label {
+            font-weight: bold;
+        }
 
-    .itembutton {
+        .itembutton {
 
-        font-size: 18px;
-        color: #9C4BEB;
-        background: transparent;
-        border: 2px solid #9C4BEB;
-        border-radius: 15px 15px 15px 15px;
-        padding: 4px;
-    }
+            font-size: 18px;
+            color: #9C4BEB;
+            background: transparent;
+            border: 2px solid #9C4BEB;
+            border-radius: 15px 15px 15px 15px;
+            padding: 4px;
+        }
     </style>
 </head>
 
@@ -52,7 +52,7 @@ include_once('conn.php');
     <div class="page-wrapper">
         <!-- Left Sidenav -->
         <?php
-            include_once('sidebar.php');
+        include_once('sidebar.php');
         ?>
 
         <!-- Page Content-->
@@ -81,15 +81,39 @@ include_once('conn.php');
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Contract #:</label>
-                                <select class="form-control" name="contractno" required>
-                                    <option selected disabled>Select Contract No</option>
+                                <select name="contractno" id="contractno" class="form-control">
+                                    <option selected disabled>Select Contract</option>
+                                    <optgroup class="bg-success" label="Debtor/AccountReceivable/Sales"></optgroup>
                                     <?php
-                                        $sql = 'SELECT * FROM toolmillcontract';
-                                        $result = mysqli_query($conn, $sql);
-                                        while($row = mysqli_fetch_assoc($result)){
-                                            echo'
-                                            <option value="'.$row['ContractNo'].'">'.$row['ContractNo'].'</option>';
+                                    $sql = 'SELECT * FROM debtor';
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo '<option value="' . $row['ContractNo'] . '">' . $row['ContractNo'] . '</option>';
                                         }
+                                    }
+                                    ?>
+
+                                    <optgroup class="bg-success" label="Creditor/AccountPayable/Purchase"></optgroup>
+                                    <?php
+                                    $sql = 'SELECT * FROM creditor';
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo '<option value="' . $row['ContractNo'] . '">' . $row['ContractNo'] . '</option>';
+                                        }
+                                    }
+                                    ?>
+
+                                    <optgroup class="bg-success" label="Sales"></optgroup>
+                                    <?php
+                                    $sql = 'SELECT * FROM toolmillcontract';
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo '<option value="' . $row['ContractNo'] . '">' . $row['ContractNo'] . '</option>';
+                                        }
+                                    }
                                     ?>
                                 </select>
                             </div>
@@ -100,16 +124,15 @@ include_once('conn.php');
                                 <?php
                                 $sql = 'SELECT MAX(Id) as maxid FROM gatepass_g_recieved';
                                 $result = mysqli_query($conn, $sql);
-                                if(mysqli_num_rows($result)>0){
+                                if (mysqli_num_rows($result) > 0) {
                                     $row = mysqli_fetch_assoc($result);
                                     $count = $row['maxid'] + 1;
-                                }
-                                else{
+                                } else {
                                     $count = 1;
                                 }
-                                
-                                echo'
-                                <input type="text" name="GRNNo" value="'.$count++.'" class="form-control" readonly>'
+
+                                echo '
+                                <input type="text" name="GRNNo" value="' . $count++ . '" class="form-control" readonly>'
                                 ?>
                             </div>
                         </div>
@@ -118,13 +141,13 @@ include_once('conn.php');
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Party Name:</label>
-                                <select type="text" name="partyname" class="form-control" required>
+                                <select type="text" name="partyname" id="partyname" class="form-control" required>
                                     <option value="" selected disabled>Select Party Name</option>
                                     <?php
-                                    $sql1 = 'SELECT * FROM addparty;'; 
+                                    $sql1 = 'SELECT * FROM addparty;';
                                     $result = mysqli_query($conn, $sql1);
-                                    while($row = mysqli_fetch_assoc($result)){
-                                    echo'<option value="'.$row['PartyName'].'">'.$row['PartyName'].'</option>';
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '<option value="' . $row['PartyName'] . '">' . $row['PartyName'] . '</option>';
                                     }
                                     ?>
                                 </select>
@@ -149,75 +172,78 @@ include_once('conn.php');
                             </div>
                         </div>
                     </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>CHALKY:</label>
-                                <input type="number" name="chalky" class="form-control">
+                    <div id="desc_rice">
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>CHALKY:</label>
+                                    <input type="number" name="chalky" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>B-1:</label>
-                                <input type="number" name="b1" class="form-control">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>B-1:</label>
+                                    <input type="number" name="b1" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>B-2:</label>
-                                <input type="number" name="b2" class="form-control">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>B-2:</label>
+                                    <input type="number" name="b2" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>B-3:</label>
-                                <input type="number" name="b3" class="form-control">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>B-3:</label>
+                                    <input type="number" name="b3" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>D/D:</label>
-                                <input type="number" name="dd" class="form-control">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>D/D:</label>
+                                    <input type="number" name="dd" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>SHV:</label>
-                                <input type="number" name="shv" class="form-control">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>SHV:</label>
+                                    <input type="number" name="shv" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>RED STRIPE/UM:</label>
-                                <input type="number" name="redstripe" class="form-control">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>RED STRIPE/UM:</label>
+                                    <input type="number" name="redstripe" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>CHOBA:</label>
-                                <input type="number" name="choba" class="form-control">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>CHOBA:</label>
+                                    <input type="number" name="choba" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>OV:</label>
-                                <input type="number" name="ov" class="form-control">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>OV:</label>
+                                    <input type="number" name="ov" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>MOISTURE:</label>
-                                <input type="number" name="moisture" class="form-control">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>MOISTURE:</label>
+                                    <input type="number" name="moisture" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>COOKING:</label>
-                                <input type="text" name="cooking" class="form-control">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>COOKING:</label>
+                                    <input type="text" name="cooking" class="form-control">
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <hr><br>
                     <div class="row">
                         <div class="col-md-2">
@@ -315,12 +341,10 @@ include_once('conn.php');
                     <div class="row">
                         <div class="col-3"></div>
                         <div class="col-2">
-                            <input name="addFieldButton" type="button" value="+Add Item" onclick="addField();"
-                                class="form-control itembutton">
+                            <input name="addFieldButton" type="button" value="+Add Item" onclick="addField();" class="form-control itembutton">
                         </div>
                         <div class="col-3">
-                            <input name="delFieldButton" type="button" value="+Remove Item" onclick="delField();"
-                                class="form-control itembutton">
+                            <input name="delFieldButton" type="button" value="+Remove Item" onclick="delField();" class="form-control itembutton">
                         </div>
                     </div><br>
                     <div class="row">
@@ -359,111 +383,151 @@ include_once('conn.php');
     <script src="assets/js/app.js"></script>
 
     <script>
-    $('#headername').html("Gate Passes");
+        $('#headername').html("Gate Passes");
     </script>
 
     <!-- script of add_Item_button/del_Item_button work -->
     <script>
-    counter = -1;
+        counter = -1;
 
-    function addField() {
-        counter++;
+        function addField() {
+            counter++;
 
-        var content = '';
-        content += '<div class="row" id="GoodReceiveNote_row_' + counter + '" name="GoodReceive_rows">';
-        content += '    <div class="col-md-2">';
-        content += '        <div class="form-group">';
-        content += '            <select class="form-control itemtype" name="type[]" id="typeSelect-' + counter + '" required>';
-        content += '                <option selected disabled>Select Type</option>';
-        content += '                <option value="Rice">Rice</option>';
-        content += '                <option value="Other">Other</option>';
-        content += '            </select>';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-3" style="display:none" id="ItemVariety' + counter + '">';
-        content += '        <div class="form-group">';
-        content += '            <select class="form-control" name="Items[]">';
-        content += '                <option selected disabled>Select Variety</option>';
-        content += '                <option value="1121 Kainaat">1121 Kainaat</option>';
-        content += '                <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab </option>';
-        content += '                <option value="Rice 386 Basmati">Rice 386 Basmati</option>';
-        content += '                <option value="Rice 386 Supri">Rice 386 Supri</option>';
-        content += '                <option value="Super Fine">Super Fine</option>';
-        content += '                <option value="Irri 9-C9">Irri 9-C9</option>';
-        content += '                <option value="Irri 6">Irri 6</option>';
-        content += '                <option value="D-98">D-98</option>';
-        content += '                <option value="KS-282">KS-282</option>';
-        content += '            </select>';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-3" style="display:none" id="ItemOther' + counter + '">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="ItemsOther[]" class="form-control">';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-2">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="Description[]" class="form-control" required>';
-        content += '        </div>';
-        content += '    </div>';
-        // content += '    <div class="col-md-1">';
-        // content += '        <div class="form-group">';
-        // content += '            <input type="text" name="LabNo[]" class="form-control" required>';
-        // content += '        </div>';
-        // content += '    </div>';
-        content += '    <div class="col-md-1">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="Packsize[]" class="form-control" required>';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-1">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="Quantity[]" class="form-control" required>';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-1">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="ExWeight[]" class="form-control" required>';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-2">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="Weight[]" class="form-control" required>';
-        content += '        </div>';
-        content += '    </div>';
-        content += '</div>';
-        $('#items').append(content);
-    }
+            var content = '';
+            content += '<div class="row" id="GoodReceiveNote_row_' + counter + '" name="GoodReceive_rows">';
+            content += '    <div class="col-md-2">';
+            content += '        <div class="form-group">';
+            content += '            <select class="form-control itemtype" name="type[]" id="typeSelect-' + counter + '" required>';
+            content += '                <option selected disabled>Select Type</option>';
+            content += '                <option value="Rice">Rice</option>';
+            content += '                <option value="Other">Other</option>';
+            content += '            </select>';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-3" style="display:none" id="ItemVariety' + counter + '">';
+            content += '        <div class="form-group">';
+            content += '            <select class="form-control" name="Items[]">';
+            content += '                <option selected disabled>Select Variety</option>';
+            content += '                <option value="1121 Kainaat">1121 Kainaat</option>';
+            content += '                <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab </option>';
+            content += '                <option value="Rice 386 Basmati">Rice 386 Basmati</option>';
+            content += '                <option value="Rice 386 Supri">Rice 386 Supri</option>';
+            content += '                <option value="Super Fine">Super Fine</option>';
+            content += '                <option value="Irri 9-C9">Irri 9-C9</option>';
+            content += '                <option value="Irri 6">Irri 6</option>';
+            content += '                <option value="D-98">D-98</option>';
+            content += '                <option value="KS-282">KS-282</option>';
+            content += '            </select>';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-3" style="display:none" id="ItemOther' + counter + '">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="ItemsOther[]" class="form-control">';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-2">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="Description[]" class="form-control" required>';
+            content += '        </div>';
+            content += '    </div>';
+            // content += '    <div class="col-md-1">';
+            // content += '        <div class="form-group">';
+            // content += '            <input type="text" name="LabNo[]" class="form-control" required>';
+            // content += '        </div>';
+            // content += '    </div>';
+            content += '    <div class="col-md-1">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="Packsize[]" class="form-control" required>';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-1">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="Quantity[]" class="form-control" required>';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-1">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="ExWeight[]" class="form-control" required>';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-2">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="Weight[]" class="form-control" required>';
+            content += '        </div>';
+            content += '    </div>';
+            content += '</div>';
+            $('#items').append(content);
+        }
 
-    function delField() {
-        $("#GoodReceiveNote_row_" + counter).remove();
-        counter--;
-    }
+        function delField() {
+            $("#GoodReceiveNote_row_" + counter).remove();
+            counter--;
+        }
     </script>
 
 
     <!-- change type and show items start (DELIGATE FUNCTION) -->
     <script>
+        $(document).delegate(".itemtype", "change", function() {
+            var value = $(this).val();
+            // alert(value);
+            var elemId = $(this).attr('id');
+            var counterId = elemId.split("-")[1];
+            // alert(counterId);
+            if (value == "Rice") {
+                $("#ItemVariety" + counterId).show();
+                $("#ItemOther" + counterId).hide();
 
-    $(document).delegate(".itemtype","change", function() {
-        var value = $(this).val();
-        // alert(value);
-        var elemId = $(this).attr('id');
-        var counterId = elemId.split("-")[1];
-        // alert(counterId);
-        if(value == "Rice"){
-            $("#ItemVariety"+counterId).show();
-            $("#ItemOther"+counterId).hide();
+            } else {
+                $("#ItemOther" + counterId).show();
+                $("#ItemVariety" + counterId).hide();
 
-        }else{
-            $("#ItemOther"+counterId).show();
-            $("#ItemVariety"+counterId).hide();
-
-        }
-    });
-    
+            }
+        });
     </script>
     <!-- change type and show items end -->
+
+
+    <script>
+        $('#contractno').on('change', function() {
+            var contractno = $(this).val();
+            // alert(contractno);
+            $.ajax({
+                type: 'POST',
+                url: 'get_partyname_itemname.php',
+                data: 'contractno=' + contractno,
+                success: function(response) {
+                    let obj = JSON.parse(response);
+                    $('#partyname').val(obj.PartyName);
+                },
+            });
+        })
+    </script>
+    <script>
+        $('#desc_rice').hide();
+        $(document).on('change', '.itemtype', function() {
+            console.log($(this).val())
+            var all_types_selected = $('.itemtype').map((_, el) => el.value).get()
+            if (all_types_selected.includes("Rice")) {
+                $('#desc_rice').show();
+            } else {
+                $('#desc_rice').hide();
+                document.getElementsByName("chalky")[0].value = "";
+                document.getElementsByName("b1")[0].value = "";
+                document.getElementsByName("b2")[0].value = "";
+                document.getElementsByName("b3")[0].value = "";
+                document.getElementsByName("dd")[0].value = "";
+                document.getElementsByName("shv")[0].value = "";
+                document.getElementsByName("redstripe")[0].value = "";
+                document.getElementsByName("choba")[0].value = "";
+                document.getElementsByName("ov")[0].value = "";
+                document.getElementsByName("moisture")[0].value = "";
+                document.getElementsByName("cooking")[0].value = "";
+            }
+
+
+        })
+    </script>
 </body>
 
 </html>

@@ -27,9 +27,9 @@ include_once('conn.php');
     <link href="assets/css/metisMenu.min.css" rel="stylesheet" type="text/css">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
     <style>
-    label {
-        font-weight: bold;
-    }
+        label {
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -41,7 +41,7 @@ include_once('conn.php');
     <div class="page-wrapper">
         <!-- Left Sidenav -->
         <?php
-            include_once('sidebar.php');
+        include_once('sidebar.php');
         ?>
 
         <!-- Page Content-->
@@ -73,12 +73,12 @@ include_once('conn.php');
                                 <select class="form-control" name="contractno" id="contractno" required>
                                     <option selected disabled>Select Contract No</option>
                                     <?php
-                                        $sql = 'SELECT * FROM makecontract';
-                                        $result = mysqli_query($conn, $sql);
-                                        while($row = mysqli_fetch_assoc($result)){
-                                            echo'
-                                            <option value="'.$row['ContractNo'].'">'.$row['ContractNo'].'</option>';
-                                        }
+                                    $sql = 'SELECT * FROM makecontract';
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '
+                                            <option value="' . $row['ContractNo'] . '">' . $row['ContractNo'] . '</option>';
+                                    }
                                     ?>
                                 </select>
                             </div>
@@ -99,7 +99,8 @@ include_once('conn.php');
                         <div class="col-md-4">
                             <label>Date :</label>
                             <input class="form-control" type="date" name="reportdate"
-                                value="<?php //echo date("Y-m-d") ?>">
+                                value="<?php //echo date("Y-m-d") 
+                                        ?>">
                         </div> -->
                     </div>
 
@@ -110,17 +111,21 @@ include_once('conn.php');
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label>Date :</label>
                             <input class="form-control" type="date" name="date">
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label>GRN# :</label>
                             <input class="form-control" type="text" name="GRN">
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label>Vehicle# :</label>
                             <input class="form-control" type="text" name="vehicle">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Description :</label>
+                            <input class="form-control" type="text" name="description">
                         </div>
                     </div>
                     <br>
@@ -231,108 +236,108 @@ include_once('conn.php');
     <script src="assets/js/app.js"></script>
 
     <script>
-    $('#headername').html("Production");
+        $('#headername').html("Production");
     </script>
 
     <script>
-    $('#totalgrossweight').on('change', function() {
+        $('#totalgrossweight').on('change', function() {
+            calculateNetWeight();
+        })
+        $('#totalbardanaweight').on('change', function() {
+            calculateNetWeight();
+        })
+
         calculateNetWeight();
-    })
-    $('#totalbardanaweight').on('change', function() {
-        calculateNetWeight();
-    })
 
-    calculateNetWeight();
-
-    function calculateNetWeight() {
-        var t_g_weight = $('#totalgrossweight').val();
-        var t_b_weight = $('#totalbardanaweight').val();
-        if (t_g_weight != '' && t_b_weight != '')
-            $('#nweight_processed').val(parseFloat(t_g_weight) - parseFloat(t_b_weight))
-    }
-    </script>
-
-
-    <script>
-    $('#Nweight').on('change', function() {
-        var Nweight = parseFloat($(this).val());
-
-        if (parseFloat($('#totalgrossweightDefault').val()) > 0 && !isNaN(Nweight))
-            $('#totalgrossweight').val(parseFloat($('#totalgrossweightDefault').val()) + Nweight);
-        else if (!isNaN(Nweight))
-            $('#totalgrossweight').val(Nweight);
-        else
-            $('#totalgrossweight').val($('#totalgrossweightDefault').val());
-
-        var t_g_weight = $('#totalgrossweight').val();
-        var t_b_weight = $('#totalbardanaweight').val();
-        if (t_g_weight != '' && t_b_weight != '')
-            $('#nweight_processed').val(parseFloat(t_g_weight) - parseFloat(t_b_weight))
-    })
-
-    $('#bardanaweight').on('change', function() {
-        var bardanaweight = parseFloat($(this).val());
-
-        if (!isNaN(parseFloat($('#totalbardanaweightDefault').val())) && parseFloat($(
-                '#totalbardanaweightDefault').val()) > 0 && !isNaN(bardanaweight)) {
-            $('#totalbardanaweight').val(parseFloat($('#totalbardanaweightDefault').val()) + bardanaweight);
-        } else if (!isNaN(bardanaweight)) {
-            $('#totalbardanaweight').val(bardanaweight);
-        } else {
-            $('#totalbardanaweight').val($('#totalbardanaweightDefault').val());
+        function calculateNetWeight() {
+            var t_g_weight = $('#totalgrossweight').val();
+            var t_b_weight = $('#totalbardanaweight').val();
+            if (t_g_weight != '' && t_b_weight != '')
+                $('#nweight_processed').val(parseFloat(t_g_weight) - parseFloat(t_b_weight))
         }
-
-        var t_g_weight = $('#totalgrossweight').val();
-        var t_b_weight = $('#totalbardanaweight').val();
-        if (t_g_weight != '' && t_b_weight != '')
-            $('#nweight_processed').val(parseFloat(t_g_weight) - parseFloat(t_b_weight))
-    })
     </script>
 
 
     <script>
-    $('#contractno').on('change', function() {
-        var contractno = $(this).val();
+        $('#Nweight').on('change', function() {
+            var Nweight = parseFloat($(this).val());
 
-        $.ajax({
-            type: 'POST',
-            url: 'get_partyname_itemname.php',
-            data: 'contractno=' + contractno,
-            success: function(response) {
-                console.log(response);
+            if (parseFloat($('#totalgrossweightDefault').val()) > 0 && !isNaN(Nweight))
+                $('#totalgrossweight').val(parseFloat($('#totalgrossweightDefault').val()) + Nweight);
+            else if (!isNaN(Nweight))
+                $('#totalgrossweight').val(Nweight);
+            else
+                $('#totalgrossweight').val($('#totalgrossweightDefault').val());
 
-                var json_response = JSON.parse(response);
+            var t_g_weight = $('#totalgrossweight').val();
+            var t_b_weight = $('#totalbardanaweight').val();
+            if (t_g_weight != '' && t_b_weight != '')
+                $('#nweight_processed').val(parseFloat(t_g_weight) - parseFloat(t_b_weight))
+        })
 
-                $('#partyname').val(json_response.CustomerName);
-                $('#item_name').val(json_response.Variety);
-            },
-        });
+        $('#bardanaweight').on('change', function() {
+            var bardanaweight = parseFloat($(this).val());
 
-        refreshtotal();
-    })
+            if (!isNaN(parseFloat($('#totalbardanaweightDefault').val())) && parseFloat($(
+                    '#totalbardanaweightDefault').val()) > 0 && !isNaN(bardanaweight)) {
+                $('#totalbardanaweight').val(parseFloat($('#totalbardanaweightDefault').val()) + bardanaweight);
+            } else if (!isNaN(bardanaweight)) {
+                $('#totalbardanaweight').val(bardanaweight);
+            } else {
+                $('#totalbardanaweight').val($('#totalbardanaweightDefault').val());
+            }
 
-    function refreshtotal() {
-        var contractno = $('#contractno').val();
+            var t_g_weight = $('#totalgrossweight').val();
+            var t_b_weight = $('#totalbardanaweight').val();
+            if (t_g_weight != '' && t_b_weight != '')
+                $('#nweight_processed').val(parseFloat(t_g_weight) - parseFloat(t_b_weight))
+        })
+    </script>
 
-        if (contractno != '') {
+
+    <script>
+        $('#contractno').on('change', function() {
+            var contractno = $(this).val();
+
             $.ajax({
                 type: 'POST',
-                url: 'Production_get_Partyname_Itemname.php',
+                url: 'get_partyname_itemname.php',
                 data: 'contractno=' + contractno,
                 success: function(response) {
                     console.log(response);
 
                     var json_response = JSON.parse(response);
-                    $('#totalgrossweight').val(json_response.NWeight)
-                    $('#totalgrossweightDefault').val(json_response.NWeight)
-                    $('#totalbardanaweight').val(json_response.BardanaWeight)
-                    $('#totalbardanaweightDefault').val(json_response.BardanaWeight)
-                    $('#nweight_processed').val(parseFloat(json_response.NWeight) - parseFloat(json_response
-                        .BardanaWeight))
+
+                    $('#partyname').val(json_response.CustomerName);
+                    $('#item_name').val(json_response.Variety);
                 },
             });
+
+            refreshtotal();
+        })
+
+        function refreshtotal() {
+            var contractno = $('#contractno').val();
+
+            if (contractno != '') {
+                $.ajax({
+                    type: 'POST',
+                    url: 'Production_get_Partyname_Itemname.php',
+                    data: 'contractno=' + contractno,
+                    success: function(response) {
+                        console.log(response);
+
+                        var json_response = JSON.parse(response);
+                        $('#totalgrossweight').val(json_response.NWeight)
+                        $('#totalgrossweightDefault').val(json_response.NWeight)
+                        $('#totalbardanaweight').val(json_response.BardanaWeight)
+                        $('#totalbardanaweightDefault').val(json_response.BardanaWeight)
+                        $('#nweight_processed').val(parseFloat(json_response.NWeight) - parseFloat(json_response
+                            .BardanaWeight))
+                    },
+                });
+            }
         }
-    }
     </script>
 
 </body>

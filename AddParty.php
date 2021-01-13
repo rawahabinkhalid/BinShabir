@@ -27,9 +27,9 @@ include_once('conn.php');
     <link href="assets/css/metisMenu.min.css" rel="stylesheet" type="text/css">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
     <style>
-    label {
-        font-weight: bold;
-    }
+        label {
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -41,7 +41,7 @@ include_once('conn.php');
     <div class="page-wrapper">
         <!-- Left Sidenav -->
         <?php
-            include_once('sidebar.php');
+        include_once('sidebar.php');
         ?>
 
         <!-- Page Content-->
@@ -84,8 +84,7 @@ include_once('conn.php');
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Name:</label>
-                                <input type="text" name="partyname" id="" class="form-control" placeholder="" required
-                                    maxlength="100" onkeypress="return onlyAlphabets(event,this);">
+                                <input type="text" name="partyname" id="" class="form-control" placeholder="" required maxlength="100" onkeypress="return onlyAlphabets(event,this);">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -119,9 +118,7 @@ include_once('conn.php');
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Phone No:</label>
-                                <input type="text" name="Phoneno" id="Phoneno" class="form-control" required
-                                    data-inputmask="'mask': '9999-9999999'" onchange="checkNumber();"
-                                    placeholder="e.g. 0300-0000000">
+                                <input type="text" name="Phoneno" id="Phoneno" class="form-control" required data-inputmask="'mask': '9999-9999999'" onchange="checkNumber();" placeholder="e.g. 0300-0000000">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -147,8 +144,7 @@ include_once('conn.php');
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>CNIC:</label>
-                                <input type="text" name="cnic" id="cnic" data-inputmask="'mask': '99999-9999999-9'"
-                                    onchange="checkCNIC();" class="form-control" placeholder="e.g. 41111-1111111-1">
+                                <input type="text" name="cnic" id="cnic" data-inputmask="'mask': '99999-9999999-9'" onchange="checkCNIC();" class="form-control" placeholder="e.g. 41111-1111111-1">
                             </div>
                         </div>
                     </div>
@@ -191,60 +187,60 @@ include_once('conn.php');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
     <script>
-    $(":input").inputmask();
+        $(":input").inputmask();
     </script>
 
     <script>
-    function checkNumber() {
-        str = document.getElementById('Phoneno').value;
-        console.log(str)
-        if (str.substring(0, 2) == '03') {
-            jQuery('#submitbutton').prop("disabled", false);
-        } else {
-            alert('Please enter correct mobile number');
-            jQuery('#submitbutton').prop("disabled", true);
-            return false;
+        function checkNumber() {
+            str = document.getElementById('Phoneno').value;
+            console.log(str)
+            if (str.substring(0, 2) == '03') {
+                jQuery('#submitbutton').prop("disabled", false);
+            } else {
+                alert('Please enter correct mobile number');
+                jQuery('#submitbutton').prop("disabled", true);
+                return false;
+            }
         }
-    }
 
-    function checkCNIC() {
-        var flag = false;
-        regexp = /^(?!000|666)[0-8][0-9]{4}-(?!00)[0-9]{7}-(?!0000)[0-9]{1}$/;
-        str = document.getElementById('cnic').value;
-        if (regexp.test(str)) {
-            jQuery('#submitbutton').prop("disabled", false);
+        function checkCNIC() {
+            var flag = false;
+            regexp = /^(?!000|666)[0-8][0-9]{4}-(?!00)[0-9]{7}-(?!0000)[0-9]{1}$/;
+            str = document.getElementById('cnic').value;
+            if (regexp.test(str)) {
+                jQuery('#submitbutton').prop("disabled", false);
 
-        } else {
-            alert('Please enter correct CNIC number');
-            jQuery('#submitbutton').prop("disabled", true);
-            return false;
+            } else {
+                alert('Please enter correct CNIC number');
+                jQuery('#submitbutton').prop("disabled", true);
+                return false;
+            }
         }
-    }
     </script>
 
     <script>
-    $('#headername').html("Add Party / Customer");
+        $('#headername').html("Add Party / Customer");
     </script>
 
     <!-- Only Alphabets Entered in Input Box Start -->
     <script>
-    function onlyAlphabets(e, t) {
-        try {
-            if (window.event) {
-                var charCode = window.event.keyCode;
-            } else if (e) {
-                var charCode = e.which;
-            } else {
-                return true;
+        function onlyAlphabets(e, t) {
+            try {
+                if (window.event) {
+                    var charCode = window.event.keyCode;
+                } else if (e) {
+                    var charCode = e.which;
+                } else {
+                    return true;
+                }
+                if (!(charCode > 47 && charCode < 58)) // accept everything except numbers
+                    return true;
+                else
+                    return false;
+            } catch (err) {
+                alert(err.Description);
             }
-            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
-                return true;
-            else
-                return false;
-        } catch (err) {
-            alert(err.Description);
         }
-    }
     </script>
     <!-- Only Alphabets Entered in Input Box End -->
 

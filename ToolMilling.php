@@ -28,19 +28,19 @@ include_once('conn.php');
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
 
     <style>
-    label {
-        font-weight: bold;
-    }
+        label {
+            font-weight: bold;
+        }
 
-    .itembutton {
+        .itembutton {
 
-        font-size: 18px;
-        color: #9C4BEB;
-        background: transparent;
-        border: 2px solid #9C4BEB;
-        border-radius: 15px 15px 15px 15px;
-        padding: 4px;
-    }
+            font-size: 18px;
+            color: #9C4BEB;
+            background: transparent;
+            border: 2px solid #9C4BEB;
+            border-radius: 15px 15px 15px 15px;
+            padding: 4px;
+        }
     </style>
 
 </head>
@@ -53,7 +53,7 @@ include_once('conn.php');
     <div class="page-wrapper">
         <!-- Left Sidenav -->
         <?php
-            include_once('sidebar.php');
+        include_once('sidebar.php');
         ?>
 
         <!-- Page Content-->
@@ -79,18 +79,18 @@ include_once('conn.php');
                 <form action="ToolMillingSubmit.php" method="POST">
                     <br><br>
                     <div class="row">
-                    <div class="col-md-4">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Contract #:</label>
                                 <select class="form-control" name="contractno" id="contractno" required>
                                     <option selected disabled>Select Contract No</option>
                                     <?php
-                                        $sql = 'SELECT * FROM makecontract';
-                                        $result = mysqli_query($conn, $sql);
-                                        while($row = mysqli_fetch_assoc($result)){
-                                            echo'
-                                            <option value="'.$row['ContractNo'].'">'.$row['ContractNo'].'</option>';
-                                        }
+                                    $sql = 'SELECT * FROM makecontract';
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo '
+                                            <option value="' . $row['ContractNo'] . '">' . $row['ContractNo'] . '</option>';
+                                    }
                                     ?>
                                 </select>
                             </div>
@@ -154,12 +154,10 @@ include_once('conn.php');
                     </div>
                     <div class="row">
                         <div class="col-2">
-                            <input name="addFieldButton" type="button" value="+Add Row" onclick="addField();"
-                                class="form-control itembutton">
+                            <input name="addFieldButton" type="button" value="+Add Row" onclick="addField();" class="form-control itembutton">
                         </div>
                         <div class="col-3">
-                            <input name="delFieldButton" type="button" value="+Remove Row" onclick="delField();"
-                                class="form-control itembutton">
+                            <input name="delFieldButton" type="button" value="+Remove Row" onclick="delField();" class="form-control itembutton">
                         </div>
                     </div>
                     <br>
@@ -201,96 +199,96 @@ include_once('conn.php');
     <script src="assets/js/app.js"></script>
 
     <script>
-    $('#headername').html("Tool Milling");
+        $('#headername').html("Tool Milling");
     </script>
 
     <!-- script of add_button/del_button work -->
     <script>
-    counter = -1;
+        counter = -1;
 
-    function addField() {
-        counter++;
+        function addField() {
+            counter++;
 
-        var content = '';
-        content += '<div class="row" id="ToolMilling_row_' + counter + '" name="ToolMilling_row">';
-        content += '    <div class="col-md-2">';
-        content += '        <div class="form-group">';
-        content += '            <select name="head[]" class="form-control" required>';
-        content += '                <option value="Select Head"  selected disabled>Select Head</option>';
-        content += '                <option value="Processing">Processing</option>';
-        content += '                <option value="Labour">Labour</option>';
-        content += '            </select>';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-2">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="description[]" class="form-control">';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-2">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="weight[]" id="weight" class="form-control" onkeyup="sum(counter)">';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-2">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="unit[]" class="form-control">';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-2">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="rate[]" id="rate" class="form-control" onkeyup="sum(counter)">';
-        content += '        </div>';
-        content += '    </div>';
-        content += '    <div class="col-md-2">';
-        content += '        <div class="form-group">';
-        content += '            <input type="text" name="amount[]" id="amount" class="form-control" readonly>';
-        content += '        </div>';
-        content += '    </div>';
-        content += '</div>';
-        $('#items').append(content);
-    }
-
-    function delField() {
-        $("#ToolMilling_row_" + counter).remove();
-        counter--;
-    }
-    </script>
-
-
-    <script>
-    // MULTIPLY OF TWO NUMBER FUNCTIONALITY
-    function sum(counter) {
-        console.log(counter)
-        var weight = document.getElementsByName('weight[]')[counter].value;
-        var rate = document.getElementsByName('rate[]')[counter].value;
-        var result = parseInt(weight) * parseInt(rate);
-        if (!isNaN(result)) {
-            document.getElementsByName('amount[]')[counter].value = result;
+            var content = '';
+            content += '<div class="row" id="ToolMilling_row_' + counter + '" name="ToolMilling_row">';
+            content += '    <div class="col-md-2">';
+            content += '        <div class="form-group">';
+            content += '            <select name="head[]" class="form-control" required>';
+            content += '                <option value="Select Head"  selected disabled>Select Head</option>';
+            content += '                <option value="Processing">Processing</option>';
+            content += '                <option value="Labour">Labour</option>';
+            content += '            </select>';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-2">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="description[]" class="form-control">';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-2">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="weight[]" id="weight" class="form-control" onkeyup="sum(counter)">';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-2">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="unit[]" class="form-control">';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-2">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="rate[]" id="rate" class="form-control" onkeyup="sum(counter)">';
+            content += '        </div>';
+            content += '    </div>';
+            content += '    <div class="col-md-2">';
+            content += '        <div class="form-group">';
+            content += '            <input type="text" name="amount[]" id="amount" class="form-control" readonly>';
+            content += '        </div>';
+            content += '    </div>';
+            content += '</div>';
+            $('#items').append(content);
         }
-    }
+
+        function delField() {
+            $("#ToolMilling_row_" + counter).remove();
+            counter--;
+        }
+    </script>
+
+
+    <script>
+        // MULTIPLY OF TWO NUMBER FUNCTIONALITY
+        function sum(counter) {
+            console.log(counter)
+            var weight = document.getElementsByName('weight[]')[counter].value;
+            var rate = document.getElementsByName('rate[]')[counter].value;
+            var result = (parseFloat(weight) * parseFloat(rate)).toFixed(2);
+            if (!isNaN(result)) {
+                document.getElementsByName('amount[]')[counter].value = result;
+            }
+        }
     </script>
 
     <script>
-    $('#contractno').on('change', function() {
-        var contractno = $(this).val();
+        $('#contractno').on('change', function() {
+            var contractno = $(this).val();
 
-        $.ajax({
-            type: 'POST',
-            url: 'get_partyname_itemname.php',
-            data: 'contractno=' + contractno,
-            success: function(response) {
-                console.log(response);
+            $.ajax({
+                type: 'POST',
+                url: 'get_partyname_itemname.php',
+                data: 'contractno=' + contractno,
+                success: function(response) {
+                    console.log(response);
 
-                var json_response = JSON.parse(response);
+                    var json_response = JSON.parse(response);
 
-                $('#partyname').val(json_response.CustomerName);
-                $('#item_name').val(json_response.Variety);
-            },
-        });
-    })
+                    $('#partyname').val(json_response.CustomerName);
+                    $('#item_name').val(json_response.Variety);
+                },
+            });
+        })
     </script>
-    
+
 </body>
 
 </html>
