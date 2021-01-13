@@ -111,19 +111,19 @@ include_once('conn.php');
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <label>Date :</label>
                             <input class="form-control" type="date" name="date">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <label>GRN# :</label>
                             <input class="form-control" type="text" name="GRN">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <label>Vehicle# :</label>
                             <input class="form-control" type="text" name="vehicle">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <label>Description :</label>
                             <input class="form-control" type="text" name="description">
                         </div>
