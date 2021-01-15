@@ -71,13 +71,37 @@ include_once('conn.php');
                             <div class="form-group">
                                 <label>Contract #:</label>
                                 <select class="form-control" name="contractno" id="contractno" required>
-                                    <option selected disabled>Select Contract No</option>
+                                    <option selected disabled>Select Contract</option>
+                                    <optgroup class="bg-success" label="Debtor/AccountReceivable/Sales"></optgroup>
                                     <?php
-                                    $sql = 'SELECT * FROM makecontract';
+                                    $sql = 'SELECT * FROM debtor';
                                     $result = mysqli_query($conn, $sql);
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo '
-                                            <option value="' . $row['ContractNo'] . '">' . $row['ContractNo'] . '</option>';
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo '<option value="' . $row['ContractNo'] . '">' . $row['ContractNo'] . '</option>';
+                                        }
+                                    }
+                                    ?>
+
+                                    <optgroup class="bg-success" label="Creditor/AccountPayable/Purchase"></optgroup>
+                                    <?php
+                                    $sql = 'SELECT * FROM creditor';
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo '<option value="' . $row['ContractNo'] . '">' . $row['ContractNo'] . '</option>';
+                                        }
+                                    }
+                                    ?>
+
+                                    <optgroup class="bg-success" label="Sales"></optgroup>
+                                    <?php
+                                    $sql = 'SELECT * FROM toolmillcontract';
+                                    $result = mysqli_query($conn, $sql);
+                                    if (mysqli_num_rows($result) > 0) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo '<option value="' . $row['ContractNo'] . '">' . $row['ContractNo'] . '</option>';
+                                        }
                                     }
                                     ?>
                                 </select>
@@ -308,7 +332,7 @@ include_once('conn.php');
 
                     var json_response = JSON.parse(response);
 
-                    $('#partyname').val(json_response.CustomerName);
+                    $('#partyname').val(json_response.PartyName);
                     $('#item_name').val(json_response.Variety);
                 },
             });

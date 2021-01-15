@@ -69,7 +69,7 @@ include_once 'conn.php';
                 <!-- end page title end breadcrumb -->
                 <div class="row" id="" style="">
                     <div class="col-md-12 text-center">
-                        <h3><b><u>Weight Bridge Report</u></b></h3>
+                        <h3><b><u>Weigh Bridge Report</u></b></h3>
                     </div>
                 </div>
                 <br><br>
@@ -101,7 +101,7 @@ include_once 'conn.php';
                                         <th scope="col"><b>Truck</b></th>
                                         <th scope="col"><b>Weight</b></th>
                                         <th scope="col"><b>Rate</b></th>
-                                        <th scope="col"><b>Amount</b></th>
+                                        <!-- <th scope="col"><b>Amount</b></th> -->
                                         <!-- <th scope="col"><b>N.Weight</b></th> -->
                                     </tr>
                                 </thead>
@@ -113,15 +113,24 @@ include_once 'conn.php';
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo '
                                         <tr>
-                                            <td scope="row"><b>'.$count++.'</b></td>
+                                            <td><b>'.$count++.'</b></td>
                                             <td>'.$row['Date'].'</td>
                                             <td>'.$row['Truck'].'</td>
                                             <td>'.$row['Weight'].'</td>
                                             <td>'.$row['Rate'].'</td>
-                                            <td>'.$row['Amount'].'</td>
                                         </tr>';
                                     }
-                                ?>
+
+                                    $sql1 = 'SELECT SUM(Rate) AS totalrate FROM weigh_bridge';
+                                    $result1 = mysqli_query($conn, $sql1);
+                                    $row1 = mysqli_fetch_assoc($result1);
+                                        echo '
+                                        <tr>
+                                            <td colspan="4"><b>Total Rate</b></td>
+                                            <td class="bg-warning text-white">'.number_format($row1['totalrate'], 2).'</td>
+                                        </tr>
+                                        ';
+                                    ?>
                                 </tbody>
                                 <tfoot id="">
 

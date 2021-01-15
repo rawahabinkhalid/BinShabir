@@ -136,7 +136,6 @@ include_once('conn.php');
                                 <select class="form-control" name="variety" required>
                                     <option selected disabled>Select Variety</option>
                                     <option value="1121 Kainaat">1121 Kainaat</option>
-                                    <option value="1121 Kainaat B1">1121 Kainaat B1</option>
                                     <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab
                                     </option>
                                     <option value="Rice 386 Basmati">Rice 386 Basmati</option>
