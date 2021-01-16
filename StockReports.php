@@ -29,13 +29,13 @@ include_once('conn.php');
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
 
     <style>
-        label {
-            font-weight: bold;
-        }
+    label {
+        font-weight: bold;
+    }
 
-        table tr th {
-            background-color: #33F3FF;
-        }
+    table tr th {
+        background-color: #33F3FF;
+    }
     </style>
 </head>
 
@@ -108,8 +108,7 @@ include_once('conn.php');
                                                 JOIN gatepass_g_recieved ON toolmillcontract.ContractNo = gatepass_g_recieved.ContractNo
                                                 JOIN gatepass_g_recieved_items ON gatepass_g_recieved.Id = gatepass_g_recieved_items.GoodReceivedId
                                                 WHERE gatepass_g_recieved_items.Type = "Rice"
-                                                GROUP BY ContractNo
-                                                ';
+                                                GROUP BY ContractNo';
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     // print_r($row);
@@ -123,15 +122,32 @@ include_once('conn.php');
                                     if ($result1->num_rows > 0) {
                                         while ($row1 = mysqli_fetch_assoc($result1)) {
 
-
-                                            echo '
+                                    echo '
                                     <tr>
                                         <td scope="row"><b>' . $count++ . '</b></td>
                                         <td>' . $row['ContractNo'] . '</td>
                                         <td>' . $row['SaleCustomerName'] . '</td>
-                                        <td>' . $row['Quality'] . '</td>
-                                        <td>' . $row['Variety'] . '</td>
-                                        <td>' . $row1['Quantity'] . '</td>';
+                                        <td>' . $row['Quality'] . '</td>';
+
+                                        $sql_gi_raw_material = 'SELECT *, SUM(gatepass_g_issue_items.Quantity) AS Quantity FROM gatepass_g_issue 
+                                                        JOIN gatepass_g_issue_items ON gatepass_g_issue.Id = gatepass_g_issue_items.GoodIssueId
+                                                        WHERE gatepass_g_issue.ContractNo = ' . $row['ContractNo'] . ' AND gatepass_g_issue_items.Items = "' . $row['Items'] . '"
+                                                        AND gatepass_g_issue_items.ItemName = "" GROUP BY gatepass_g_issue.ContractNo, gatepass_g_issue_items.Items';
+                                        // echo $sql_gi_raw_material;
+                                        
+                                        $r_gi_raw_material = mysqli_query($conn, $sql_gi_raw_material);
+                                        if($r_gi_raw_material->num_rows > 0) {
+                                            $row_gi_raw_material  = mysqli_fetch_assoc($r_gi_raw_material);
+                                            echo '
+                                            <td>' . $row['Variety'] . '</td> 
+                                            <td>' . $row1['Quantity'] - $row_gi_raw_material['Quantity'] . '</td>';
+                                        } else {
+                                                echo '
+                                                <td>' . $row['Variety'] . '</td> 
+                                                <td>' . $row1['Quantity'] . '</td>';
+        
+                                        }
+
                                             foreach ($varieties as $variety) {
                                                 $sql2 = 'SELECT SUM(production_milling.M_Bags) AS Quantity
                                                     FROM production_milling 
@@ -143,7 +159,21 @@ include_once('conn.php');
                                                 echo '<td>';
                                                 if ($result2->num_rows > 0)
                                                     while ($row2 = mysqli_fetch_assoc($result2)) {
-                                                        echo $row2['Quantity'];
+                                                        
+                                                        $sql_goodissue = 'SELECT *, SUM(gatepass_g_issue_items.Quantity) AS Quantity FROM gatepass_g_issue 
+                                                        JOIN gatepass_g_issue_items ON gatepass_g_issue.Id = gatepass_g_issue_items.GoodIssueId
+                                                        WHERE gatepass_g_issue.ContractNo = ' . $row['ContractNo'] . ' AND gatepass_g_issue_items.Items = "' . $row['Items'] . '"
+                                                        AND gatepass_g_issue_items.ItemName = "' . $variety . '" GROUP BY gatepass_g_issue.ContractNo ';
+                                                        // echo $sql_goodissue;
+                                                        $result_goodissue = mysqli_query($conn, $sql_goodissue);
+                                                        $row_goodissue = mysqli_fetch_assoc($result_goodissue);
+                                                        
+                                                        if(isset($row_goodissue['Quantity'])){
+                                                        echo $row2['Quantity'] - $row_goodissue['Quantity'];
+                                                        }
+                                                        else{
+                                                            echo $row2['Quantity'];
+                                                        }
                                                     }
                                                 echo '</td>';
                                             }
@@ -185,9 +215,29 @@ include_once('conn.php');
                                         <td scope="row"><b>' . $count++ . '</b></td>
                                         <td>' . $row['ContractNo'] . '</td>
                                         <td>' . $row['SaleCustomerName'] . '</td>
-                                        <td>' . $row['Quality'] . '</td>
-                                        <td>' . $row['Variety'] . '</td>
-                                        <td>' . $row['Quantity'] . '</td>';
+                                        <td>' . $row['Quality'] . '</td>';
+                                        
+                                        $sql_gi_raw_material = 'SELECT *, SUM(gatepass_g_issue_items.Quantity) AS Quantity, gatepass_g_issue_items.Items FROM gatepass_g_issue 
+                                                        JOIN gatepass_g_issue_items ON gatepass_g_issue.Id = gatepass_g_issue_items.GoodIssueId
+                                                        WHERE gatepass_g_issue.ContractNo = ' . $row['ContractNo'] . '
+                                                        AND gatepass_g_issue_items.ItemName = "" GROUP BY gatepass_g_issue.ContractNo ';
+                                        // echo $sql_gi_raw_material;
+                                        $r_gi_raw_material = mysqli_query($conn, $sql_gi_raw_material);
+                                        if($r_gi_raw_material->num_rows > 0) {
+                                            
+                                            $row_gi_raw_material  = mysqli_fetch_assoc($r_gi_raw_material);
+                                            $varieties_issued_qty = $row['Quantity'] - $row_gi_raw_material['Quantity'];
+                                            echo '
+                                            <td>' .  $row['Variety'] . '</td> 
+                                            <td>' . $varieties_issued_qty . '</td> 
+                                            ';
+                                        } else {
+                                                echo '
+                                                <td>' . $row['Variety'] . '</td> 
+                                                <td>' . $row['Quantity'] . '</td>';
+        
+                                        }
+                                        
                                         foreach ($varieties as $variety) {
                                             echo '<td>';
                                             echo '</td>';
@@ -248,7 +298,8 @@ include_once('conn.php');
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <input class="btn btn-success" id="printpagebutton" type="button" value="Print" onclick="printpage()" />
+                        <input class="btn btn-success" id="printpagebutton" type="button" value="Print"
+                            onclick="printpage()" />
                     </div>
                 </div>
             </div>
@@ -280,28 +331,28 @@ include_once('conn.php');
     <script src="assets/js/app.js"></script>
 
     <script>
-        $('#headername').html("Stock Report");
+    $('#headername').html("Stock Report");
     </script>
 
     <script>
-        $(document).ready(function() {
-            $('.table').DataTable();
-        });
+    $(document).ready(function() {
+        $('.table').DataTable();
+    });
     </script>
 
     <!-- Print Document -->
     <script type="text/javascript">
-        function printpage() {
+    function printpage() {
 
-            var printButton = document.getElementById("printpagebutton");
-            //Set the print button visibility to 'hidden' 
-            printButton.style.visibility = 'hidden';
+        var printButton = document.getElementById("printpagebutton");
+        //Set the print button visibility to 'hidden' 
+        printButton.style.visibility = 'hidden';
 
-            //Print the page content
-            window.print()
-            //Set the print button to 'visible' again 
-            printButton.style.visibility = 'visible';
-        }
+        //Print the page content
+        window.print()
+        //Set the print button to 'visible' again 
+        printButton.style.visibility = 'visible';
+    }
     </script>
 
 </body>

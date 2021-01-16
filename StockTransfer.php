@@ -67,7 +67,7 @@ include_once('conn.php');
                 <form action="StockTransferSubmit.php" method="POST">
                     <br><br>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>CONTRACT NO# FROM:</label>
                                 <select name="contractnofrom" id="contractnofrom" class="form-control" required>
@@ -107,7 +107,7 @@ include_once('conn.php');
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>CONTRACT NO# TO:</label>
                                 <select name="contractnoto" id="" class="form-control" required>
@@ -147,10 +147,49 @@ include_once('conn.php');
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Item Variety:</label>
+                                <select class="form-control" name="itemvariety" required>
+                                    <option selected disabled>Select Variety</option>
+                                    <option value="1121 Kainaat">1121 Kainaat</option>
+                                    <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab
+                                    </option>
+                                    <option value="Rice 386 Basmati">Rice 386 Basmati</option>
+                                    <option value="Rice 386 Supri">Rice 386 Supri</option>
+                                    <option value="Super Fine">Super Fine</option>
+                                    <option value="Irri 9-C9">Irri 9-C9</option>
+                                    <option value="Irri 6">Irri 6</option>
+                                    <option value="D-98">D-98</option>
+                                    <option value="KS-282">KS-282</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Item Name:</label>
+                                <select class="form-control" type="text" name="itemname">
+                                    <option selected disabled>Select Item</option>
+                                    <option value="Final">Final</option>
+                                    <option value="Short grain">Short grain</option>
+                                    <option value="B1">B1</option>
+                                    <option value="B2">B2</option>
+                                    <option value="B3">B3</option>
+                                    <option value="CSR">CSR</option>
+                                    <option value="Broken CSR">Broken CSR</option>
+                                    <option value="Peddy">Peddy</option>
+                                    <option value="Powder">Powder</option>
+                                    <option value="Choba">Choba</option>
+                                    <option value="Sweeping">Sweeping</option>
+                                    <option value="Stones">Stones</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Bags:</label>
-                                <input type="number" name="bagstransfer" id="bagstransfer" class="form-control" required>
+                                <input type="number" name="bagstransfer" id="bagstransfer" class="form-control"
+                                    required>
                             </div>
                         </div>
                     </div>
@@ -206,15 +245,14 @@ include_once('conn.php');
                 // alert(response);
                 var totalbags = parseInt(response);
                 var remaining = parseInt(totalbags) - parseInt(bags);
-                if(remaining < 0) {
+                if (remaining < 0) {
                     alert('Not Enough Bags');
-                    $('#submitbtn').prop('disabled',true);
-                }
-                else{
-                    $('#submitbtn').prop('disabled',false);
+                    $('#submitbtn').prop('disabled', true);
+                } else {
+                    $('#submitbtn').prop('disabled', false);
                 }
             },
-        });   
+        });
     })
     </script>
 

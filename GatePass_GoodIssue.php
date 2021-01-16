@@ -174,17 +174,17 @@ include_once('conn.php');
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Items:</label>
+                                <label>Items Variety:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Item Name:</label>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Description:</label>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Lot No / Contract No:</label>
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -311,8 +311,7 @@ include_once('conn.php');
             content += '            <select class="form-control" name="Items[]">';
             content += '                <option selected disabled>Select Variety</option>';
             content += '                <option value="1121 Kainaat">1121 Kainaat</option>';
-            content +=
-                '                <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab </option>';
+            content += '                <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab </option>';
             content += '                <option value="Rice 386 Basmati">Rice 386 Basmati</option>';
             content += '                <option value="Rice 386 Supri">Rice 386 Supri</option>';
             content += '                <option value="Super Fine">Super Fine</option>';
@@ -325,12 +324,26 @@ include_once('conn.php');
             content += '    </div>';
             content += '    <div class="col-md-2">';
             content += '        <div class="form-group">';
-            content += '            <input type="text" name="Description[]" class="form-control">';
+            content += '            <select class="form-control" name="ItemName[]">';
+            content += '                <option selected disabled>Select Item</option>';
+            content += '                <option value="Final">Final</option>';
+            content += '                <option value="Short grain">Short grain</option>';
+            content += '                <option value="B1">B1</option>';
+            content += '                <option value="B2">B2</option>';
+            content += '                <option value="B3">B3</option>';
+            content += '                <option value="CSR">CSR</option>';
+            content += '                <option value="Broken CSR">Broken CSR</option>';
+            content += '                <option value="Peddy">Peddy</option>';
+            content += '                <option value="Powder">Powder</option>';
+            content += '                <option value="Choba">Choba</option>';
+            content += '                <option value="Sweeping">Sweeping</option>';
+            content += '                <option value="Stones">Stones</option>';
+            content += '            </select>';
             content += '        </div>';
             content += '    </div>';
             content += '    <div class="col-md-2">';
             content += '        <div class="form-group">';
-            content += '            <input type="text" name="LabNo[]" class="form-control">';
+            content += '            <input type="text" name="Description[]" class="form-control">';
             content += '        </div>';
             content += '    </div>';
             content += '    <div class="col-md-2">';
