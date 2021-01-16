@@ -163,77 +163,7 @@ include_once('conn.php');
                             </div>
                         </div>
                     </div>
-                    <div id="desc_rice">
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>CHALKY:</label>
-                                    <input type="number" name="chalky" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>B-1:</label>
-                                    <input type="number" name="b1" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>B-2:</label>
-                                    <input type="number" name="b2" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>B-3:</label>
-                                    <input type="number" name="b3" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>D/D:</label>
-                                    <input type="number" name="dd" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>SHV:</label>
-                                    <input type="number" name="shv" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>RED STRIPE/UM:</label>
-                                    <input type="number" name="redstripe" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>CHOBA:</label>
-                                    <input type="number" name="choba" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>OV:</label>
-                                    <input type="number" name="ov" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>MOISTURE:</label>
-                                    <input type="number" name="moisture" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>COOKING:</label>
-                                    <input type="text" name="cooking" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
 
                     <hr><br>
                     <div class="row">
@@ -338,6 +268,77 @@ include_once('conn.php');
                             <input name="delFieldButton" type="button" value="+Remove Item" onclick="delField();" class="form-control itembutton">
                         </div>
                     </div><br>
+                    <div id="desc_rice">
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>CHALKY:</label>
+                                    <input type="number" name="chalky" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>B-1:</label>
+                                    <input type="number" name="b1" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>B-2:</label>
+                                    <input type="number" name="b2" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>B-3:</label>
+                                    <input type="number" name="b3" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>D/D:</label>
+                                    <input type="number" name="dd" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>SHV:</label>
+                                    <input type="number" name="shv" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>RED STRIPE/UM:</label>
+                                    <input type="number" name="redstripe" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>CHOBA:</label>
+                                    <input type="number" name="choba" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>OV:</label>
+                                    <input type="number" name="ov" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>MOISTURE:</label>
+                                    <input type="number" name="moisture" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>COOKING:</label>
+                                    <input type="text" name="cooking" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-4">
                             <br>

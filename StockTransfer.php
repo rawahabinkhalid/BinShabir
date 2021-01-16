@@ -27,9 +27,9 @@ include_once('conn.php');
     <link href="assets/css/metisMenu.min.css" rel="stylesheet" type="text/css">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
     <style>
-    label {
-        font-weight: bold;
-    }
+        label {
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -41,7 +41,7 @@ include_once('conn.php');
     <div class="page-wrapper">
         <!-- Left Sidenav -->
         <?php
-            include_once('sidebar.php');
+        include_once('sidebar.php');
         ?>
 
         <!-- Page Content-->
@@ -149,7 +149,7 @@ include_once('conn.php');
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Item Variety:</label>
+                                <label>Item Variety (From):</label>
                                 <select class="form-control" name="itemvariety" required>
                                     <option selected disabled>Select Variety</option>
                                     <option value="1121 Kainaat">1121 Kainaat</option>
@@ -188,8 +188,7 @@ include_once('conn.php');
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Bags:</label>
-                                <input type="number" name="bagstransfer" id="bagstransfer" class="form-control"
-                                    required>
+                                <input type="number" name="bagstransfer" id="bagstransfer" class="form-control" required>
                             </div>
                         </div>
                     </div>
@@ -229,31 +228,31 @@ include_once('conn.php');
     <script src="assets/js/app.js"></script>
 
     <script>
-    $('#headername').html("Stock Transfer");
+        $('#headername').html("Stock Transfer");
     </script>
 
     <script>
-    $('#bagstransfer').on('change', function() {
-        var id = $('#contractnofrom').val();
-        var bags = $(this).val();
-        // alert(id);
-        $.ajax({
-            type: 'POST',
-            url: 'CheckNoOfBags.php',
-            data: 'ContractId=' + id,
-            success: function(response) {
-                // alert(response);
-                var totalbags = parseInt(response);
-                var remaining = parseInt(totalbags) - parseInt(bags);
-                if (remaining < 0) {
-                    alert('Not Enough Bags');
-                    $('#submitbtn').prop('disabled', true);
-                } else {
-                    $('#submitbtn').prop('disabled', false);
-                }
-            },
-        });
-    })
+        $('#bagstransfer').on('change', function() {
+            var id = $('#contractnofrom').val();
+            var bags = $(this).val();
+            // alert(id);
+            $.ajax({
+                type: 'POST',
+                url: 'CheckNoOfBags.php',
+                data: 'ContractId=' + id,
+                success: function(response) {
+                    // alert(response);
+                    var totalbags = parseInt(response);
+                    var remaining = parseInt(totalbags) - parseInt(bags);
+                    if (remaining < 0) {
+                        alert('Not Enough Bags');
+                        $('#submitbtn').prop('disabled', true);
+                    } else {
+                        $('#submitbtn').prop('disabled', false);
+                    }
+                },
+            });
+        })
     </script>
 
 </body>
