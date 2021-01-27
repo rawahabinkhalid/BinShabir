@@ -28,19 +28,19 @@ include_once('conn.php');
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
 
     <style>
-        label {
-            font-weight: bold;
-        }
+    label {
+        font-weight: bold;
+    }
 
-        .itembutton {
+    .itembutton {
 
-            font-size: 18px;
-            color: #9C4BEB;
-            background: transparent;
-            border: 2px solid #9C4BEB;
-            border-radius: 15px 15px 15px 15px;
-            padding: 4px;
-        }
+        font-size: 18px;
+        color: #9C4BEB;
+        background: transparent;
+        border: 2px solid #9C4BEB;
+        border-radius: 15px 15px 15px 15px;
+        padding: 4px;
+    }
     </style>
 </head>
 
@@ -79,9 +79,20 @@ include_once('conn.php');
                     <br>
                     <div class="row">
                         <div class="col-md-4">
+                            <label>Category Type</label>
+                            <select name="categorytype" id="categorytype" class="form-control">
+                                <option selected disabled>Select Category</option>
+                                <option value="Bin Shabir">Bin Shabir</option>
+                                <option value="ToolMill">ToolMill</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4" id="DebtorCreditor" style="display:none">
                             <div class="form-group">
                                 <label>Contract #:</label>
-                                <select name="contractno" id="contractno" class="form-control">
+                                <select name="contractno" id="contractno" class="form-control contractno">
                                     <option selected disabled>Select Contract</option>
                                     <optgroup class="bg-success" label="Debtor/AccountReceivable/Sales"></optgroup>
                                     <?php
@@ -104,8 +115,16 @@ include_once('conn.php');
                                         }
                                     }
                                     ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4" id="Toolmill" style="display:none">
+                            <div class="form-group">
+                                <label>Contract #:</label>
+                                <select name="contractno" id="contractno" class="form-control contractno">
+                                    <option selected disabled>Select Contract</option>
 
-                                    <optgroup class="bg-success" label="Sales"></optgroup>
+                                    <optgroup class="bg-success" label="ToolMill/Sales"></optgroup>
                                     <?php
                                     $sql = 'SELECT * FROM toolmillcontract';
                                     $result = mysqli_query($conn, $sql);
@@ -252,10 +271,12 @@ include_once('conn.php');
                     <div class="row">
                         <div class="col-3"></div>
                         <div class="col-2">
-                            <input name="addFieldButton" type="button" value="+Add Item" onclick="addField();" class="form-control itembutton">
+                            <input name="addFieldButton" type="button" value="+Add Item" onclick="addField();"
+                                class="form-control itembutton">
                         </div>
                         <div class="col-3">
-                            <input name="delFieldButton" type="button" value="+Remove Item" onclick="delField();" class="form-control itembutton">
+                            <input name="delFieldButton" type="button" value="+Remove Item" onclick="delField();"
+                                class="form-control itembutton">
                         </div>
                     </div><br>
                     <div class="row">
@@ -294,82 +315,164 @@ include_once('conn.php');
     <script src="assets/js/app.js"></script>
 
     <script>
-        $('#headername').html("Gate Passes");
+    $('#headername').html("Gate Passes");
     </script>
+
+    <!-- categorytye change and show contractNo accordingly start -->
+    <script>
+    $('#categorytype').on('change', function() {
+        var type = $(this).val();
+        console.log(type);
+
+        if (type == "Bin Shabir") {
+            $('#DebtorCreditor').show();
+            $('#Toolmill').hide();
+        } else {
+            $('#Toolmill').show();
+            $('#DebtorCreditor').hide();
+            $('#partyname').val('');
+        }
+    })
+    </script>
+    <!-- categorytye change and show contractNo accordingly end -->
 
     <!-- script of add_Item_button/del_Item_button work -->
     <script>
-        counter = -1;
+    counter = -1;
 
-        function addField() {
-            counter++;
+    function addField() {
+        counter++;
 
-            var content = '';
-            content += '<div class="row" id="GoodIssueNote_row_' + counter + '" name="GoodIssue_rows">';
-            content += '    <div class="col-md-3">';
-            content += '        <div class="form-group">';
-            content += '            <select class="form-control" name="Items[]">';
-            content += '                <option selected disabled>Select Variety</option>';
-            content += '                <option value="1121 Kainaat">1121 Kainaat</option>';
-            content += '                <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab </option>';
-            content += '                <option value="Rice 386 Basmati">Rice 386 Basmati</option>';
-            content += '                <option value="Rice 386 Supri">Rice 386 Supri</option>';
-            content += '                <option value="Super Fine">Super Fine</option>';
-            content += '                <option value="Irri 9-C9">Irri 9-C9</option>';
-            content += '                <option value="Irri 6">Irri 6</option>';
-            content += '                <option value="D-98">D-98</option>';
-            content += '                <option value="KS-282">KS-282</option>';
-            content += '            </select>';
-            content += '        </div>';
-            content += '    </div>';
-            content += '    <div class="col-md-2">';
-            content += '        <div class="form-group">';
-            content += '            <select class="form-control" name="ItemName[]">';
-            content += '                <option selected disabled>Select Item</option>';
-            content += '                <option value="Final">Final</option>';
-            content += '                <option value="Short grain">Short grain</option>';
-            content += '                <option value="B1">B1</option>';
-            content += '                <option value="B2">B2</option>';
-            content += '                <option value="B3">B3</option>';
-            content += '                <option value="CSR">CSR</option>';
-            content += '                <option value="Broken CSR">Broken CSR</option>';
-            content += '                <option value="Peddy">Peddy</option>';
-            content += '                <option value="Powder">Powder</option>';
-            content += '                <option value="Choba">Choba</option>';
-            content += '                <option value="Sweeping">Sweeping</option>';
-            content += '                <option value="Stones">Stones</option>';
-            content += '            </select>';
-            content += '        </div>';
-            content += '    </div>';
-            content += '    <div class="col-md-2">';
-            content += '        <div class="form-group">';
-            content += '            <input type="text" name="Description[]" class="form-control">';
-            content += '        </div>';
-            content += '    </div>';
-            content += '    <div class="col-md-2">';
-            content += '        <div class="form-group">';
-            content += '            <input type="text" name="Packsize[]" class="form-control">';
-            content += '        </div>';
-            content += '    </div>';
-            content += '    <div class="col-md-1">';
-            content += '        <div class="form-group">';
-            content += '            <input type="text" name="Quantity[]" class="form-control">';
-            content += '        </div>';
-            content += '    </div>';
-            content += '    <div class="col-md-2">';
-            content += '        <div class="form-group">';
-            content += '            <input type="text" name="Weight[]" class="form-control">';
-            content += '        </div>';
-            content += '    </div>';
-            content += '</div>';
-            $('#items').append(content);
-        }
+        var content = '';
+        content += '<div class="row" id="GoodIssueNote_row_' + counter + '" name="GoodIssue_rows">';
+        content += '    <div class="col-md-3">';
+        content += '        <div class="form-group">';
+        content += '            <select class="form-control" name="Items[]" id="Items' + counter + '">';
+        content += '                <option selected disabled>Select Variety</option>';
+        // content += '                <option value="1121 Kainaat">1121 Kainaat</option>';
+        // content += '                <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab </option>';
+        // content += '                <option value="Rice 386 Basmati">Rice 386 Basmati</option>';
+        // content += '                <option value="Rice 386 Supri">Rice 386 Supri</option>';
+        // content += '                <option value="Super Fine">Super Fine</option>';
+        // content += '                <option value="Irri 9-C9">Irri 9-C9</option>';
+        // content += '                <option value="Irri 6">Irri 6</option>';
+        // content += '                <option value="D-98">D-98</option>';
+        // content += '                <option value="KS-282">KS-282</option>';
+        content += '            </select>';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-2">';
+        content += '        <div class="form-group">';
+        content += '            <select class="form-control" name="ItemName[]">';
+        content += '                <option selected disabled>Select Item</option>';
+        content += '                <option value="Final">Final</option>';
+        content += '                <option value="Short grain">Short grain</option>';
+        content += '                <option value="B1">B1</option>';
+        content += '                <option value="B2">B2</option>';
+        content += '                <option value="B3">B3</option>';
+        content += '                <option value="CSR">CSR</option>';
+        content += '                <option value="Broken CSR">Broken CSR</option>';
+        content += '                <option value="Peddy">Peddy</option>';
+        content += '                <option value="Powder">Powder</option>';
+        content += '                <option value="Choba">Choba</option>';
+        content += '                <option value="Sweeping">Sweeping</option>';
+        content += '                <option value="Stones">Stones</option>';
+        content += '            </select>';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-2">';
+        content += '        <div class="form-group">';
+        content += '            <input type="text" name="Description[]" class="form-control">';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-2">';
+        content += '        <div class="form-group">';
+        content += '            <input type="text" name="Packsize[]" class="form-control">';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-1">';
+        content += '        <div class="form-group">';
+        content += '            <input type="text" name="Quantity[]" class="form-control" onkeyup="sum(counter)">';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-2">';
+        content += '        <div class="form-group">';
+        content += '            <input type="text" name="Weight[]" class="form-control">';
+        content += '        </div>';
+        content += '    </div>';
+        content += '</div>';
+        $('#items').append(content);
 
-        function delField() {
-            $("#GoodIssueNote_row_" + counter).remove();
-            counter--;
-        }
+
+        // Show ItmeName According to Selected ContractNo Start
+        var contractno = $('#contractno').val();
+
+        $.ajax({
+            type: 'POST',
+            url: 'get_ItemNames.php',
+            data: 'contractno=' + contractno,
+            success: function(response) {
+                console.log(response);
+                $('#Items' + counter).html(response);
+            },
+        });
+        // Show ItmeName According to Selected ContractNo End
+
+    }
+
+    function delField() {
+        $("#GoodIssueNote_row_" + counter).remove();
+        counter--;
+    }
     </script>
+    s
+
+    <script>
+    // Show ItmeName According to Selected ContractNo Start 
+    $('#contractno').on('change', function() {
+        var contractno = $('#contractno').val();
+
+        $.ajax({
+            type: 'POST',
+            url: 'getStockOfContract.php',
+            data: 'contractNo=' + contractno,
+            success: function(response) {
+                console.log("stock: " + response);
+                // $('#Items' + counter).html(response);
+            },
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: 'get_ItemNames.php',
+            data: 'contractno=' + contractno,
+            success: function(response) {
+                console.log(response);
+                $('#Items' + counter).html(response);
+            },
+        });
+    })
+    // Show ItmeName According to Selected ContractNo End
+    </script>
+
+    <script>
+    // CHECK QUANTITY ON SELECTED ItemName Start
+    // function sum(counter) {
+    //     console.log(counter);
+    //     var items = document.getElementsByName('Items[]')[counter].value;
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: 'get_CheckQuantity.php',
+    //         data: 'items =' + items,
+    //         success: function(response) {
+    //             console.log(response);
+
+    //         },
+    //     });
+    // }
+    // CHECK QUANTITY ON SELECTED ItemName End
+    </script>
+
 </body>
 
 </html>

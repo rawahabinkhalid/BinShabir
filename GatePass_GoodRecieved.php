@@ -28,19 +28,19 @@ include_once('conn.php');
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
 
     <style>
-        label {
-            font-weight: bold;
-        }
+    label {
+        font-weight: bold;
+    }
 
-        .itembutton {
+    .itembutton {
 
-            font-size: 18px;
-            color: #9C4BEB;
-            background: transparent;
-            border: 2px solid #9C4BEB;
-            border-radius: 15px 15px 15px 15px;
-            padding: 4px;
-        }
+        font-size: 18px;
+        color: #9C4BEB;
+        background: transparent;
+        border: 2px solid #9C4BEB;
+        border-radius: 15px 15px 15px 15px;
+        padding: 4px;
+    }
     </style>
 </head>
 
@@ -79,9 +79,20 @@ include_once('conn.php');
                     <br>
                     <div class="row">
                         <div class="col-md-3">
+                            <label>Category Type</label>
+                            <select name="categorytype" id="categorytype" class="form-control">
+                                <option selected disabled>Select Category</option>
+                                <option value="Bin Shabir">Bin Shabir</option>
+                                <option value="ToolMill">ToolMill</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-3" id="DebtorCreditor" style="display:none">
                             <div class="form-group">
                                 <label>Contract #:</label>
-                                <select name="contractno" id="contractno" class="form-control">
+                                <select name="contractno" class="form-control contractno">
                                     <option selected disabled>Select Contract</option>
                                     <optgroup class="bg-success" label="Debtor/AccountReceivable/Sales"></optgroup>
                                     <?php
@@ -104,8 +115,16 @@ include_once('conn.php');
                                         }
                                     }
                                     ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3" id="Toolmill" style="display:none">
+                            <div class="form-group">
+                                <label>Contract #:</label>
+                                <select name="contractno" class="form-control contractno">
+                                    <option selected disabled>Select Contract</option>
 
-                                    <optgroup class="bg-success" label="Sales"></optgroup>
+                                    <optgroup class="bg-success" label="ToolMill/Sales"></optgroup>
                                     <?php
                                     $sql = 'SELECT * FROM toolmillcontract';
                                     $result = mysqli_query($conn, $sql);
@@ -146,19 +165,19 @@ include_once('conn.php');
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Date:</label>
+                                <label>Date: <span class="text-danger">*</span></label>
                                 <input type="date" name="date" id="" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Time In:</label>
+                                <label>Time In: <span class="text-danger">*</span></label>
                                 <input type="time" name="timein" id="" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Vehicle No:</label>
+                                <label>Vehicle No: <span class="text-danger">*</span></label>
                                 <input type="text" name="vehicleNo" class="form-control" required>
                             </div>
                         </div>
@@ -169,17 +188,17 @@ include_once('conn.php');
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label>Type:</label>
+                                <label>Type: <span class="text-danger">*</span></label>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Items:</label>
+                                <label>Items: <span class="text-danger">*</span></label>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label>Description:</label>
+                                <label>Description: <span class="text-danger">*</span></label>
                             </div>
                         </div>
                         <!-- <div class="col-md-1">
@@ -189,22 +208,22 @@ include_once('conn.php');
                         </div> -->
                         <div class="col-md-1">
                             <div class="form-group">
-                                <label>Pack Size & Type:</label>
+                                <label>Pack Size & Type: <span class="text-danger">*</span></label>
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="form-group">
-                                <label>Quantity:</label>
+                                <label>Quantity: <span class="text-danger">*</span></label>
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="form-group">
-                                <label>Ex Weight:</label>
+                                <label>Ex Weight: <span class="text-danger">*</span></label>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label>Weight :</label>
+                                <label>Weight : <span class="text-danger">*</span></label>
                             </div>
                         </div>
                     </div>
@@ -262,10 +281,12 @@ include_once('conn.php');
                     <div class="row">
                         <div class="col-3"></div>
                         <div class="col-2">
-                            <input name="addFieldButton" type="button" value="+Add Item" onclick="addField();" class="form-control itembutton">
+                            <input name="addFieldButton" type="button" value="+Add Item" onclick="addField();"
+                                class="form-control itembutton">
                         </div>
                         <div class="col-3">
-                            <input name="delFieldButton" type="button" value="+Remove Item" onclick="delField();" class="form-control itembutton">
+                            <input name="delFieldButton" type="button" value="+Remove Item" onclick="delField();"
+                                class="form-control itembutton">
                         </div>
                     </div><br>
                     <div id="desc_rice">
@@ -274,61 +295,71 @@ include_once('conn.php');
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>CHALKY:</label>
-                                    <input type="number" name="chalky" class="form-control">
+                                    <input onkeypress="return check(event,value)" type="text" name="chalky"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>B-1:</label>
-                                    <input type="number" name="b1" class="form-control">
+                                    <input onkeypress="return check(event,value)" type="text" name="b1"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>B-2:</label>
-                                    <input type="number" name="b2" class="form-control">
+                                    <input onkeypress="return check(event,value)" type="text" name="b2"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>B-3:</label>
-                                    <input type="number" name="b3" class="form-control">
+                                    <input onkeypress="return check(event,value)" type="text" name="b3"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>D/D:</label>
-                                    <input type="number" name="dd" class="form-control">
+                                    <input onkeypress="return check(event,value)" type="text" name="dd"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>SHV:</label>
-                                    <input type="number" name="shv" class="form-control">
+                                    <input onkeypress="return check(event,value)" type="text" name="shv"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>RED STRIPE/UM:</label>
-                                    <input type="number" name="redstripe" class="form-control">
+                                    <input onkeypress="return check(event,value)" type="text" name="redstripe"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>CHOBA:</label>
-                                    <input type="number" name="choba" class="form-control">
+                                    <input onkeypress="return check(event,value)" type="text" name="choba"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>OV:</label>
-                                    <input type="number" name="ov" class="form-control">
+                                    <input onkeypress="return check(event,value)" type="text" name="ov"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>MOISTURE:</label>
-                                    <input type="number" name="moisture" class="form-control">
+                                    <input onkeypress="return check(event,value)" type="text" name="moisture"
+                                        class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -375,151 +406,188 @@ include_once('conn.php');
     <script src="assets/js/app.js"></script>
 
     <script>
-        $('#headername').html("Gate Passes");
+    $('#headername').html("Gate Passes");
     </script>
+
+    <!-- categorytye change and show contractNo accordingly start -->
+    <script>
+    $('#categorytype').on('change', function() {
+        var type = $(this).val();
+        console.log(type);
+
+        if (type == "Bin Shabir") {
+            $('#DebtorCreditor').show();
+            $('#Toolmill').hide();
+        } 
+        else{
+            $('#Toolmill').show();
+            $('#DebtorCreditor').hide();
+            $('#partyname').val('');
+        }
+    })
+    </script>
+    <!-- categorytye change and show contractNo accordingly end -->
 
     <!-- script of add_Item_button/del_Item_button work -->
     <script>
-        counter = -1;
+    counter = -1;
 
-        function addField() {
-            counter++;
+    function addField() {
+        counter++;
 
-            var content = '';
-            content += '<div class="row" id="GoodReceiveNote_row_' + counter + '" name="GoodReceive_rows">';
-            content += '    <div class="col-md-2">';
-            content += '        <div class="form-group">';
-            content += '            <select class="form-control itemtype" name="type[]" id="typeSelect-' + counter + '" required>';
-            content += '                <option selected disabled>Select Type</option>';
-            content += '                <option value="Rice">Rice</option>';
-            content += '                <option value="Other">Other</option>';
-            content += '            </select>';
-            content += '        </div>';
-            content += '    </div>';
-            content += '    <div class="col-md-3" style="display:none" id="ItemVariety' + counter + '">';
-            content += '        <div class="form-group">';
-            content += '            <select class="form-control" name="Items[]">';
-            content += '                <option selected disabled>Select Variety</option>';
-            content += '                <option value="1121 Kainaat">1121 Kainaat</option>';
-            content += '                <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab </option>';
-            content += '                <option value="Rice 386 Basmati">Rice 386 Basmati</option>';
-            content += '                <option value="Rice 386 Supri">Rice 386 Supri</option>';
-            content += '                <option value="Super Fine">Super Fine</option>';
-            content += '                <option value="Irri 9-C9">Irri 9-C9</option>';
-            content += '                <option value="Irri 6">Irri 6</option>';
-            content += '                <option value="D-98">D-98</option>';
-            content += '                <option value="KS-282">KS-282</option>';
-            content += '            </select>';
-            content += '        </div>';
-            content += '    </div>';
-            content += '    <div class="col-md-3" style="display:none" id="ItemOther' + counter + '">';
-            content += '        <div class="form-group">';
-            content += '            <input type="text" name="ItemsOther[]" class="form-control">';
-            content += '        </div>';
-            content += '    </div>';
-            content += '    <div class="col-md-2">';
-            content += '        <div class="form-group">';
-            content += '            <input type="text" name="Description[]" class="form-control" required>';
-            content += '        </div>';
-            content += '    </div>';
-            // content += '    <div class="col-md-1">';
-            // content += '        <div class="form-group">';
-            // content += '            <input type="text" name="LabNo[]" class="form-control" required>';
-            // content += '        </div>';
-            // content += '    </div>';
-            content += '    <div class="col-md-1">';
-            content += '        <div class="form-group">';
-            content += '            <input type="text" name="Packsize[]" class="form-control" required>';
-            content += '        </div>';
-            content += '    </div>';
-            content += '    <div class="col-md-1">';
-            content += '        <div class="form-group">';
-            content += '            <input type="text" name="Quantity[]" class="form-control" required>';
-            content += '        </div>';
-            content += '    </div>';
-            content += '    <div class="col-md-1">';
-            content += '        <div class="form-group">';
-            content += '            <input type="text" name="ExWeight[]" class="form-control" required>';
-            content += '        </div>';
-            content += '    </div>';
-            content += '    <div class="col-md-2">';
-            content += '        <div class="form-group">';
-            content += '            <input type="text" name="Weight[]" class="form-control" required>';
-            content += '        </div>';
-            content += '    </div>';
-            content += '</div>';
-            $('#items').append(content);
-        }
+        var content = '';
+        content += '<div class="row" id="GoodReceiveNote_row_' + counter + '" name="GoodReceive_rows">';
+        content += '    <div class="col-md-2">';
+        content += '        <div class="form-group">';
+        content += '            <select class="form-control itemtype" name="type[]" id="typeSelect-' + counter +
+            '" required>';
+        content += '                <option selected disabled>Select Type</option>';
+        content += '                <option value="Rice">Rice</option>';
+        content += '                <option value="Other">Other</option>';
+        content += '            </select>';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-3" style="display:none" id="ItemVariety' + counter + '" required>';
+        content += '        <div class="form-group">';
+        content += '            <select class="form-control" name="Items[]">';
+        content += '                <option selected disabled>Select Variety</option>';
+        content += '                <option value="1121 Kainaat">1121 Kainaat</option>';
+        content +=
+            '                <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab </option>';
+        content += '                <option value="Rice 386 Basmati">Rice 386 Basmati</option>';
+        content += '                <option value="Rice 386 Supri">Rice 386 Supri</option>';
+        content += '                <option value="Super Fine">Super Fine</option>';
+        content += '                <option value="Irri 9-C9">Irri 9-C9</option>';
+        content += '                <option value="Irri 6">Irri 6</option>';
+        content += '                <option value="D-98">D-98</option>';
+        content += '                <option value="KS-282">KS-282</option>';
+        content += '            </select>';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-3" style="display:none" id="ItemOther' + counter + '" >';
+        content += '        <div class="form-group">';
+        content += '            <input type="text" name="ItemsOther[]" class="form-control">';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-2">';
+        content += '        <div class="form-group">';
+        content += '            <input type="text" name="Description[]" class="form-control" required>';
+        content += '        </div>';
+        content += '    </div>';
+        // content += '    <div class="col-md-1">';
+        // content += '        <div class="form-group">';
+        // content += '            <input type="text" name="LabNo[]" class="form-control" required>';
+        // content += '        </div>';
+        // content += '    </div>';
+        content += '    <div class="col-md-1">';
+        content += '        <div class="form-group">';
+        content += '            <input type="text" name="Packsize[]" class="form-control" required>';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-1">';
+        content += '        <div class="form-group">';
+        content += '            <input type="text" name="Quantity[]" class="form-control" required>';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-1">';
+        content += '        <div class="form-group">';
+        content += '            <input type="text" name="ExWeight[]" class="form-control" required>';
+        content += '        </div>';
+        content += '    </div>';
+        content += '    <div class="col-md-2">';
+        content += '        <div class="form-group">';
+        content += '            <input type="text" name="Weight[]" class="form-control" required>';
+        content += '        </div>';
+        content += '    </div>';
+        content += '</div>';
+        $('#items').append(content);
+    }
 
-        function delField() {
-            $("#GoodReceiveNote_row_" + counter).remove();
-            counter--;
-        }
+    function delField() {
+        $("#GoodReceiveNote_row_" + counter).remove();
+        counter--;
+    }
     </script>
 
 
-    <!-- change type and show items start (DELIGATE FUNCTION) -->
+    <!-- change type and show (items) start (DELIGATE FUNCTION) -->
     <script>
-        $(document).delegate(".itemtype", "change", function() {
-            var value = $(this).val();
-            // alert(value);
-            var elemId = $(this).attr('id');
-            var counterId = elemId.split("-")[1];
-            // alert(counterId);
-            if (value == "Rice") {
-                $("#ItemVariety" + counterId).show();
-                $("#ItemOther" + counterId).hide();
+    $(document).delegate(".itemtype", "change", function() {
+        var value = $(this).val();
+        // alert(value);
+        var elemId = $(this).attr('id');
+        var counterId = elemId.split("-")[1];
+        // alert(counterId);
+        if (value == "Rice") {
+            $("#ItemVariety" + counterId).show();
+            $("#ItemOther" + counterId).hide();
 
-            } else {
-                $("#ItemOther" + counterId).show();
-                $("#ItemVariety" + counterId).hide();
+        } else {
+            $("#ItemOther" + counterId).show();
+            $("#ItemVariety" + counterId).hide();
 
-            }
+        }
+    });
+    </script>
+    <!-- change type and show (items) end -->
+
+
+    <script>
+    $('.contractno').on('change', function() {
+        var contractno = $(this).val();
+        // alert(contractno);
+        $.ajax({
+            type: 'POST',
+            url: 'get_partyname_itemname.php',
+            data: 'contractno=' + contractno,
+            success: function(response) {
+                let obj = JSON.parse(response);
+                $('#partyname').val(obj.PartyName);
+            },
         });
+    })
     </script>
-    <!-- change type and show items end -->
-
 
     <script>
-        $('#contractno').on('change', function() {
-            var contractno = $(this).val();
-            // alert(contractno);
-            $.ajax({
-                type: 'POST',
-                url: 'get_partyname_itemname.php',
-                data: 'contractno=' + contractno,
-                success: function(response) {
-                    let obj = JSON.parse(response);
-                    $('#partyname').val(obj.PartyName);
-                },
-            });
-        })
+    $('#desc_rice').hide();
+    $(document).on('change', '.itemtype', function() {
+        console.log($(this).val())
+        var all_types_selected = $('.itemtype').map((_, el) => el.value).get()
+        if (all_types_selected.includes("Rice")) {
+            $('#desc_rice').show();
+        } else {
+            $('#desc_rice').hide();
+            document.getElementsByName("chalky")[0].value = "";
+            document.getElementsByName("b1")[0].value = "";
+            document.getElementsByName("b2")[0].value = "";
+            document.getElementsByName("b3")[0].value = "";
+            document.getElementsByName("dd")[0].value = "";
+            document.getElementsByName("shv")[0].value = "";
+            document.getElementsByName("redstripe")[0].value = "";
+            document.getElementsByName("choba")[0].value = "";
+            document.getElementsByName("ov")[0].value = "";
+            document.getElementsByName("moisture")[0].value = "";
+            document.getElementsByName("cooking")[0].value = "";
+        }
+
+
+    })
     </script>
+
+
+    <!-- only number and float value accept in input box start -->
     <script>
-        $('#desc_rice').hide();
-        $(document).on('change', '.itemtype', function() {
-            console.log($(this).val())
-            var all_types_selected = $('.itemtype').map((_, el) => el.value).get()
-            if (all_types_selected.includes("Rice")) {
-                $('#desc_rice').show();
-            } else {
-                $('#desc_rice').hide();
-                document.getElementsByName("chalky")[0].value = "";
-                document.getElementsByName("b1")[0].value = "";
-                document.getElementsByName("b2")[0].value = "";
-                document.getElementsByName("b3")[0].value = "";
-                document.getElementsByName("dd")[0].value = "";
-                document.getElementsByName("shv")[0].value = "";
-                document.getElementsByName("redstripe")[0].value = "";
-                document.getElementsByName("choba")[0].value = "";
-                document.getElementsByName("ov")[0].value = "";
-                document.getElementsByName("moisture")[0].value = "";
-                document.getElementsByName("cooking")[0].value = "";
-            }
-
-
-        })
+    function check(e, value) {
+        //Check Charater
+        var unicode = e.charCode ? e.charCode : e.keyCode;
+        if (value.indexOf(".") != -1)
+            if (unicode == 46) return false;
+        if (unicode != 8)
+            if ((unicode < 48 || unicode > 57) && unicode != 46) return false;
+    }
     </script>
+    <!-- only number and float value accept in input box end -->
+
 </body>
 
 </html>

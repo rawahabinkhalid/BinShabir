@@ -27,9 +27,9 @@ include_once('conn.php');
     <link href="assets/css/metisMenu.min.css" rel="stylesheet" type="text/css">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
     <style>
-        label {
-            font-weight: bold;
-        }
+    label {
+        font-weight: bold;
+    }
     </style>
 </head>
 
@@ -139,13 +139,15 @@ include_once('conn.php');
                             <label>Date :</label>
                             <input class="form-control" type="date" name="date">
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2" id="grn">
                             <label>GRN# :</label>
-                            <input class="form-control" type="text" name="GRN">
+                            <select class="form-control" name="GRN" id="GRN">
+                                <option selected disabled>Select GRN No</option>
+                            </select>
                         </div>
                         <div class="col-md-2">
                             <label>Vehicle# :</label>
-                            <input class="form-control" type="text" name="vehicle">
+                            <input class="form-control" type="text" name="vehicle" id="vehicle" value="" readonly>
                         </div>
                         <div class="col-md-6">
                             <label>Description :</label>
@@ -260,109 +262,150 @@ include_once('conn.php');
     <script src="assets/js/app.js"></script>
 
     <script>
-        $('#headername').html("Production");
+    $('#headername').html("Production");
     </script>
 
     <script>
-        $('#totalgrossweight').on('change', function() {
-            calculateNetWeight();
-        })
-        $('#totalbardanaweight').on('change', function() {
-            calculateNetWeight();
-        })
-
+    $('#totalgrossweight').on('change', function() {
         calculateNetWeight();
+    })
+    $('#totalbardanaweight').on('change', function() {
+        calculateNetWeight();
+    })
 
-        function calculateNetWeight() {
-            var t_g_weight = $('#totalgrossweight').val();
-            var t_b_weight = $('#totalbardanaweight').val();
-            if (t_g_weight != '' && t_b_weight != '')
-                $('#nweight_processed').val(parseFloat(t_g_weight) - parseFloat(t_b_weight))
+    calculateNetWeight();
+
+    function calculateNetWeight() {
+        var t_g_weight = $('#totalgrossweight').val();
+        var t_b_weight = $('#totalbardanaweight').val();
+        if (t_g_weight != '' && t_b_weight != '')
+            $('#nweight_processed').val(parseFloat(t_g_weight) - parseFloat(t_b_weight))
+    }
+    </script>
+
+
+    <script>
+    $('#Nweight').on('change', function() {
+        var Nweight = parseFloat($(this).val());
+
+        if (parseFloat($('#totalgrossweightDefault').val()) > 0 && !isNaN(Nweight))
+            $('#totalgrossweight').val(parseFloat($('#totalgrossweightDefault').val()) + Nweight);
+        else if (!isNaN(Nweight))
+            $('#totalgrossweight').val(Nweight);
+        else
+            $('#totalgrossweight').val($('#totalgrossweightDefault').val());
+
+        var t_g_weight = $('#totalgrossweight').val();
+        var t_b_weight = $('#totalbardanaweight').val();
+        if (t_g_weight != '' && t_b_weight != '')
+            $('#nweight_processed').val(parseFloat(t_g_weight) - parseFloat(t_b_weight))
+    })
+
+    $('#bardanaweight').on('change', function() {
+        var bardanaweight = parseFloat($(this).val());
+
+        if (!isNaN(parseFloat($('#totalbardanaweightDefault').val())) && parseFloat($(
+                '#totalbardanaweightDefault').val()) > 0 && !isNaN(bardanaweight)) {
+            $('#totalbardanaweight').val(parseFloat($('#totalbardanaweightDefault').val()) + bardanaweight);
+        } else if (!isNaN(bardanaweight)) {
+            $('#totalbardanaweight').val(bardanaweight);
+        } else {
+            $('#totalbardanaweight').val($('#totalbardanaweightDefault').val());
         }
+
+        var t_g_weight = $('#totalgrossweight').val();
+        var t_b_weight = $('#totalbardanaweight').val();
+        if (t_g_weight != '' && t_b_weight != '')
+            $('#nweight_processed').val(parseFloat(t_g_weight) - parseFloat(t_b_weight))
+    })
     </script>
 
 
     <script>
-        $('#Nweight').on('change', function() {
-            var Nweight = parseFloat($(this).val());
+    $('#contractno').on('change', function() {
+        var contractno = $(this).val();
 
-            if (parseFloat($('#totalgrossweightDefault').val()) > 0 && !isNaN(Nweight))
-                $('#totalgrossweight').val(parseFloat($('#totalgrossweightDefault').val()) + Nweight);
-            else if (!isNaN(Nweight))
-                $('#totalgrossweight').val(Nweight);
-            else
-                $('#totalgrossweight').val($('#totalgrossweightDefault').val());
+        $.ajax({
+            type: 'POST',
+            url: 'get_partyname_itemname.php',
+            data: 'contractno=' + contractno,
+            success: function(response) {
+                console.log(response);
 
-            var t_g_weight = $('#totalgrossweight').val();
-            var t_b_weight = $('#totalbardanaweight').val();
-            if (t_g_weight != '' && t_b_weight != '')
-                $('#nweight_processed').val(parseFloat(t_g_weight) - parseFloat(t_b_weight))
-        })
+                var json_response = JSON.parse(response);
 
-        $('#bardanaweight').on('change', function() {
-            var bardanaweight = parseFloat($(this).val());
+                $('#partyname').val(json_response.PartyName);
+                $('#item_name').val(json_response.Variety);
+            },
+        });
 
-            if (!isNaN(parseFloat($('#totalbardanaweightDefault').val())) && parseFloat($(
-                    '#totalbardanaweightDefault').val()) > 0 && !isNaN(bardanaweight)) {
-                $('#totalbardanaweight').val(parseFloat($('#totalbardanaweightDefault').val()) + bardanaweight);
-            } else if (!isNaN(bardanaweight)) {
-                $('#totalbardanaweight').val(bardanaweight);
-            } else {
-                $('#totalbardanaweight').val($('#totalbardanaweightDefault').val());
-            }
+        refreshtotal();
+    })
 
-            var t_g_weight = $('#totalgrossweight').val();
-            var t_b_weight = $('#totalbardanaweight').val();
-            if (t_g_weight != '' && t_b_weight != '')
-                $('#nweight_processed').val(parseFloat(t_g_weight) - parseFloat(t_b_weight))
-        })
-    </script>
+    function refreshtotal() {
+        var contractno = $('#contractno').val();
 
-
-    <script>
-        $('#contractno').on('change', function() {
-            var contractno = $(this).val();
-
+        if (contractno != '') {
             $.ajax({
                 type: 'POST',
-                url: 'get_partyname_itemname.php',
+                url: 'Production_get_Partyname_Itemname.php',
                 data: 'contractno=' + contractno,
                 success: function(response) {
                     console.log(response);
 
                     var json_response = JSON.parse(response);
 
-                    $('#partyname').val(json_response.PartyName);
-                    $('#item_name').val(json_response.Variety);
+                    $('#totalgrossweight').val(json_response.NWeight)
+                    $('#totalgrossweightDefault').val(json_response.NWeight)
+                    $('#totalbardanaweight').val(json_response.BardanaWeight)
+                    $('#totalbardanaweightDefault').val(json_response.BardanaWeight)
+                    $('#nweight_processed').val(parseFloat(json_response.NWeight) - parseFloat(json_response
+                        .BardanaWeight))
                 },
             });
-
-            refreshtotal();
-        })
-
-        function refreshtotal() {
-            var contractno = $('#contractno').val();
-
-            if (contractno != '') {
-                $.ajax({
-                    type: 'POST',
-                    url: 'Production_get_Partyname_Itemname.php',
-                    data: 'contractno=' + contractno,
-                    success: function(response) {
-                        console.log(response);
-
-                        var json_response = JSON.parse(response);
-                        $('#totalgrossweight').val(json_response.NWeight)
-                        $('#totalgrossweightDefault').val(json_response.NWeight)
-                        $('#totalbardanaweight').val(json_response.BardanaWeight)
-                        $('#totalbardanaweightDefault').val(json_response.BardanaWeight)
-                        $('#nweight_processed').val(parseFloat(json_response.NWeight) - parseFloat(json_response
-                            .BardanaWeight))
-                    },
-                });
-            }
         }
+    }
     </script>
+
+    <!-- Show GRN# According to Selected ContractNo Start  -->
+    <script>
+    $('#contractno').on('change', function() {
+        var contractno = $(this).val();
+
+        $.ajax({
+            type: 'POST',
+            url: 'get_GRN_No.php',
+            data: 'contractno=' + contractno,
+            success: function(response) {
+                console.log(response);
+                $('#GRN').html(response);
+            },
+        });
+    })
+    </script>
+    <!-- Show GRN# According to Selected ContractNo End  -->
+
+    <!-- Show Vehicle# According to Selected GRN# Start  -->
+    <script>
+    $('#GRN').on('change', function() {
+        var grnno = $(this).val();
+        console.log(grnno);
+
+        $.ajax({
+            type: 'POST',
+            url: 'get_Vehicle_No.php',
+            data: 'grnno=' + grnno,
+            success: function(response) {
+                console.log(response);
+
+                var json_response = JSON.parse(response);
+                $('#vehicle').val(json_response);
+            },
+        });
+    })
+    </script>
+    <!-- Show Vehicle# According to Selected GRN# End  -->
+    
 
 </body>
 

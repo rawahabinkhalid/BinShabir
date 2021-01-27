@@ -35,6 +35,10 @@ include_once('conn.php');
     .table-bordered th {
         border-color: black !important;
     }
+
+    table tr th {
+        background-color: #33F3FF;
+    }
     </style>
 </head>
 
@@ -139,8 +143,7 @@ include_once('conn.php');
                                     <tr>
                                         <th scope="col">S.No</th>
                                         <th scope="col">Items</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Lot No. / Contract No.</th>
+                                        <th scope="col">Description</th> 
                                         <th scope="col">Pack Size & Type</th>
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Weight</th>

@@ -7,6 +7,7 @@ $quality = $_POST['quality'];
 $variety = $_POST['variety'];
 
 $ourreference = $_POST['ourreference'];
+$brokenpercentage = $_POST['brokenpercentage'];
 $brand = $_POST['brand'];
 $quantity = $_POST['quantity'];
 $moisture = $_POST['moisture'];
@@ -29,10 +30,9 @@ if(isset($_POST['contracttype']) && $_POST['contracttype'] == "Debtor/AccountRec
     // Deptor Contract Form Field
     $salecustomername = $_POST['salecustomername'];
     $salecustomerSoNum = $_POST['salecustomerSoNum'];
-    $salesordernum = $_POST['salesordernum'];
 
     $sql = 'UPDATE debtor SET `ContractType`= "'.$contracttype.'", `SaleCustomerName` = "'.$salecustomername.'", `SaleCustomerSoNum` = "'.$salecustomerSoNum.'", `ContractNo` = "'.$ContractNo.'", `Quality` = "'.$quality.'", `Variety` = "'.$variety.'",
-                                `OurReference` = "'.$ourreference.'", `SaleOrderNum` = "'.$salesordernum.'", `Brand` = "'.$brand.'", `Quantity` = "'.$quantity.'",
+                                `OurReference` = "'.$ourreference.'", `BrokenPercentage` = "'.$brokenpercentage.'", `Brand` = "'.$brand.'", `Quantity` = "'.$quantity.'",
                                 `Moisture` = "'.$moisture.'", `PaymentTerms` = "'.$paymentterms.'", `Price` = "'.$price.'", `ChalkyImmatureKernels` = "'.$chalkyimmaturekernels.'", `PackingWeight` = "'.$packingweight.'", `Tags` = "'.$tags.'", `LoadingBags` = "'.$loadingbags.'",
                                 `InspectionDate` = "'.$inspectiondate.'", `EmptyBagsLoading` = "'.$emptybagsloading.'", `Fumigation` = "'.$fumigation.'", `Silicagel` = "'.$silicagel.'", `KraftPaper` = "'.$kraftpaper.'", `SpecialInstruction` = "'.$specialinstruction.'",
                                 `ProcessingMill` = "'.$processingmill.'" WHERE ContractNo = '.$ContractNo;
@@ -52,10 +52,9 @@ if(isset($_POST['contracttype']) && $_POST['contracttype'] == "Debtor/AccountRec
     // Creditor Contract Form Field
     $purchasesuppliername = $_POST['purchasesuppliername'];
     $purchasesupplierPoNum = $_POST['purchasesupplierPoNum'];
-    $purchaseordernum = $_POST['purchaseordernum'];
 
     $sql = 'UPDATE creditor SET `ContractType`= "'.$contracttype.'", `PurchaseSupplierName` = "'.$purchasesuppliername.'", `PurchaseSupplierSoNum` = "'.$purchasesupplierPoNum.'", `ContractNo` = "'.$ContractNo.'", `Quality` = "'.$quality.'", `Variety` = "'.$variety.'",
-                                `OurReference` = "'.$ourreference.'", `PurchaseOrderNum` = "'.$purchaseordernum.'", `Brand` = "'.$brand.'", `Quantity` = "'.$quantity.'",
+                                `OurReference` = "'.$ourreference.'", `BrokenPercentage` = "'.$brokenpercentage.'", `Brand` = "'.$brand.'", `Quantity` = "'.$quantity.'",
                                 `Moisture` = "'.$moisture.'", `PaymentTerms` = "'.$paymentterms.'", `Price` = "'.$price.'", `ChalkyImmatureKernels` = "'.$chalkyimmaturekernels.'", `PackingWeight` = "'.$packingweight.'", `Tags` = "'.$tags.'", `LoadingBags` = "'.$loadingbags.'",
                                 `InspectionDate` = "'.$inspectiondate.'", `EmptyBagsLoading` = "'.$emptybagsloading.'", `Fumigation` = "'.$fumigation.'", `Silicagel` = "'.$silicagel.'", `KraftPaper` = "'.$kraftpaper.'", `SpecialInstruction` = "'.$specialinstruction.'",
                                 `ProcessingMill` = "'.$processingmill.'" WHERE ContractNo = '.$ContractNo;
@@ -75,10 +74,9 @@ if(isset($_POST['contracttype']) && $_POST['contracttype'] == "Debtor/AccountRec
     // Toolmill Contract Form Field
     $salecustomername_toolmill = $_POST['salecustomername_toolmill'];
     $salecustomerSoNum_toolmill = $_POST['salecustomerSoNum_toolmill'];
-    $salesordernum_toolmill = $_POST['salesordernum_toolmill'];
 
     $sql = 'UPDATE toolmillcontract SET `ContractType`= "'.$contracttype.'", `SaleCustomerName` = "'.$salecustomername_toolmill.'", `SaleCustomerSoNum` = "'.$salecustomerSoNum_toolmill.'", `ContractNo` = "'.$ContractNo.'", `Quality` = "'.$quality.'", `Variety` = "'.$variety.'",
-                                `OurReference` = "'.$ourreference.'", `SaleOrderNum` = "'.$salesordernum_toolmill.'", `Brand` = "'.$brand.'", `Quantity` = "'.$quantity.'",
+                                `OurReference` = "'.$ourreference.'", `BrokenPercentage` = "'.$brokenpercentage.'", `Brand` = "'.$brand.'", `Quantity` = "'.$quantity.'",
                                 `Moisture` = "'.$moisture.'", `PaymentTerms` = "'.$paymentterms.'", `Price` = "'.$price.'", `ChalkyImmatureKernels` = "'.$chalkyimmaturekernels.'", `PackingWeight` = "'.$packingweight.'", `Tags` = "'.$tags.'", `LoadingBags` = "'.$loadingbags.'",
                                 `InspectionDate` = "'.$inspectiondate.'", `EmptyBagsLoading` = "'.$emptybagsloading.'", `Fumigation` = "'.$fumigation.'", `Silicagel` = "'.$silicagel.'", `KraftPaper` = "'.$kraftpaper.'", `SpecialInstruction` = "'.$specialinstruction.'",
                                 `ProcessingMill` = "'.$processingmill.'" WHERE ContractNo = '.$ContractNo;

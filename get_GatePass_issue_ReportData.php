@@ -29,10 +29,9 @@ if(mysqli_num_rows($result) > 0) {
 
         $data_tbody .= '
             <tr>
-                <th scope="row">'.$count++.'</th>
+                <td>'.$count++.'</td>
                 <td>'.$row['Items'].'</td>
                 <td>'.$row['Description'].'</td>
-                <td>'.$row['LabNo'].'</td>
                 <td>'.$row['Packsize'].'</td>
                 <td>'.$row['Quantity'].'</td>
                 <td>'.$row['Weight'].'</td>
@@ -42,7 +41,6 @@ if(mysqli_num_rows($result) > 0) {
     }
     $data_tfoot .= '
         <tr>
-            <th scope="row" colspan="1"></th>
             <td></td>
             <td></td>
             <td></td>
@@ -51,7 +49,6 @@ if(mysqli_num_rows($result) > 0) {
             <td><b>Total Weight</b></td>
         </tr>
         <tr>
-            <th scope="row" colspan="1"></th>
             <td></td>
             <td></td>
             <td></td>

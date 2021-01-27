@@ -35,7 +35,7 @@ if (mysqli_num_rows($result) > 0) {
                 <td>' . $row['ItemName'] . '</td>
                 <td>' . $row['Bags'] . '</td>
                 <td>' . $row['Packing'] . '</td>
-                <td>' . $row['NWeight'] . '</td>
+                <td>' . number_format($row['NWeight']). '</td>
             </tr>';
 
         $grossweight = floatval($grossweight) + floatval($row['NWeight']);
@@ -47,19 +47,19 @@ if (mysqli_num_rows($result) > 0) {
             <td scope="row" colspan="5"><b>Gross Weight</b></td>
             <td></td>
             <td></td>
-            <td>' . $grossweight . '</td>
+            <td>' . number_format($grossweight , 2) . '</td>
         </tr>
         <tr>
             <td scope="row" colspan="5"><b>Less: Bardana Weight</b></td>
             <td></td>
             <td></td>
-            <td>' . $bardanaweight . '</td>
+            <td>' . number_format($bardanaweight , 2) . '</td>
         </tr>
         <tr>
             <td scope="row" colspan="5"><b>Net Weight Processed</b></td>
             <td>' . $totalBags . '</td>
             <td></td>
-            <td>' . ($grossweight - $bardanaweight) . '</td>
+            <td>' .number_format(($grossweight - $bardanaweight) , 2) . '</td>
         </tr>';
 
     $jsonObj = new \StdClass;
@@ -100,21 +100,21 @@ if (mysqli_num_rows($result1) > 0) {
             <td></td>
             <td></td>
             <td></td>
-            <td>' . $dischargeweight . '</td>
+            <td>' . number_format($dischargeweight , 2) . '</td>
         </tr>
         <tr>
             <td scope="row" colspan="2"><b>Estimated Shortage</b></td>
             <td>' . number_format((100 - $percentage), 2) . '%</td>
             <td></td>
             <td></td>
-            <td>' . $estimatedshortage . '</td>
+            <td>' . number_format($estimatedshortage , 2) . '</td>
         </tr>
         <tr>
             <td scope="row" colspan="2"></td>
             <td>100%</td>
             <td>' . $m_totalBags . '</td>
             <td></td>
-            <td>' . ($dischargeweight + $estimatedshortage) . '</td>
+            <td>' . number_format(($dischargeweight + $estimatedshortage) , 2) . '</td>
         </tr>';
 
     $jsonObj->tbody1 = $data_tbody1;

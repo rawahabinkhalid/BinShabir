@@ -79,6 +79,17 @@ include_once('conn.php');
                         <h3><b><u>GOODS RECIEVED NOTE</u></b></h3>
                     </div>
                     <div class="row">
+                        <div class="col-md-4">
+                            <label>Search By :</label>
+                            <select class="form-control" name="searchby" id="searchby" required>
+                                <option selected disabled value="">Select Search by</option>
+                                <option value="GRN">GRN</option>
+                                <option value="ContractNo">ContractNo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" id="GRN_Row" style="display:none;">
                         <div class="col-md-4" id="name_select">
                             <div class="form-group">
                                 <label>GRN NO # :</label>
@@ -104,6 +115,34 @@ include_once('conn.php');
                         </div>
                         <!-- (end) -->
                     </div>
+                    <div class="row" id="ContractNo_Row" style="display:none">
+                        <div class="col-md-4" id="name_select">
+                            <div class="form-group">
+                                <label>Contract NO # :</label>
+                                <select class="form-control" name="contractNo" id="contractNo" required>
+                                    <option selected disabled value="">Select Contract No</option>
+                                    <?php
+                                        $sql = 'SELECT DISTINCT(ContractNo) AS contractno FROM gatepass_g_recieved';
+                                        $result = mysqli_query($conn, $sql);
+                                        while($row = mysqli_fetch_assoc($result)){
+                                            echo'
+                                            <option value="'.$row['contractno'].'">'.$row['contractno'].'</option>';
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- print ke time pr ye visible hoga Contract NO (start) -->
+                        <!-- <div class="col-md-4" id="print_contractno" style="display: none">
+                            <div class="form-group">
+                                <label>Contract No #:</label>
+                                <input type="text" name="contract_no" id="contract_no" value="" class="form-control">
+                            </div>
+                        </div> -->
+                        <!-- (end) -->
+                    </div>
+
+                    <!-- showData for GRN No # Wise Report Start -->
                     <div class="row" id="goodrecievednoteReport" style="display:none">
                         <div class="col-md-3">
                             <div class="form-group">
@@ -228,6 +267,71 @@ include_once('conn.php');
                                     onclick="printpage()" />
                             </div>
                         </div>
+                        <!-- showData for GRN No # Wise Report end -->
+                    </div>
+
+                    <!-- showData for Contract No # Wise Report Start -->
+                    <div class="row" id="goodrecievednoteReport_ContractNo" style="display:none">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Contract No# :</label>
+                                <input type="text" name="contractno" id="contractno_contractwise" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Party Name:</label>
+                                <input type="text" name="partyname" id="partyname_contractwise" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Date:</label>
+                                <input type="date" name="date" id="date_contractwise" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Time In:</label>
+                                <input type="time" name="timein" id="timein_contractwise" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Vehicle No:</label>
+                                <input type="text" name="vehicleNo" id="vehicleNo_contractwise" value="" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">S.No</th>
+                                        <th scope="col">GRN No</th>
+                                        <th scope="col">Items</th>
+                                        <th scope="col">Description</th>
+                                        <!-- <th scope="col">Lot No. / Contract No.</th> -->
+                                        <th scope="col">Pack Size & Type</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Ex Weight</th>
+                                        <th scope="col">Weight</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="goodrecieveddata_contractNo">
+
+                                </tbody>
+                                <tfoot id="goodrecieveddata_tfoot_contractNo"></tfoot>
+                            </table>
+                        </div>
+                        <div class="col-md-4">
+                            <br>
+                            <div class="form-group">
+                                <input class="btn btn-success" id="printpagebutton" type="button" value="Print"
+                                    onclick="printpage()" />
+                            </div>
+                        </div>
+                        <!-- showData for Contract No # Wise Report end -->
                     </div>
                 </form>
             </div>
@@ -263,6 +367,26 @@ include_once('conn.php');
     </script>
 
     <script>
+    $('#searchby').on('change', function() {
+        var searchtype = $(this).val();
+        // console.log(searchtype);
+
+        if (searchtype == "GRN") {
+            $('#GRN_Row').show();
+            $('#ContractNo_Row').hide();
+            $('#goodrecievednoteReport_ContractNo').hide();
+
+        } else {
+            $('#ContractNo_Row').show();
+            $('#GRN_Row').hide();
+            $('#goodrecievednoteReport').hide();
+
+        }
+    })
+    </script>
+
+    <!-- GRN WISE SEARCHING Start -->
+    <script>
     $('#GRNNo').on('change', function() {
         var GRNNo = $(this).val();
 
@@ -272,7 +396,7 @@ include_once('conn.php');
         if (GRNNo !== null && GRNNo !== '') {
             $.ajax({
                 type: 'POST',
-                url: 'get_GatePass_recieved_ReportData.php',
+                url: 'get_GatePass_GRN_Wise_ReportData.php',
                 data: 'GRN_NO=' + GRNNo,
                 success: function(response) {
                     console.log(response);
@@ -284,7 +408,7 @@ include_once('conn.php');
                     $('#goodrecieveddata').html(json_response.tbody);
                     $('#goodrecieveddata_tfoot').html(json_response.tfoot);
 
-                    $('#contractno').val(json_response.contract_no);                    
+                    $('#contractno').val(json_response.contract_no);
                     $('#partyname').val(json_response.party_name);
                     $('#date').val(json_response.date);
                     $('#timein').val(json_response.timein);
@@ -307,6 +431,46 @@ include_once('conn.php');
         }
     })
     </script>
+    <!-- GRN WISE SEARCHING end -->
+
+
+    <!-- CONTRACTNO WISE SEARCHING start -->
+    <script>
+    $('#contractNo').on('change', function() {
+        var ContractNo = $(this).val();
+
+        $('#goodrecieveddata_contractNo').html('');
+        $('#goodrecieveddata_tfoot_contractNo').html('');
+
+        if (ContractNo !== null && ContractNo !== '') {
+            $.ajax({
+                type: 'POST',
+                url: 'get_GatePass_ContractNo_Wise_ReportData.php',
+                data: 'Contract_No=' + ContractNo,
+                success: function(response) {
+                    console.log(response);
+
+                    // $('#contract_no').val(ContractNo);
+
+                    var json_response = JSON.parse(response);
+
+                    $('#goodrecieveddata_contractNo').html(json_response.tbody);
+                    $('#goodrecieveddata_tfoot_contractNo').html(json_response.tfoot);
+
+                    $('#contractno_contractwise').val(json_response.contract_no);
+                    $('#partyname_contractwise').val(json_response.party_name);
+                    $('#date_contractwise').val(json_response.date);
+                    $('#timein_contractwise').val(json_response.timein);
+                    $('#vehicleNo_contractwise').val(json_response.vehicleno);
+
+                    $('#goodrecievednoteReport_ContractNo').show();
+                },
+            });
+        }
+    })
+    </script>
+    <!-- CONTRACTNO WISE SEARCHING end -->
+
 
     <!-- Print Document -->
     <script type="text/javascript">

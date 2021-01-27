@@ -29,8 +29,8 @@ include_once('conn.php');
                     <div class="card-body">
                         <div class="px-3">
                             <div class="auth-logo-box mt-5">
-                                <a href="" class="logo logo-admin"><img src="logo/ricemilllogo.png" alt="logo" class=""
-                                        style="width: 100px;">
+                                <a href="" class="logo logo-admin"><img src="logo/ricemilllogo2.png" alt="logo" class=""
+                                        style="width: 260px;">
                                 </a>
                             </div>
                             <!--end auth-logo-box-->

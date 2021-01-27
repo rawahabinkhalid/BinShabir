@@ -1,6 +1,6 @@
 <div class="topbar">
     <!-- LOGO -->
-    <div class="topbar-left"><a href="dashboard.php" class="logo"> <img src="logo/ricemilllogo1.png" style="width:160px" alt="logo-large"></span></a></div>
+    <div class="topbar-left"><a href="dashboard.php" class="logo"> <img src="logo/ricemilllogo2.png" style="width:160px" alt="logo-large"></span></a></div>
     <!--end logo-->
     <!-- Navbar -->
     <nav class="navbar-custom">

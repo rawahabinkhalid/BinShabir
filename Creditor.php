@@ -76,7 +76,7 @@ include_once('conn.php');
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Purchase Supplier Name:</label>
+                                <label>Purchase Supplier Name: <span class="text-danger">*</span></label>
                                 <select class="form-control" name="purchasesuppliername" required>
                                     <option selected disabled>Select Supplier Name</option>
                                     <?php
@@ -100,9 +100,10 @@ include_once('conn.php');
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Contract #:</label>
+                                <!-- <label>Contract #:</label> -->
+                                <label>Purchase Order #:</label>
                                 <?php
-                                $sql = 'SELECT MAX(ContractNo) as maxno FROM `contract`';
+                                $sql = 'SELECT MAX(CAST(ContractNo AS DOUBLE)) as maxno FROM `contract`';
                                 $result = mysqli_query($conn, $sql);
                                 if(mysqli_num_rows($result)>0){
                                     $row = mysqli_fetch_assoc($result);
@@ -120,19 +121,20 @@ include_once('conn.php');
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Quality:</label>
+                                <label>Quality: <span class="text-danger">*</span></label>
                                 <select class="form-control" name="quality" required>
                                     <option selected disabled>Select Quality</option>
+                                    <option value="Brown">Brown</option>
+                                    <option value="Paddy">Paddy</option>
                                     <option value="Parboiled">Parboiled</option>
                                     <option value="Prestream">Prestream</option>
-                                    <option value="Brown">Brown</option>
                                     <option value="White">White</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Variety:</label>
+                                <label>Variety: <span class="text-danger">*</span></label>
                                 <select class="form-control" name="variety" required>
                                     <option selected disabled>Select Variety</option>
                                     <option value="1121 Kainaat">1121 Kainaat</option>
@@ -167,13 +169,13 @@ include_once('conn.php');
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>PO#:</label>
-                                <input type="text" name="purchaseordernum" id="" class="form-control">
+                                <label>Broken %:</label>
+                                <input type="text" name="brokenpercentage" id="" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Brand:</label>
+                                <label>Brand: <span class="text-danger">*</span></label>
                                 <input type="text" name="brand" id="" class="form-control" required>
                             </div>
                         </div>
@@ -193,13 +195,13 @@ include_once('conn.php');
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Payment Terms:</label>
+                                <label>Payment Terms: <span class="text-danger">*</span></label>
                                 <input type="text" name="paymentterms" id="" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Price:</label>
+                                <label>Price: <span class="text-danger">*</span></label>
                                 <input type="text" name="price" id="" class="form-control" required>
                             </div>
                         </div>
@@ -213,15 +215,14 @@ include_once('conn.php');
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
-                                <label>Packing Material/Packing Weight:</label>
-
+                                <label>Packing Material/Packing Weight: <span class="text-danger">*</span></label>
                                 <input type="text" name="packingweight" id="" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Tags:</label>
-                                <input type="text" name="tags" id="" class="form-control" required>
+                                <input type="text" name="tags" id="" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -234,7 +235,7 @@ include_once('conn.php');
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Expected Inspection Date:</label>
+                                <label>Expected Inspection Date: <span class="text-danger">*</span></label>
                                 <input type="date" name="inspectiondate" id="" class="form-control"
                                     min="<?php echo date('Y-m-d')?>" required>
                             </div>
@@ -242,7 +243,7 @@ include_once('conn.php');
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Empty Bags Loading:</label>
-                                <input type="text" name="emptybagsloading" id="" class="form-control" required>
+                                <input type="text" name="emptybagsloading" id="" class="form-control">
                             </div>
                         </div>
                     </div>

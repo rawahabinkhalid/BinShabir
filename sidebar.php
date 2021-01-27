@@ -18,14 +18,17 @@
         <li><a href="javascript: void(0);"><i class="ti-support"></i><span>Contract </span><span class="menu-arrow"><i
                         class="mdi mdi-chevron-right"></i></span></a>
             <ul class="nav-second-level" aria-expanded="false">
-                <li class="nav-item"><a class="" href="MakeContract.php"><i class="ti-control-record"></i>
+                <!-- <li class="nav-item"><a class="" href="MakeContract.php"><i class="ti-control-record"></i>
+                        Make Contract</a>
+                </li> -->
+                <li class="nav-item"><a class="" href=""><i class="ti-control-record"></i>
                         Make Contract</a>
                 </li>
                 <li class="nav-item"><a class="" href="Debtor.php"><i class="ti-arrow-right"></i>
-                        Debtor</a>
+                        Sale Order</a>
                 </li>
                 <li class="nav-item"><a class="" href="Creditor.php"><i class="ti-arrow-right"></i>
-                        Creditor</a>
+                        Purchase Order</a>
                 </li>
                 <li class="nav-item"><a class="" href="ToolMillContract.php"><i class="ti-arrow-right"></i>
                         Tool Mill Contract</a>

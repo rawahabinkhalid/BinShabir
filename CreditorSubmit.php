@@ -9,7 +9,7 @@ $quality = $_POST['quality'];
 $variety = $_POST['variety'];
 
 $ourreference = $_POST['ourreference'];
-$purchaseordernum = $_POST['purchaseordernum'];
+$brokenpercentage = $_POST['brokenpercentage'];
 $brand = $_POST['brand'];
 $quantity = $_POST['quantity'];
 $moisture = $_POST['moisture'];
@@ -32,7 +32,7 @@ $sql = 'INSERT INTO creditor (`ContractType`,`PurchaseSupplierName`,`PurchaseSup
                             `ChalkyImmatureKernels`,`PackingWeight`,`Tags`,`LoadingBags`,`InspectionDate`,
                             `EmptyBagsLoading`,`Fumigation`,`Silicagel`,`KraftPaper`,`SpecialInstruction`,
                             `ProcessingMill`) VALUES ("'.$contracttype.'","'.$purchasesuppliername.'","'.$purchasesupplierPoNum.'","'.$ContractNo.'","'.$quality.'","'.$variety.'",
-                                                "'.$ourreference.'","'.$purchaseordernum.'","'.$brand.'","'.$quantity.'","'.$moisture.'","'.$paymentterms.'","'.$price.'",
+                                                "'.$ourreference.'","'.$brokenpercentage.'","'.$brand.'","'.$quantity.'","'.$moisture.'","'.$paymentterms.'","'.$price.'",
                                                 "'.$chalkyimmaturekernels.'","'.$packingweight.'","'.$tags.'","'.$loadingbags.'","'.$inspectiondate.'",
                                                 "'.$emptybagsloading.'","'.$fumigation.'","'.$silicagel.'","'.$kraftpaper.'","'.$specialinstruction.'",
                                                 "'.$processingmill.'")';

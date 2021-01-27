@@ -88,6 +88,7 @@ include_once('conn.php');
                                     <th scope="col"><b>S.No</b></th>
                                     <th scope="col"><b>Contract No</b></th>
                                     <th scope="col"><b>Customer Name</b></th>
+                                    <th scope="col"><b>Location</b></th>
                                     <th scope="col"><b>Quality</b></th>
                                     <th scope="col"><b>Variety</b></th>
                                     <th scope="col"><b>Raw Bags in Stock</b></th>
@@ -98,14 +99,13 @@ include_once('conn.php');
                                     ?>
                                     <th scope="col"><b>Other</b></th>
                                     <th scope="col"><b>Total</b></th>
-
-                                    <!-- <th scope="col"><b>N.Weight</b></th> -->
+                                    <!-- <th scope="col"><b>Weight</b></th> -->
                                 </tr>
                             </thead>
                             <tbody id="">
                                 <?php
                                 $count = 1;
-                                $sql = 'SELECT  toolmillcontract.ContractNo, SaleCustomerName, Quality, Variety, 
+                                $sql = 'SELECT  toolmillcontract.ContractNo, SaleCustomerName, ProcessingMill, Quality, Variety, 
                                                 SUM(gatepass_g_recieved_items.Quantity) AS Quantity, gatepass_g_recieved_items.Items
                                                 FROM toolmillcontract 
                                                 JOIN gatepass_g_recieved ON toolmillcontract.ContractNo = gatepass_g_recieved.ContractNo
@@ -131,6 +131,7 @@ include_once('conn.php');
                                         <td scope="row"><b>' . $count++ . '</b></td>
                                         <td>' . $row['ContractNo'] . '</td>
                                         <td>' . $row['SaleCustomerName'] . '</td>
+                                        <td>' . $row['ProcessingMill'] . '</td>
                                         <td>' . $row['Quality'] . '</td>';
                                             $quantity = $row1['Quantity'];
                                             $sql_gi_raw_material = 'SELECT *, SUM(gatepass_g_issue_items.Quantity) AS Quantity FROM gatepass_g_issue 
@@ -243,7 +244,9 @@ include_once('conn.php');
                                         <td scope="row"><b>' . $count++ . '</b></td>
                                         <td>' . $row['ContractNo'] . '</td>
                                         <td>' . $row['SaleCustomerName'] . '</td>
+                                        <td>' . $row['ProcessingMill'] . '</td>
                                         <td>' . $row['Quality'] . '</td>';
+
                                         $quantity = $row['Quantity'];
 
                                         $sql_gi_raw_material = 'SELECT *, SUM(gatepass_g_issue_items.Quantity) AS Quantity, gatepass_g_issue_items.Items FROM gatepass_g_issue 
@@ -306,11 +309,9 @@ include_once('conn.php');
 
 
 
-
-
-
                     <div class="col-md-9 text-center">
-                        <h4><b><u>Creditor Contract Report</u></b></h4>
+                        <!-- <h4><b><u>Creditor Contract Report</u></b></h4> -->
+                        <h4><b><u>Bin Shabir Stock Report</u></b></h4>
                     </div>
                     <?php
                     $varieties = ["Final", "Short grain", "B1", "B2", "B3", "CSR", "Broken CSR", "Peddy", "Powder", "Choba", "Sweeping", "Stones"];
@@ -321,6 +322,7 @@ include_once('conn.php');
                                 <tr>
                                     <th scope="col"><b>S.No</b></th>
                                     <th scope="col"><b>Contract No</b></th>
+                                    <th scope="col"><b>Type</b></th>
                                     <th scope="col"><b>Customer Name</b></th>
                                     <th scope="col"><b>Quality</b></th>
                                     <th scope="col"><b>Variety</b></th>
@@ -339,7 +341,7 @@ include_once('conn.php');
                             <tbody id="">
                                 <?php
                                 $count = 1;
-                                $sql = 'SELECT  creditor.ContractNo, PurchaseSupplierName, Quality, Variety, 
+                                $sql = 'SELECT  creditor.ContractNo, creditor.ContractType, PurchaseSupplierName, Quality, Variety, 
                                                 SUM(gatepass_g_recieved_items.Quantity) AS Quantity, gatepass_g_recieved_items.Items
                                                 FROM creditor 
                                                 JOIN gatepass_g_recieved ON creditor.ContractNo = gatepass_g_recieved.ContractNo
@@ -365,6 +367,7 @@ include_once('conn.php');
                                     <tr>
                                         <td scope="row"><b>' . $count++ . '</b></td>
                                         <td>' . $row['ContractNo'] . '</td>
+                                        <td>' . $row['ContractType'] . '</td>
                                         <td>' . $row['PurchaseSupplierName'] . '</td>
                                         <td>' . $row['Quality'] . '</td>';
                                             $quantity = $row1['Quantity'];
@@ -479,6 +482,7 @@ include_once('conn.php');
                                     <tr>
                                         <td scope="row"><b>' . $count++ . '</b></td>
                                         <td>' . $row['ContractNo'] . '</td>
+                                        <td>' . $row['ContractType'] . '</td>
                                         <td>' . $row['PurchaseSupplierName'] . '</td>
                                         <td>' . $row['Quality'] . '</td>';
                                         $quantity = $row['Quantity'];
@@ -534,49 +538,10 @@ include_once('conn.php');
                                     }
                                 }
                                 ?>
-                            </tbody>
-                            <tfoot id="">
 
-                            </tfoot>
-                        </table>
-                        <br>
-                    </div>
-
-
-
-
-
-                    <div class="col-md-9 text-center">
-                        <h4><b><u>Debitor Contract Report</u></b></h4>
-                    </div>
-                    <?php
-                    $varieties = ["Final", "Short grain", "B1", "B2", "B3", "CSR", "Broken CSR", "Peddy", "Powder", "Choba", "Sweeping", "Stones"];
-                    ?>
-                    <div class="col-md-9 mt-4">
-                        <table class="table table-bordered table-responsive" id="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col"><b>S.No</b></th>
-                                    <th scope="col"><b>Contract No</b></th>
-                                    <th scope="col"><b>Customer Name</b></th>
-                                    <th scope="col"><b>Quality</b></th>
-                                    <th scope="col"><b>Variety</b></th>
-                                    <th scope="col"><b>Raw Bags in Stock</b></th>
-                                    <?php
-                                    foreach ($varieties as $variety) {
-                                        echo '<th scope="col"><b>' . $variety . '</b></th>';
-                                    }
-                                    ?>
-                                    <th scope="col"><b>Other</b></th>
-                                    <th scope="col"><b>Total</b></th>
-
-                                    <!-- <th scope="col"><b>N.Weight</b></th> -->
-                                </tr>
-                            </thead>
-                            <tbody id="">
                                 <?php
-                                $count = 1;
-                                $sql = 'SELECT  debtor.ContractNo, SaleCustomerName, Quality, Variety, 
+                                // $count = 1;
+                                $sql = 'SELECT  debtor.ContractNo, debtor.ContractType, SaleCustomerName, Quality, Variety, 
                                                 SUM(gatepass_g_recieved_items.Quantity) AS Quantity, gatepass_g_recieved_items.Items
                                                 FROM debtor 
                                                 JOIN gatepass_g_recieved ON debtor.ContractNo = gatepass_g_recieved.ContractNo
@@ -602,6 +567,7 @@ include_once('conn.php');
                                     <tr>
                                         <td scope="row"><b>' . $count++ . '</b></td>
                                         <td>' . $row['ContractNo'] . '</td>
+                                        <td>' . $row['ContractType'] . '</td>
                                         <td>' . $row['SaleCustomerName'] . '</td>
                                         <td>' . $row['Quality'] . '</td>';
                                             $quantity = $row1['Quantity'];
@@ -713,8 +679,9 @@ include_once('conn.php');
 
                                         echo '
                                     <tr>
-                                        <td scope="row"><b>' . $count++ . '</b></td>
+                                        <td><b>' . $count++ . '</b> </td>
                                         <td>' . $row['ContractNo'] . '</td>
+                                        <td>' . $row['ContractType'] . '</td>
                                         <td>' . $row['SaleCustomerName'] . '</td>
                                         <td>' . $row['Quality'] . '</td>';
                                         $quantity = $row['Quantity'];
@@ -777,6 +744,44 @@ include_once('conn.php');
                         </table>
                         <br>
                     </div>
+
+
+
+                    <!-- <div class="col-md-9 text-center">
+                        <h4><b><u>Debitor Contract Report</u></b></h4>
+                    </div>
+                    <?php
+                    // $varieties = ["Final", "Short grain", "B1", "B2", "B3", "CSR", "Broken CSR", "Peddy", "Powder", "Choba", "Sweeping", "Stones"];
+                    ?>
+                    <div class="col-md-9 mt-4">
+                        <table class="table table-bordered table-responsive" id="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col"><b>S.No</b></th>
+                                    <th scope="col"><b>Contract No</b></th>
+                                    <th scope="col"><b>Customer Name</b></th>
+                                    <th scope="col"><b>Quality</b></th>
+                                    <th scope="col"><b>Variety</b></th>
+                                    <th scope="col"><b>Raw Bags in Stock</b></th>
+                                    <?php
+                                    // foreach ($varieties as $variety) {
+                                    //     echo '<th scope="col"><b>' . $variety . '</b></th>';
+                                    // }
+                                    ?>
+                                    <th scope="col"><b>Other</b></th>
+                                    <th scope="col"><b>Total</b></th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="">
+                                
+                            </tbody>
+                            <tfoot id="">
+
+                            </tfoot>
+                        </table>
+                        <br>
+                    </div> -->
                 </div>
                 <!-- <div class="row">
                     <div class="col-md-3">

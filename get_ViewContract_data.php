@@ -79,8 +79,16 @@ if(isset($row['ContractType']) && $row['ContractType'] == "Debtor/AccountReceiva
                         <td>'.$row['OurReference'].'</td>
                     </tr>
                     <tr>
-                        <td><label>SO#: </label></td>
-                        <td>'.$row['SaleOrderNum'].'</td>
+                        <td><label>Broken%: </label></td>
+                        <td>'.$row['BrokenPercentage'].'</td>
+                    </tr>
+                    <tr>
+                        <td><label>Moisture: </label></td>
+                        <td>'.$row['Moisture'].'</td>
+                    </tr>
+                    <tr>
+                        <td><label>Chalky & Immature Kernels: </label></td>
+                        <td>'.$row['ChalkyImmatureKernels'].'</td>
                     </tr>
                     <tr>
                         <td><label>Brand: </label></td>
@@ -91,20 +99,12 @@ if(isset($row['ContractType']) && $row['ContractType'] == "Debtor/AccountReceiva
                         <td>'.$row['Quantity'].'</td>
                     </tr>
                     <tr>
-                        <td><label>Moisture: </label></td>
-                        <td>'.$row['Moisture'].'</td>
-                    </tr>
-                    <tr>
                         <td><label>Payment Terms: </label></td>
                         <td>'.$row['PaymentTerms'].'</td>
                     </tr>
                     <tr>
                         <td><label>Price: </label></td>
                         <td>'.$row['Price'].'</td>
-                    </tr>
-                    <tr>
-                        <td><label>Chalky & Immature Kernels: </label></td>
-                        <td>'.$row['ChalkyImmatureKernels'].'</td>
                     </tr>
                     <tr>
                         <td><label>Packing / Packing Weight: </label></td>
@@ -254,8 +254,16 @@ if(isset($row['ContractType']) && $row['ContractType'] == "Debtor/AccountReceiva
                         <td>'.$row1['OurReference'].'</td>
                     </tr>
                     <tr>
-                        <td><label>SO#: </label></td>
-                        <td>'.$row1['PurchaseOrderNum'].'</td>
+                        <td><label>Broken%: </label></td>
+                        <td>'.$row1['BrokenPercentage'].'</td>
+                    </tr>
+                    <tr>
+                        <td><label>Moisture: </label></td>
+                        <td>'.$row1['Moisture'].'</td>
+                    </tr>
+                    <tr>
+                        <td><label>Chalky & Immature Kernels: </label></td>
+                        <td>'.$row1['ChalkyImmatureKernels'].'</td>
                     </tr>
                     <tr>
                         <td><label>Brand: </label></td>
@@ -266,20 +274,12 @@ if(isset($row['ContractType']) && $row['ContractType'] == "Debtor/AccountReceiva
                         <td>'.$row1['Quantity'].'</td>
                     </tr>
                     <tr>
-                        <td><label>Moisture: </label></td>
-                        <td>'.$row1['Moisture'].'</td>
-                    </tr>
-                    <tr>
                         <td><label>Payment Terms: </label></td>
                         <td>'.$row1['PaymentTerms'].'</td>
                     </tr>
                     <tr>
                         <td><label>Price: </label></td>
                         <td>'.$row1['Price'].'</td>
-                    </tr>
-                    <tr>
-                        <td><label>Chalky & Immature Kernels: </label></td>
-                        <td>'.$row1['ChalkyImmatureKernels'].'</td>
                     </tr>
                     <tr>
                         <td><label>Packing / Packing Weight: </label></td>
@@ -429,8 +429,16 @@ if(isset($row['ContractType']) && $row['ContractType'] == "Debtor/AccountReceiva
                         <td>'.$row2['OurReference'].'</td>
                     </tr>
                     <tr>
-                        <td><label>SO#: </label></td>
-                        <td>'.$row2['SaleOrderNum'].'</td>
+                        <td><label>Broken%: </label></td>
+                        <td>'.$row2['BrokenPercentage'].'</td>
+                    </tr>
+                    <tr>
+                        <td><label>Moisture: </label></td>
+                        <td>'.$row2['Moisture'].'</td>
+                    </tr>
+                    <tr>
+                        <td><label>Chalky & Immature Kernels: </label></td>
+                        <td>'.$row2['ChalkyImmatureKernels'].'</td>
                     </tr>
                     <tr>
                         <td><label>Brand: </label></td>
@@ -441,20 +449,12 @@ if(isset($row['ContractType']) && $row['ContractType'] == "Debtor/AccountReceiva
                         <td>'.$row2['Quantity'].'</td>
                     </tr>
                     <tr>
-                        <td><label>Moisture: </label></td>
-                        <td>'.$row2['Moisture'].'</td>
-                    </tr>
-                    <tr>
                         <td><label>Payment Terms: </label></td>
                         <td>'.$row2['PaymentTerms'].'</td>
                     </tr>
                     <tr>
                         <td><label>Price: </label></td>
                         <td>'.$row2['Price'].'</td>
-                    </tr>
-                    <tr>
-                        <td><label>Chalky & Immature Kernels: </label></td>
-                        <td>'.$row2['ChalkyImmatureKernels'].'</td>
                     </tr>
                     <tr>
                         <td><label>Packing / Packing Weight: </label></td>

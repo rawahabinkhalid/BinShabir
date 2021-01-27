@@ -10,6 +10,7 @@ $sql = 'SELECT SUM(NWeight), SUM(BardanaWeight) FROM production_goods WHERE Cont
 $result = mysqli_query($conn, $sql);
 if($result->num_rows > 0) {
     $row = mysqli_fetch_assoc($result);
+
     $SUM_NWeight = $row['SUM(NWeight)'];
     $SUM_BardanaWeight = $row['SUM(BardanaWeight)'];
 

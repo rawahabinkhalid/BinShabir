@@ -127,7 +127,7 @@ include_once 'conn.php';
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Broken Percentage:</label>
+                                <label>Broken %:</label>
                                 <input type="text" name="broken" id="" class="form-control" required>
                             </div>
                         </div>

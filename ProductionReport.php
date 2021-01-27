@@ -77,7 +77,7 @@ include_once('conn.php');
                     <br>
                     <div class="row">
                         <div class="col-md-12 text-center" id="view_logo" style="display:none; padding-bottom: 30px;">
-                            <h3><img src="logo/ricemilllogo1.png" style="width: 300px;" alt=""></h3>
+                            <h3><img src="logo/ricemilllogo2.png" style="width: 300px;" alt=""></h3>
                         </div>
                         <div class="col-md-4" id="contract">
                             <div class="form-group">
@@ -340,6 +340,8 @@ include_once('conn.php');
         window.print()
         printButton.style.visibility = 'visible';
         viewlogo.style.display = 'none';
+
+        // https://stackoverflow.com/questions/1664049/can-i-force-a-page-break-in-html-printing/1664058
 
 
 

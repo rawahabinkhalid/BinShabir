@@ -54,11 +54,12 @@ if(isset($row['ContractType']) && $row['ContractType'] == "Debtor/AccountReceiva
             <select class="form-control" name="quality" required>
                 <option <?php echo ($row['Quality']== "") ? 'selected' : '' ;?> selected disabled>Select Quality
                 </option>
+                <option <?php echo ($row['Quality']== "Brown") ? 'selected' : '' ;?> value="Brown">Brown</option>
+                <option <?php echo ($row['Quality']== "Paddy") ? 'selected' : '' ;?> value="Paddy">Paddy</option>
                 <option <?php echo ($row['Quality']== "Parboiled") ? 'selected' : '' ;?> value="Parboiled">Parboiled
                 </option>
                 <option <?php echo ($row['Quality']== "Prestream") ? 'selected' : '' ;?> value="Prestream">Prestream
                 </option>
-                <option <?php echo ($row['Quality']== "Brown") ? 'selected' : '' ;?> value="Brown">Brown</option>
                 <option <?php echo ($row['Quality']== "White") ? 'selected' : '' ;?> value="White">White</option>
             </select>
         </div>
@@ -106,8 +107,9 @@ if(isset($row['ContractType']) && $row['ContractType'] == "Debtor/AccountReceiva
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <label>SO#:</label>
-            <input type="text" name="salesordernum" value="<?php echo $row['SaleOrderNum'] ?>" class="form-control">
+            <label>Broken %:</label>
+            <input type="text" name="brokenpercentage" value="<?php echo $row['BrokenPercentage'] ?>"
+                class="form-control">
         </div>
     </div>
     <div class="col-md-3">
@@ -269,11 +271,12 @@ if(isset($row1['ContractType']) && $row1['ContractType'] == "Creditor/AccountPay
             <select class="form-control" name="quality" required>
                 <option <?php echo ($row1['Quality']== "") ? 'selected' : '' ;?> selected disabled>Select Quality
                 </option>
+                <option <?php echo ($row1['Quality']== "Brown") ? 'selected' : '' ;?> value="Brown">Brown</option>
+                <option <?php echo ($row1['Quality']== "Paddy") ? 'selected' : '' ;?> value="Paddy">Paddy</option>
                 <option <?php echo ($row1['Quality']== "Parboiled") ? 'selected' : '' ;?> value="Parboiled">Parboiled
                 </option>
                 <option <?php echo ($row1['Quality']== "Prestream") ? 'selected' : '' ;?> value="Prestream">Prestream
                 </option>
-                <option <?php echo ($row1['Quality']== "Brown") ? 'selected' : '' ;?> value="Brown">Brown</option>
                 <option <?php echo ($row1['Quality']== "White") ? 'selected' : '' ;?> value="White">White</option>
             </select>
         </div>
@@ -322,8 +325,8 @@ if(isset($row1['ContractType']) && $row1['ContractType'] == "Creditor/AccountPay
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <label>PO#:</label>
-            <input type="text" name="purchaseordernum" value="<?php echo $row1['PurchaseOrderNum'] ?>"
+            <label>Broken %:</label>
+            <input type="text" name="brokenpercentage" value="<?php echo $row1['BrokenPercentage'] ?>"
                 class="form-control">
         </div>
     </div>
@@ -486,11 +489,12 @@ if(isset($row2['ContractType']) && $row2['ContractType'] == "Sales"){
             <select class="form-control" name="quality" required>
                 <option <?php echo ($row2['Quality']== "") ? 'selected' : '' ;?> selected disabled>Select Quality
                 </option>
+                <option <?php echo ($row2['Quality']== "Brown") ? 'selected' : '' ;?> value="Brown">Brown</option>
+                <option <?php echo ($row2['Quality']== "Paddy") ? 'selected' : '' ;?> value="Paddy">Paddy</option>
                 <option <?php echo ($row2['Quality']== "Parboiled") ? 'selected' : '' ;?> value="Parboiled">Parboiled
                 </option>
                 <option <?php echo ($row2['Quality']== "Prestream") ? 'selected' : '' ;?> value="Prestream">Prestream
                 </option>
-                <option <?php echo ($row2['Quality']== "Brown") ? 'selected' : '' ;?> value="Brown">Brown</option>
                 <option <?php echo ($row2['Quality']== "White") ? 'selected' : '' ;?> value="White">White</option>
             </select>
         </div>
@@ -539,8 +543,8 @@ if(isset($row2['ContractType']) && $row2['ContractType'] == "Sales"){
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <label>SO#:</label>
-            <input type="text" name="salesordernum_toolmill" value="<?php echo $row2['SaleOrderNum'] ?>"
+            <label>Broken %:</label>
+            <input type="text" name="brokenpercentage" value="<?php echo $row2['BrokenPercentage'] ?>"
                 class="form-control">
         </div>
     </div>

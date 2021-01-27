@@ -83,7 +83,7 @@ include_once('conn.php');
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Name:</label>
+                                <label>Name: <span class="text-danger">*</span></label>
                                 <input type="text" name="partyname" id="" class="form-control" placeholder="" required maxlength="100" onkeypress="return onlyAlphabets(event,this);">
                             </div>
                         </div>
@@ -97,7 +97,7 @@ include_once('conn.php');
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Address:</label>
+                                <label>Address: <span class="text-danger">*</span></label>
                                 <input type="text" name="address" id="" class="form-control" placeholder="" required>
                             </div>
                         </div>
@@ -117,14 +117,14 @@ include_once('conn.php');
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Phone No:</label>
-                                <input type="text" name="Phoneno" id="Phoneno" class="form-control" required data-inputmask="'mask': '9999-9999999'" onchange="checkNumber();" placeholder="e.g. 0300-0000000">
+                                <label>Phone No: <span class="text-danger">*</span></label>
+                                <input type="text" name="Phoneno" id="Phoneno" class="form-control" required data-inputmask="'mask': '9999-9999999'" onchange="checkNumber();" placeholder="e.g. 0300-0000000" required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Contact Person:</label>
-                                <input type="text" name="contactperson" id="" class="form-control" placeholder="">
+                                <label>Contact Person: <span class="text-danger">*</span></label>
+                                <input type="text" name="contactperson" id="" class="form-control" placeholder="" required>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -207,7 +207,7 @@ include_once('conn.php');
             var flag = false;
             regexp = /^(?!000|666)[0-8][0-9]{4}-(?!00)[0-9]{7}-(?!0000)[0-9]{1}$/;
             str = document.getElementById('cnic').value;
-            if (regexp.test(str)) {
+            if (regexp.test(str) || str == "" ) {
                 jQuery('#submitbutton').prop("disabled", false);
 
             } else {
@@ -222,7 +222,7 @@ include_once('conn.php');
         $('#headername').html("Add Party / Customer");
     </script>
 
-    <!-- Only Alphabets Entered in Input Box Start -->
+    <!-- Only Alphabets Entered in Name Input Box Start -->
     <script>
         function onlyAlphabets(e, t) {
             try {
@@ -242,7 +242,7 @@ include_once('conn.php');
             }
         }
     </script>
-    <!-- Only Alphabets Entered in Input Box End -->
+    <!-- Only Alphabets Entered in Name Input Box End -->
 
 
 </body>

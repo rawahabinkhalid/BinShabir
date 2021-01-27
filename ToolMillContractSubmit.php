@@ -9,7 +9,7 @@ $quality = $_POST['quality'];
 $variety = $_POST['variety'];
 
 $ourreference = $_POST['ourreference'];
-$salesordernum = $_POST['salesordernum'];
+$brokenpercentage = $_POST['brokenpercentage'];
 $brand = $_POST['brand'];
 $quantity = $_POST['quantity'];
 $moisture = $_POST['moisture'];
@@ -28,16 +28,15 @@ $specialinstruction = $_POST['specialinstruction'];
 $processingmill = $_POST['processingmill'];
 
 $sql = 'INSERT INTO toolmillcontract (`ContractType`,`SaleCustomerName`,`SaleCustomerSoNum`,`ContractNo`,`Quality`,`Variety`,
-                            `OurReference`,`SaleOrderNum`,`Brand`,`Quantity`,`Moisture`,`PaymentTerms`,`Price`,
+                            `OurReference`,`BrokenPercentage`,`Brand`,`Quantity`,`Moisture`,`PaymentTerms`,`Price`,
                             `ChalkyImmatureKernels`,`PackingWeight`,`Tags`,`LoadingBags`,`InspectionDate`,
                             `EmptyBagsLoading`,`Fumigation`,`Silicagel`,`KraftPaper`,`SpecialInstruction`,
                             `ProcessingMill`) VALUES ("'.$contracttype.'","'.$salecustomername.'","'.$salecustomerSoNum.'","'.$ContractNo.'","'.$quality.'","'.$variety.'",
-                                                "'.$ourreference.'","'.$salesordernum.'","'.$brand.'","'.$quantity.'","'.$moisture.'","'.$paymentterms.'","'.$price.'",
+                                                "'.$ourreference.'","'.$brokenpercentage.'","'.$brand.'","'.$quantity.'","'.$moisture.'","'.$paymentterms.'","'.$price.'",
                                                 "'.$chalkyimmaturekernels.'","'.$packingweight.'","'.$tags.'","'.$loadingbags.'","'.$inspectiondate.'",
                                                 "'.$emptybagsloading.'","'.$fumigation.'","'.$silicagel.'","'.$kraftpaper.'","'.$specialinstruction.'",
                                                 "'.$processingmill.'")';
 $result = mysqli_query($conn, $sql);
-
 if($result){
 
     $sql1 = 'INSERT INTO `contract` (`ContractNo`,`ContractType`) VALUES ("'.$ContractNo.'","'.$contracttype.'")';
