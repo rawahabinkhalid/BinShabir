@@ -119,9 +119,10 @@ include_once('conn.php');
                                     // echo '<br>';
                                     $sql1 = 'SELECT ' . $row['Quantity'] . ' - SUM(production_goods.Bags) AS Quantity, SUM(production_goods.Bags) AS Production_Bags
                                     FROM production_goods 
-                                    WHERE ContractNo = ' . $row['ContractNo'] . ' AND Party_ItemName = "' . $row['Items'] . '"
+                                    WHERE ContractNo = ' . $row['ContractNo'] . '
                                     GROUP BY ContractNo
                                     ';
+                                    // echo $sql1;
                                     $result1 = mysqli_query($conn, $sql1);
                                     if ($result1->num_rows > 0) {
                                         while ($row1 = mysqli_fetch_assoc($result1)) {
@@ -136,7 +137,7 @@ include_once('conn.php');
                                             $quantity = $row1['Quantity'];
                                             $sql_gi_raw_material = 'SELECT *, SUM(gatepass_g_issue_items.Quantity) AS Quantity FROM gatepass_g_issue 
                                                         JOIN gatepass_g_issue_items ON gatepass_g_issue.Id = gatepass_g_issue_items.GoodIssueId
-                                                        WHERE gatepass_g_issue.ContractNo = ' . $row['ContractNo'] . ' AND gatepass_g_issue_items.Items = "' . $row['Items'] . '"
+                                                        WHERE gatepass_g_issue.ContractNo = ' . $row['ContractNo'] . '
                                                         AND gatepass_g_issue_items.ItemName = "" GROUP BY gatepass_g_issue.ContractNo, gatepass_g_issue_items.Items';
                                             // echo $sql_gi_raw_material;
 
@@ -147,7 +148,7 @@ include_once('conn.php');
                                             }
 
                                             $sql_stock_transfer = 'SELECT *, SUM(BagsTransfer) AS Quantity FROM stocktransfer 
-                                                        WHERE ContractNoFrom = ' . $row['ContractNo'] . ' AND Items = "' . $row['Items'] . '"
+                                                        WHERE ContractNoFrom = ' . $row['ContractNo'] . '
                                                         AND ItemName = "" GROUP BY ContractNoFrom, Items';
                                             // echo $sql_stock_transfer . '<br>';
 
@@ -158,7 +159,7 @@ include_once('conn.php');
                                             }
 
                                             $sql_stock_transfer = 'SELECT *, SUM(BagsTransfer) AS Quantity FROM stocktransfer 
-                                                        WHERE ContractNoTo = ' . $row['ContractNo'] . ' AND Items = "' . $row['Items'] . '"
+                                                        WHERE ContractNoTo = ' . $row['ContractNo'] . '
                                                         AND ItemName = "" GROUP BY ContractNoTo, Items';
 
                                             $r_stock_transfer = mysqli_query($conn, $sql_stock_transfer);
