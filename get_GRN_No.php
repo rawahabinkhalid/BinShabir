@@ -2,7 +2,7 @@
 include_once('conn.php');
 
 
-$sql = 'SELECT GRN FROM production_goods WHERE ContractNo = "'.$_POST['contractno'].'"';
+$sql = 'SELECT GRN_No FROM gatepass_g_recieved WHERE ContractNo = "'.$_POST['contractno'].'"';
 // echo $sql;
 $result = mysqli_query($conn, $sql);
 if($result->num_rows > 0) {
@@ -10,7 +10,7 @@ if($result->num_rows > 0) {
     while($row = mysqli_fetch_assoc($result)){
         
         echo '
-            <option value="'.$row['GRN'].'">'.$row['GRN'].'</option>
+            <option value="'.$row['GRN_No'].'">'.$row['GRN_No'].'</option>
         ';
     }
 }

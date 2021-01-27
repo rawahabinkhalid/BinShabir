@@ -339,6 +339,7 @@ include_once('conn.php');
     <!-- script of add_Item_button/del_Item_button work -->
     <script>
     counter = -1;
+    var contract_selected = -1;
 
     function addField() {
         counter++;
@@ -347,7 +348,7 @@ include_once('conn.php');
         content += '<div class="row" id="GoodIssueNote_row_' + counter + '" name="GoodIssue_rows">';
         content += '    <div class="col-md-3">';
         content += '        <div class="form-group">';
-        content += '            <select class="form-control" name="Items[]" id="Items' + counter + '">';
+        content += '            <select class="form-control Items" name="Items[]" id="Items' + counter + '">';
         content += '                <option selected disabled>Select Variety</option>';
         // content += '                <option value="1121 Kainaat">1121 Kainaat</option>';
         // content += '                <option value="Super Kernal Basmati Sindh-Punjab">Super Kernal Basmati Sindh-Punjab </option>';
@@ -392,7 +393,7 @@ include_once('conn.php');
         content += '    </div>';
         content += '    <div class="col-md-1">';
         content += '        <div class="form-group">';
-        content += '            <input type="text" name="Quantity[]" class="form-control" onkeyup="sum(counter)">';
+        content += '            <input type="text" id="Quantity' + counter + '" name="Quantity[]" class="form-control Quantity" onkeyup="sum(counter)">';
         content += '        </div>';
         content += '    </div>';
         content += '    <div class="col-md-2">';
@@ -403,14 +404,14 @@ include_once('conn.php');
         content += '</div>';
         $('#items').append(content);
 
+        console.log(contract_selected)
 
         // Show ItmeName According to Selected ContractNo Start
-        var contractno = $('#contractno').val();
 
         $.ajax({
             type: 'POST',
             url: 'get_ItemNames.php',
-            data: 'contractno=' + contractno,
+            data: 'contractno=' + contract_selected,
             success: function(response) {
                 console.log(response);
                 $('#Items' + counter).html(response);
@@ -429,18 +430,19 @@ include_once('conn.php');
 
     <script>
     // Show ItmeName According to Selected ContractNo Start 
-    $('#contractno').on('change', function() {
-        var contractno = $('#contractno').val();
+    $('.contractno').on('change', function() {
+        var contractno = $(this).val();
+        contract_selected = contractno;
 
-        $.ajax({
-            type: 'POST',
-            url: 'getStockOfContract.php',
-            data: 'contractNo=' + contractno,
-            success: function(response) {
-                console.log("stock: " + response);
-                // $('#Items' + counter).html(response);
-            },
-        });
+        // $.ajax({
+        //     type: 'POST',
+        //     url: 'getStockOfContract.php',
+        //     data: 'contractNo=' + contractno,
+        //     success: function(response) {
+        //         console.log("stock: " + response);
+        //         // $('#Items' + counter).html(response);
+        //     },
+        // });
 
         $.ajax({
             type: 'POST',
@@ -451,6 +453,26 @@ include_once('conn.php');
                 $('#Items' + counter).html(response);
             },
         });
+    })
+
+    $(document).on('change', '.Items', function() {
+        var id = $(this).attr('id').split('Items')[1];
+        // console.log()
+        $.ajax({
+            type: 'POST',
+            url: 'get_stock_from_contract.php',
+            data: 'contractNo=' + contract_selected + '&item_name=' + encodeURIComponent($(this).val()),
+            success: function(response) {
+                console.log("stock: " + response);
+                $('#Quantity' + id).attr('max', response);
+                // $('#Items' + counter).html(response);
+            },
+        });
+    })
+
+    $(document).on('change', '.Quantity', function() {
+        if(parseFloat($(this).val()) > parseFloat($(this).attr('max')))
+            $(this).val($(this).attr('max'))
     })
     // Show ItmeName According to Selected ContractNo End
     </script>

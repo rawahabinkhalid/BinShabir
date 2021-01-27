@@ -111,7 +111,7 @@ include_once('conn.php');
                                                 JOIN gatepass_g_recieved ON toolmillcontract.ContractNo = gatepass_g_recieved.ContractNo
                                                 JOIN gatepass_g_recieved_items ON gatepass_g_recieved.Id = gatepass_g_recieved_items.GoodReceivedId
                                                 WHERE gatepass_g_recieved_items.Type = "Rice"
-                                                GROUP BY ContractNo';
+                                                GROUP BY ContractNo  ORDER BY CAST(toolmillcontract.ContractNo AS DECIMAL)';
 
                                 $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_assoc($result)) {
